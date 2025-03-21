@@ -1,0 +1,113 @@
+
+import React, { useState, useEffect } from 'react';
+import Button from './Button';
+import { cn } from '@/lib/utils';
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+      )}
+    >
+      <div className="container-custom flex items-center justify-between">
+        {/* Logo */}
+        <a 
+          href="/" 
+          className="text-2xl font-display font-bold text-foreground flex items-center gap-1"
+        >
+          <span className="text-primary">Easy</span>
+          <span>Webs</span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          <NavLink href="#templates">Templates</NavLink>
+          <NavLink href="#consultation">Consultation</NavLink>
+          <NavLink href="#about">About</NavLink>
+          <NavLink href="#contact">Contact</NavLink>
+          <Button variant="primary" shine>Book a Consultation</Button>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          <span className={cn(
+            "w-6 h-0.5 bg-foreground transition-all", 
+            isMobileMenuOpen && "transform rotate-45 translate-y-2"
+          )}></span>
+          <span className={cn(
+            "w-6 h-0.5 bg-foreground transition-all", 
+            isMobileMenuOpen && "opacity-0"
+          )}></span>
+          <span className={cn(
+            "w-6 h-0.5 bg-foreground transition-all", 
+            isMobileMenuOpen && "transform -rotate-45 -translate-y-2"
+          )}></span>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={cn(
+        "md:hidden fixed inset-0 top-16 bg-background p-4 z-40 transform transition-transform ease-in-out duration-300",
+        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+      )}>
+        <nav className="flex flex-col gap-6 p-4">
+          <MobileNavLink href="#templates" onClick={() => setIsMobileMenuOpen(false)}>Templates</MobileNavLink>
+          <MobileNavLink href="#consultation" onClick={() => setIsMobileMenuOpen(false)}>Consultation</MobileNavLink>
+          <MobileNavLink href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
+          <MobileNavLink href="#contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</MobileNavLink>
+          <Button className="w-full mt-4" variant="primary" shine>Book a Consultation</Button>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+const NavLink = ({ href, children }: NavLinkProps) => {
+  return (
+    <a 
+      href={href} 
+      className="relative text-foreground/80 hover:text-foreground transition-colors font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+    >
+      {children}
+    </a>
+  );
+};
+
+const MobileNavLink = ({ href, children, onClick }: NavLinkProps) => {
+  return (
+    <a 
+      href={href} 
+      className="text-foreground/80 hover:text-foreground text-xl font-medium py-2 border-b border-border transition-colors"
+      onClick={onClick}
+    >
+      {children}
+    </a>
+  );
+};
+
+export default Header;
