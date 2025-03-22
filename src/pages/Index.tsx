@@ -50,15 +50,15 @@ const Index = () => {
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Making Great Code <span className="text-gradient">Accessible</span>
+                Building <span className="text-gradient">Applications</span> That Work
               </h2>
               
               <p className="text-lg text-foreground/80 mb-8">
-                At EasyWebs, we believe everyone deserves powerful, intelligent coding tools that grow with their projects. We started with a simple mission: to make AI-powered development accessible, scalable, and straightforward.
+                At EasyWebs, we believe every business deserves a powerful, effective website that grows with their projects. We started with a simple mission: to make professional web development accessible, scalable, and straightforward for small to medium-sized businesses.
               </p>
               
               <p className="text-lg text-foreground/80">
-                Whether you're a solo developer, small team, or growing company, we're here to help you build applications that are as unique as your ideas. Our AI combines technical expertise with a human-centered approach, ensuring your code not only works great but also drives results.
+                Whether you're a solo entrepreneur, small team, or growing company, we're here to help you build applications that are as unique as your ideas. Our development process combines technical expertise with a client-centered approach, ensuring your website not only looks great but also drives business results.
               </p>
               
               <div className="mt-12 p-8 bg-card rounded-2xl animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
@@ -66,11 +66,11 @@ const Index = () => {
                 <div className="grid md:grid-cols-3 gap-6 mt-6">
                   <ValueCard 
                     title="Simplicity" 
-                    description="We believe in clean, intuitive code that puts functionality first." 
+                    description="We believe in clean, intuitive interfaces that put user experience first." 
                   />
                   <ValueCard 
                     title="Scalability" 
-                    description="Our AI evolves with your project, adapting to your changing requirements." 
+                    description="Our solutions evolve with your business, adapting to your changing requirements." 
                   />
                   <ValueCard 
                     title="Personal Touch" 
@@ -144,7 +144,7 @@ const Index = () => {
                 <div className="aspect-square relative overflow-hidden bg-secondary/30">
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/30">
                     <Avatar className="w-32 h-32 border-4 border-primary/20">
-                      <AvatarFallback className="text-4xl font-bold">JS</AvatarFallback>
+                      <AvatarFallback className="text-4xl font-bold bg-secondary text-foreground">JS</AvatarFallback>
                     </Avatar>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ const Index = () => {
               </Card>
             </div>
             
-            {/* Contact Form - Kept beneath the team section */}
+            {/* Contact Form - Kept beneath the team section with background color fix */}
             <div className="max-w-2xl mx-auto mt-24 bg-card rounded-2xl shadow-xl border border-border p-8 animate-on-scroll opacity-0 animate-fade-in animate-delay-3">
               <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
               <form className="space-y-6">
@@ -190,7 +190,7 @@ const Index = () => {
                     <input
                       type="text"
                       id="contact-name"
-                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
                       placeholder="John Doe"
                     />
                   </div>
@@ -202,7 +202,7 @@ const Index = () => {
                     <input
                       type="email"
                       id="contact-email"
-                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -215,7 +215,7 @@ const Index = () => {
                   <input
                     type="text"
                     id="contact-subject"
-                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
                     placeholder="How can we help you?"
                   />
                 </div>
@@ -227,7 +227,7 @@ const Index = () => {
                   <textarea
                     id="contact-message"
                     rows={5}
-                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
                     placeholder="Tell us more about what you're looking for..."
                   ></textarea>
                 </div>
