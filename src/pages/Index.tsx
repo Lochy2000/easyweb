@@ -5,7 +5,10 @@ import Hero from '@/components/Hero';
 import TemplateGallery from '@/components/TemplateGallery';
 import ConsultationSection from '@/components/ConsultationSection';
 import Footer from '@/components/Footer';
-import { Code } from 'lucide-react';
+import { Code, Linkedin, Github } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import Button from '@/components/Button';
 
 const Index = () => {
   // Add scroll reveal effect
@@ -79,25 +82,105 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Contact Section */}
-        <section id="contact" className="section bg-background">
+        {/* Team Section - replacing Contact Section */}
+        <section id="team" className="section bg-background">
           <div className="container-custom">
             <div className="max-w-3xl mx-auto text-center mb-12 animate-on-scroll opacity-0 animate-fade-in">
               <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
                 <Code className="w-4 h-4" />
-                <span>Get In Touch</span>
+                <span>Our Experts</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Say Hello!
+                Meet The Team
               </h2>
               
               <p className="text-lg text-foreground/80">
-                Have questions or want to discuss your project? We'd love to hear from you. Fill out the form below and we'll get back to you faster than you think!
+                Our talented developers bring your vision to life with expertise in the latest web technologies.
               </p>
             </div>
             
-            <div className="max-w-2xl mx-auto bg-card rounded-2xl shadow-xl border border-border p-8 animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
+              {/* Team Member 1 - Lochlann O'Higgins */}
+              <Card className="bg-card border border-border overflow-hidden hover:shadow-lg transition-all">
+                <div className="aspect-square relative overflow-hidden bg-secondary/30">
+                  <img 
+                    src="/lovable-uploads/ad6e657a-bf63-4bcf-aeca-e6669eae1a8a.png" 
+                    alt="Lochlann O'Higgins" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle>Lochlann O'Higgins</CardTitle>
+                  <CardDescription>Full Stack Developer</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-foreground/80">
+                    Specializes in React, TypeScript, and modern frontend frameworks with a passion for creating responsive, accessible user interfaces.
+                  </p>
+                </CardContent>
+                <CardFooter className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="flex-1"
+                    icon={<Linkedin className="w-4 h-4" />}
+                  >
+                    LinkedIn
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="flex-1"
+                    icon={<Github className="w-4 h-4" />}
+                  >
+                    GitHub
+                  </Button>
+                </CardFooter>
+              </Card>
+              
+              {/* Team Member 2 - Backend Developer */}
+              <Card className="bg-card border border-border overflow-hidden hover:shadow-lg transition-all">
+                <div className="aspect-square relative overflow-hidden bg-secondary/30">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/30">
+                    <Avatar className="w-32 h-32 border-4 border-primary/20">
+                      <AvatarFallback className="text-4xl font-bold">JS</AvatarFallback>
+                    </Avatar>
+                  </div>
+                </div>
+                <CardHeader>
+                  <CardTitle>Jane Smith</CardTitle>
+                  <CardDescription>Backend Developer</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-foreground/80">
+                    Expert in Node.js, databases, and API development with experience building scalable server architectures and cloud solutions.
+                  </p>
+                </CardContent>
+                <CardFooter className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="flex-1"
+                    icon={<Linkedin className="w-4 h-4" />}
+                  >
+                    LinkedIn
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="flex-1"
+                    icon={<Github className="w-4 h-4" />}
+                  >
+                    GitHub
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+            
+            {/* Contact Form - Kept beneath the team section */}
+            <div className="max-w-2xl mx-auto mt-24 bg-card rounded-2xl shadow-xl border border-border p-8 animate-on-scroll opacity-0 animate-fade-in animate-delay-3">
+              <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
