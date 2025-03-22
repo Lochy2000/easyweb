@@ -1,9 +1,67 @@
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { ArrowRight, Globe } from 'lucide-react';
 
 const Hero = () => {
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+  const isMounted = useRef(true);
+
+  const headlines = [
+    'Simple & Scalable Websites, Tailored to You',
+    'Beautiful WordPress Sites for Small Businesses',
+    'Custom React & Tailwind Solutions',
+    'Professional Wix Development',
+    'Modern Web Design, Built to Convert'
+  ];
+
+  useEffect(() => {
+    // Cleanup function
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      if (!isMounted.current) return;
+
+      const currentPhrase = headlines[loopNum % headlines.length];
+      const shouldDelete = isDeleting;
+      const shouldComplete = !isDeleting && displayText === currentPhrase;
+      const shouldStartDeleting = shouldComplete && !isDeleting;
+      const shouldStartNewPhrase = isDeleting && displayText === '';
+
+      if (shouldStartNewPhrase) {
+        setIsDeleting(false);
+        setLoopNum(l => l + 1);
+        setTypingSpeed(150);
+        return;
+      }
+
+      if (shouldStartDeleting) {
+        // Pause before starting to delete
+        setTimeout(() => {
+          if (isMounted.current) setIsDeleting(true);
+        }, 1500);
+        return;
+      }
+
+      if (shouldDelete) {
+        setDisplayText(prev => prev.substring(0, prev.length - 1));
+        setTypingSpeed(50);
+      } else {
+        setDisplayText(currentPhrase.substring(0, displayText.length + 1));
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, loopNum, typingSpeed, headlines]);
+
   return (
     <section className="relative min-h-screen pt-32 pb-16 flex items-center overflow-hidden">
       {/* Background Elements */}
@@ -20,8 +78,9 @@ const Hero = () => {
             <span>Web Design Studio</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
-            <span className="text-gradient">Simple & Scalable Websites, Tailored to You</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1 min-h-[120px] md:min-h-[180px]">
+            <span className="text-gradient">{displayText}</span>
+            <span className="animate-pulse">|</span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl text-balance opacity-0 animate-fade-in animate-delay-2">
