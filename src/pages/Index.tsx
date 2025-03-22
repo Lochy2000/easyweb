@@ -5,7 +5,7 @@ import Hero from '@/components/Hero';
 import TemplateGallery from '@/components/TemplateGallery';
 import ConsultationSection from '@/components/ConsultationSection';
 import Footer from '@/components/Footer';
-import { Globe } from 'lucide-react';
+import { Code } from 'lucide-react';
 
 const Index = () => {
   // Add scroll reveal effect
@@ -42,20 +42,20 @@ const Index = () => {
           <div className="container-custom">
             <div className="max-w-4xl mx-auto text-center animate-on-scroll opacity-0 animate-fade-in">
               <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                <Globe className="w-4 h-4" />
+                <Code className="w-4 h-4" />
                 <span>Our Story</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Making Great Design <span className="text-gradient">Accessible</span>
+                Making Great Code <span className="text-gradient">Accessible</span>
               </h2>
               
               <p className="text-lg text-foreground/80 mb-8">
-                At EasyWebs, we believe everyone deserves a beautiful, functional website that grows with their business. We started with a simple mission: to make professional web design accessible, scalable, and straightforward.
+                At EasyWebs, we believe everyone deserves powerful, intelligent coding tools that grow with their projects. We started with a simple mission: to make AI-powered development accessible, scalable, and straightforward.
               </p>
               
               <p className="text-lg text-foreground/80">
-                Whether you're a solo entrepreneur, small business, or growing company, we're here to help you build a digital presence that's as unique as you are. Our team combines technical expertise with a human-centered approach, ensuring your website not only looks great but also drives results.
+                Whether you're a solo developer, small team, or growing company, we're here to help you build applications that are as unique as your ideas. Our AI combines technical expertise with a human-centered approach, ensuring your code not only works great but also drives results.
               </p>
               
               <div className="mt-12 p-8 bg-card rounded-2xl animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
@@ -63,11 +63,11 @@ const Index = () => {
                 <div className="grid md:grid-cols-3 gap-6 mt-6">
                   <ValueCard 
                     title="Simplicity" 
-                    description="We believe in clean, intuitive designs that put your content first." 
+                    description="We believe in clean, intuitive code that puts functionality first." 
                   />
                   <ValueCard 
                     title="Scalability" 
-                    description="Our websites grow with your business, adapting to your evolving needs." 
+                    description="Our AI evolves with your project, adapting to your changing requirements." 
                   />
                   <ValueCard 
                     title="Personal Touch" 
@@ -84,7 +84,7 @@ const Index = () => {
           <div className="container-custom">
             <div className="max-w-3xl mx-auto text-center mb-12 animate-on-scroll opacity-0 animate-fade-in">
               <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                <Globe className="w-4 h-4" />
+                <Code className="w-4 h-4" />
                 <span>Get In Touch</span>
               </div>
               

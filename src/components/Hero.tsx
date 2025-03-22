@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Button from './Button';
-import { Globe, ArrowRight } from 'lucide-react';
+import { ArrowRight, Code } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -16,8 +16,8 @@ const Hero = () => {
         {/* Hero Content */}
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
-            <Globe className="w-4 h-4" />
-            <span>Modern Web Design Studio</span>
+            <Code className="w-4 h-4" />
+            <span>Modern AI Code Editor</span>
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
@@ -49,17 +49,40 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Hero Image/Visual */}
+        {/* Hero Visual - Code Editor UI */}
         <div className="relative flex items-center justify-center">
           <div className="relative opacity-0 animate-fade-in animate-delay-4">
-            {/* Main Image Frame */}
+            {/* Code Editor Frame */}
             <div className="relative z-10 glass-card rounded-2xl overflow-hidden shadow-2xl border border-white/20 opacity-0 animate-scale-in animate-delay-4">
-              <img 
-                src="public/lovable-uploads/613c1101-088f-4b68-a18c-d2d8f072605e.png" 
-                alt="EasyWebs Template Preview" 
-                className="w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <div className="bg-secondary/80 p-3 border-b border-white/10 flex items-center">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
+                </div>
+                <div className="mx-auto text-sm text-white/60">AI Code Editor</div>
+              </div>
+              <div className="bg-background/90 p-4 font-mono text-sm text-white/80 h-[300px] overflow-hidden">
+                <div className="flex items-center gap-2 text-primary mb-2"># AI-powered code generation</div>
+                <pre className="text-white/70 leading-relaxed">
+                  <span className="text-blue-400">function</span> <span className="text-green-400">createComponent</span>() {`{`}<br/>
+                  &nbsp;&nbsp;<span className="text-yellow-400">const</span> [code, setCode] = useState('');<br/>
+                  &nbsp;&nbsp;<span className="text-yellow-400">const</span> [loading, setLoading] = useState(<span className="text-orange-400">false</span>);<br/>
+                  <br/>
+                  &nbsp;&nbsp;<span className="text-purple-400">// Generate with AI</span><br/>
+                  &nbsp;&nbsp;<span className="text-blue-400">async function</span> <span className="text-green-400">generateCode</span>() {`{`}<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;setLoading(<span className="text-orange-400">true</span>);<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">// AI magic happens here</span><br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;setLoading(<span className="text-orange-400">false</span>);<br/>
+                  &nbsp;&nbsp;{`}`}<br/>
+                  {`}`}
+                </pre>
+                <div className="absolute bottom-4 left-4 right-4 flex">
+                  <div className="border border-primary/30 rounded-md bg-primary/10 text-primary px-3 py-1 text-sm animate-pulse">
+                    AI is generating code...
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Decorative Elements */}
