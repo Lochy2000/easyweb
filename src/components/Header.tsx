@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
+import { Globe } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,17 +22,22 @@ const Header = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
       )}
     >
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
         <a 
           href="/" 
-          className="text-2xl font-display font-bold text-foreground flex items-center gap-1"
+          className="text-2xl font-display font-bold text-foreground flex items-center gap-2"
         >
-          <span className="text-primary">Easy</span>
-          <span>Webs</span>
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/20">
+            <Globe className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex items-center">
+            <span className="text-primary">easy</span>
+            <span>web</span>
+          </div>
         </a>
 
         {/* Desktop Navigation */}
@@ -40,7 +46,7 @@ const Header = () => {
           <NavLink href="#consultation">Consultation</NavLink>
           <NavLink href="#about">About</NavLink>
           <NavLink href="#contact">Contact</NavLink>
-          <Button variant="primary" shine>Book a Consultation</Button>
+          <Button variant="primary" shine>Get Started</Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -74,7 +80,7 @@ const Header = () => {
           <MobileNavLink href="#consultation" onClick={() => setIsMobileMenuOpen(false)}>Consultation</MobileNavLink>
           <MobileNavLink href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
           <MobileNavLink href="#contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</MobileNavLink>
-          <Button className="w-full mt-4" variant="primary" shine>Book a Consultation</Button>
+          <Button className="w-full mt-4" variant="primary" shine>Get Started</Button>
         </nav>
       </div>
     </header>

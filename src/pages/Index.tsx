@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import TemplateGallery from '@/components/TemplateGallery';
 import ConsultationSection from '@/components/ConsultationSection';
 import Footer from '@/components/Footer';
+import { Globe } from 'lucide-react';
 
 const Index = () => {
   // Add scroll reveal effect
@@ -29,7 +30,7 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Header />
       <main>
         <Hero />
@@ -37,11 +38,12 @@ const Index = () => {
         <ConsultationSection />
         
         {/* About Section */}
-        <section id="about" className="section bg-white">
+        <section id="about" className="section bg-secondary/30">
           <div className="container-custom">
             <div className="max-w-4xl mx-auto text-center animate-on-scroll opacity-0 animate-fade-in">
-              <div className="inline-block mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                Our Story
+              <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
+                <Globe className="w-4 h-4" />
+                <span>Our Story</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -56,7 +58,7 @@ const Index = () => {
                 Whether you're a solo entrepreneur, small business, or growing company, we're here to help you build a digital presence that's as unique as you are. Our team combines technical expertise with a human-centered approach, ensuring your website not only looks great but also drives results.
               </p>
               
-              <div className="mt-12 p-8 bg-secondary rounded-2xl animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
+              <div className="mt-12 p-8 bg-card rounded-2xl animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
                 <h3 className="text-xl font-bold mb-4">Our Values</h3>
                 <div className="grid md:grid-cols-3 gap-6 mt-6">
                   <ValueCard 
@@ -78,11 +80,12 @@ const Index = () => {
         </section>
         
         {/* Contact Section */}
-        <section id="contact" className="section bg-secondary/50">
+        <section id="contact" className="section bg-background">
           <div className="container-custom">
             <div className="max-w-3xl mx-auto text-center mb-12 animate-on-scroll opacity-0 animate-fade-in">
-              <div className="inline-block mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                Get In Touch
+              <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm">
+                <Globe className="w-4 h-4" />
+                <span>Get In Touch</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -94,7 +97,7 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-border p-8 animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
+            <div className="max-w-2xl mx-auto bg-card rounded-2xl shadow-xl border border-border p-8 animate-on-scroll opacity-0 animate-fade-in animate-delay-2">
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -104,7 +107,7 @@ const Index = () => {
                     <input
                       type="text"
                       id="contact-name"
-                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
                       placeholder="John Doe"
                     />
                   </div>
@@ -116,7 +119,7 @@ const Index = () => {
                     <input
                       type="email"
                       id="contact-email"
-                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -129,7 +132,7 @@ const Index = () => {
                   <input
                     type="text"
                     id="contact-subject"
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
                     placeholder="How can we help you?"
                   />
                 </div>
@@ -141,7 +144,7 @@ const Index = () => {
                   <textarea
                     id="contact-message"
                     rows={5}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-4 py-2 border bg-secondary/50 border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
                     placeholder="Tell us more about what you're looking for..."
                   ></textarea>
                 </div>
@@ -174,7 +177,7 @@ interface ValueCardProps {
 
 const ValueCard = ({ title, description }: ValueCardProps) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-border">
+    <div className="bg-background p-6 rounded-xl shadow-sm border border-border">
       <h4 className="text-lg font-bold mb-2">{title}</h4>
       <p className="text-foreground/70">{description}</p>
     </div>
