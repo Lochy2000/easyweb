@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
-import { ArrowRight, Globe, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
@@ -81,14 +81,14 @@ const Hero = () => {
 
       <div className="container-custom relative grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
         {/* Hero Content */}
-        <div className="max-w-3xl">
+        <div className="max-w-3xl z-10">
           <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
             <Sparkles className="w-4 h-4 text-primary" />
             <span>Custom Web Development</span>
           </div>
           
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-accent">
+            <span className="text-gradient">
               {displayText}
             </span>
             <span className="animate-pulse">|</span>
@@ -133,90 +133,156 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Hero Visual */}
-        <div className="relative flex items-center justify-center">
-          <div className="relative opacity-0 animate-fade-in animate-delay-4">
-            {/* Interactive Tech Display */}
-            <div className="relative">
-              {/* Main image - modern website visualization */}
-              <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl border border-white/10 animate-float">
-                <div className="relative perspective-[1000px] transform-style-3d">
-                  <img 
-                    src="/lovable-uploads/613c1101-088f-4b68-a18c-d2d8f072605e.png" 
-                    alt="Modern website development showcase" 
-                    className="relative z-10 max-w-full rounded-lg opacity-0 animate-scale-in animate-delay-4"
-                  />
-                  
-                  {/* Animated code overlay */}
-                  <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent to-background/90 rounded-lg overflow-hidden">
-                    <div className="absolute inset-0 opacity-20 animate-scroll-y">
-                      <pre className="text-xs text-primary font-mono leading-tight">
-                        {`<div className="hero">
-  <Header />
-  <main>
-    <h1>Building Digital Solutions</h1>
-    <p>Custom websites for your needs</p>
-  </main>
-</div>
+        {/* Hero Visual - Updated with modern web tech showcase */}
+        <div className="relative z-10">
+          <div className="relative perspective-[1000px] md:ml-10 lg:ml-0 opacity-0 animate-fade-in animate-delay-4">
+            {/* Main Content */}
+            <div className="relative transform-style-3d">
+              {/* Tech Showcase Window */}
+              <div className="relative z-10 rounded-xl overflow-hidden border border-white/20 shadow-2xl bg-gradient-to-b from-[#1a1921] to-[#121218] animate-float" style={{maxWidth: "600px"}}>
+                {/* Window Header */}
+                <div className="bg-[#131217] px-4 py-3 border-b border-white/10 flex items-center">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="inline-flex items-center gap-2 text-xs font-medium text-white/60">
+                      <code>easyweb</code>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Code Editor Content */}
+                <div className="p-6 relative h-[360px] overflow-hidden">
+                  {/* Background code */}
+                  <div className="opacity-30 animate-scroll-y">
+                    <pre className="text-xs text-primary/80 font-mono leading-tight">
+{`// Modern React Component
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-.hero {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(...)
-}`}
-                      </pre>
+const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+      <div className="container mx-auto px-4 py-20">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-6xl font-bold text-white"
+        >
+          Building <span className="text-indigo-500">beautiful</span> websites
+        </motion.h1>
+        
+        <div className="mt-8 flex gap-4">
+          <Button variant="primary">Get Started</Button>
+          <Button variant="outline">Learn More</Button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// WordPress Theme Development
+function easyweb_enqueue_styles() {
+  wp_enqueue_style(
+    'easyweb-main', 
+    get_template_directory_uri() . '/assets/css/main.css'
+  );
+}
+add_action('wp_enqueue_scripts', 'easyweb_enqueue_styles');
+
+// Wix Custom Code Solution
+$w.onReady(function () {
+  $w('#contactButton').onClick(() => {
+    $w('#contactForm').show();
+  });
+});
+
+// Custom API Integration
+async function fetchData() {
+  try {
+    const response = await fetch('/api/products');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}`}</pre>
+                  </div>
+                  
+                  {/* Centered Content */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {/* "Easyweb" Logo Card */}
+                    <div className="glass-card p-5 rounded-xl rotate-3 transform-gpu hover:rotate-0 transition-all duration-500 backdrop-blur-md">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                          <div className="text-primary text-xl font-bold">
+                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                              <path d="M7 12H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                              <path d="M12 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white">easyweb</h3>
+                          <p className="text-sm text-white/70">Custom web development</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Interactive Elements */}
+                  <div className="absolute top-10 left-8 glass-card p-3 rounded-lg -rotate-2 transform-gpu shadow-lg opacity-80 animate-float-reverse" style={{animationDelay: '1s'}}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 20H8L18 10L14 6L4 16V20Z" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M14 6L18 10" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                      </div>
+                      <div className="text-xs text-white">
+                        <p className="font-medium">WordPress</p>
+                        <p className="text-white/60 text-xs">Custom themes</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-12 right-6 glass-card p-3 rounded-lg rotate-3 transform-gpu shadow-lg opacity-80 animate-float" style={{animationDelay: '0.5s'}}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-accent/20 text-accent rounded-lg flex items-center justify-center">
+                        <Code className="w-4 h-4" />
+                      </div>
+                      <div className="text-xs text-white">
+                        <p className="font-medium">React</p>
+                        <p className="text-white/60 text-xs">Modern apps</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-32 left-10 glass-card p-3 rounded-lg rotate-1 transform-gpu shadow-lg opacity-80 animate-float-reverse" style={{animationDelay: '1.5s'}}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-white/10 text-white rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
+                          <path d="M3 9H21" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                      </div>
+                      <div className="text-xs text-white">
+                        <p className="font-medium">Wix</p>
+                        <p className="text-white/60 text-xs">Custom solutions</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Glow effect */}
-              <div className="absolute -inset-10 bg-primary/20 rounded-full filter blur-[80px] opacity-60 animate-pulse-slow"></div>
-              
-              {/* Floating elements */}
-              <div className="absolute -top-10 right-12 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-6 animate-float">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Globe className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="text-sm">
-                    <p className="font-medium">Custom WordPress</p>
-                    <p className="text-xs text-foreground/70">Tailored themes & plugins</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute bottom-6 -left-14 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-7 animate-float-reverse">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <div className="text-sm">
-                    <p className="font-medium">React Development</p>
-                    <p className="text-xs text-foreground/70">Modern & scalable applications</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Additional floating design element */}
-              <div className="absolute top-[40%] -right-10 p-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-8 animate-float">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M12 8V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                      <path d="M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                  <div className="text-xs">
-                    <p className="font-medium">Custom Design</p>
-                  </div>
-                </div>
-              </div>
+              {/* Glow effect and other decorative elements */}
+              <div className="absolute -inset-10 bg-primary/10 rounded-full filter blur-[80px] opacity-60 animate-pulse-slow -z-10"></div>
             </div>
           </div>
         </div>
