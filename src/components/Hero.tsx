@@ -136,13 +136,39 @@ const Hero = () => {
         {/* Hero Visual */}
         <div className="relative flex items-center justify-center">
           <div className="relative opacity-0 animate-fade-in animate-delay-4">
-            {/* 3D Mockup */}
+            {/* Interactive Tech Display */}
             <div className="relative">
-              <img 
-                src="/lovable-uploads/fd3c2b52-1483-427d-af73-ec691509c0b9.png" 
-                alt="Website mockup on laptop" 
-                className="relative z-10 opacity-0 animate-scale-in animate-delay-4 max-w-full"
-              />
+              {/* Main image - modern website visualization */}
+              <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl border border-white/10 animate-float">
+                <div className="relative perspective-[1000px] transform-style-3d">
+                  <img 
+                    src="/lovable-uploads/613c1101-088f-4b68-a18c-d2d8f072605e.png" 
+                    alt="Modern website development showcase" 
+                    className="relative z-10 max-w-full rounded-lg opacity-0 animate-scale-in animate-delay-4"
+                  />
+                  
+                  {/* Animated code overlay */}
+                  <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent to-background/90 rounded-lg overflow-hidden">
+                    <div className="absolute inset-0 opacity-20 animate-scroll-y">
+                      <pre className="text-xs text-primary font-mono leading-tight">
+                        {`<div className="hero">
+  <Header />
+  <main>
+    <h1>Building Digital Solutions</h1>
+    <p>Custom websites for your needs</p>
+  </main>
+</div>
+
+.hero {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(...)
+}`}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
               {/* Glow effect */}
               <div className="absolute -inset-10 bg-primary/20 rounded-full filter blur-[80px] opacity-60 animate-pulse-slow"></div>
@@ -172,6 +198,22 @@ const Hero = () => {
                   <div className="text-sm">
                     <p className="font-medium">React Development</p>
                     <p className="text-xs text-foreground/70">Modern & scalable applications</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Additional floating design element */}
+              <div className="absolute top-[40%] -right-10 p-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-8 animate-float">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M12 8V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div className="text-xs">
+                    <p className="font-medium">Custom Design</p>
                   </div>
                 </div>
               </div>

@@ -97,6 +97,14 @@
       linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
+  
+  .perspective-[1000px] {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
 }
 
 /* Animations */
@@ -151,6 +159,11 @@
   50% { transform: translateY(6px); opacity: 1; }
 }
 
+@keyframes scroll-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -170,3 +183,8 @@
 .animate-move-down {
   animation: move-down 2s ease-in-out infinite;
 }
+
+.animate-scroll-y {
+  animation: scroll-y 15s linear infinite;
+}
+
