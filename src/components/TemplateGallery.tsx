@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 
 // Template data
 const templates = [
@@ -62,23 +64,32 @@ const categories = [
 const TemplateGallery = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredTemplate, setHoveredTemplate] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const filteredTemplates = activeCategory === "all" 
     ? templates 
     : templates.filter(template => template.category === activeCategory);
 
   return (
-    <section id="templates" className="section bg-secondary/50">
+    <section id="templates" className="section relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px]"></div>
+        <div className="absolute bottom-40 -left-60 w-[300px] h-[300px] rounded-full bg-accent/10 blur-[80px]"></div>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
+      </div>
+      
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
+          <div className="inline-block mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
             Beautiful Templates
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 opacity-0 animate-fade-in animate-delay-1">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 opacity-0 animate-fade-in animate-delay-1 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             Find the Perfect Starting Point
           </h2>
-          <p className="text-lg text-foreground/70 opacity-0 animate-fade-in animate-delay-2">
+          <p className="text-lg text-foreground/80 opacity-0 animate-fade-in animate-delay-2">
             Browse our hand-crafted templates designed for various needs. Each template is fully responsive and customizable to your brand.
           </p>
         </div>
@@ -92,7 +103,7 @@ const TemplateGallery = () => {
                 "px-4 py-2 rounded-full text-sm font-medium transition-all",
                 activeCategory === category.id
                   ? "bg-primary text-white shadow-md"
-                  : "bg-white hover:bg-white/80 text-foreground/70 hover:text-foreground"
+                  : "bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 text-foreground/70 hover:text-foreground"
               )}
               onClick={() => setActiveCategory(category.id)}
             >
@@ -111,7 +122,7 @@ const TemplateGallery = () => {
               onMouseEnter={() => setHoveredTemplate(template.id)}
               onMouseLeave={() => setHoveredTemplate(null)}
             >
-              <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <img 
                     src={template.image} 
@@ -122,17 +133,23 @@ const TemplateGallery = () => {
                     )}
                   />
                   <div className={cn(
-                    "absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity duration-300",
+                    "absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent flex items-center justify-center opacity-0 transition-opacity duration-300",
                     hoveredTemplate === template.id && "opacity-100"
                   )}>
                     <div className="flex gap-3">
-                      <Button variant="outline" className="bg-white text-foreground hover:bg-white/90">View Demo</Button>
-                      <Button>Get Started</Button>
+                      <Button 
+                        variant="outline" 
+                        className="backdrop-blur-sm bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                        icon={<ExternalLink className="w-4 h-4" />}
+                      >
+                        View Demo
+                      </Button>
+                      <Button className="bg-gradient-to-r from-primary to-accent">Get Started</Button>
                     </div>
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold mb-2">{template.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{template.title}</h3>
                   <p className="text-foreground/70 mb-4 flex-grow">{template.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
@@ -147,7 +164,15 @@ const TemplateGallery = () => {
 
         {/* See All Button */}
         <div className="text-center mt-12 opacity-0 animate-fade-in animate-delay-8">
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10"
+            onClick={() => {
+              // Could link to a more comprehensive template gallery in the future
+              window.open('https://your-template-gallery-external-link.com', '_blank');
+            }}
+          >
             See All Templates
           </Button>
         </div>

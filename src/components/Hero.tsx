@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
-import { ArrowRight, Globe } from 'lucide-react';
+import { ArrowRight, Globe, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -11,11 +12,11 @@ const Hero = () => {
   const isMounted = useRef(true);
 
   const headlines = [
-    'Simple & Scalable Websites, Tailored to You',
-    'Beautiful WordPress Sites for Small Businesses',
-    'Custom React & Tailwind Solutions',
-    'Professional Wix Development',
-    'Modern Web Design, Built to Convert'
+    'Web Design Crafted for Your Vision',
+    'WordPress Websites That Convert',
+    'React & Tailwind Development',
+    'Custom Wix Solutions',
+    'Websites Built Around Your Needs'
   ];
 
   useEffect(() => {
@@ -64,99 +65,127 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen pt-32 pb-16 flex items-center overflow-hidden">
-      {/* Background Elements */}
+      {/* Interactive Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl"></div>
-        <div className="absolute top-1/3 -left-20 w-72 h-72 rounded-full bg-accent/5 blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[100px] animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/10 blur-[80px] animate-float" style={{animationDelay: '2s'}}></div>
+        
+        {/* Moving gradient background */}
+        <div className="absolute -top-[200px] -left-[200px] w-[calc(100%+400px)] h-[calc(100%+400px)] opacity-20 animate-spin-slow pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-primary"></div>
+        </div>
+        
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
       </div>
 
       <div className="container-custom relative grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
         {/* Hero Content */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-primary/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
-            <Globe className="w-4 h-4" />
-            <span>Web Design Studio</span>
+          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span>Custom Web Development</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1 min-h-[120px] md:min-h-[180px]">
-            <span className="text-gradient">{displayText}</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-accent">
+              {displayText}
+            </span>
             <span className="animate-pulse">|</span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl text-balance opacity-0 animate-fade-in animate-delay-2">
-            Explore our templates or book a free consultation today. We build beautiful, easy-to-use websites that grow with your business.
+            We create stunning websites tailored to your specific needs - whether it's WordPress, React, or Wix. We adapt our solutions to your business, not the other way around.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in animate-delay-3">
-            <Button 
-              variant="primary" 
-              size="lg" 
-              onClick={() => document.getElementById('templates')?.scrollIntoView({behavior: 'smooth'})}
-              shine
-              icon={<ArrowRight className="w-5 h-5" />}
-              iconPosition="right"
-            >
-              Browse Templates
-            </Button>
+            <Link to="/templates">
+              <Button 
+                variant="primary" 
+                size="lg" 
+                shine
+                icon={<ArrowRight className="w-5 h-5" />}
+                iconPosition="right"
+                className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+              >
+                Browse Templates
+              </Button>
+            </Link>
             <Button 
               variant="outline" 
               size="lg"
-              onClick={() => document.getElementById('consultation')?.scrollIntoView({behavior: 'smooth'})}
+              onClick={() => window.open('https://calendly.com/your-booking-link', '_blank')}
+              className="backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10 w-full sm:w-auto"
             >
               Book a Consultation
             </Button>
           </div>
+          
+          {/* Client logos or trust badges */}
+          <div className="mt-12 opacity-0 animate-fade-in animate-delay-5">
+            <p className="text-sm text-foreground/60 mb-4">Trusted by forward-thinking businesses</p>
+            <div className="flex flex-wrap gap-8 items-center">
+              <div className="h-8 w-24 bg-white/5 rounded-md"></div>
+              <div className="h-8 w-20 bg-white/5 rounded-md"></div>
+              <div className="h-8 w-28 bg-white/5 rounded-md"></div>
+              <div className="h-8 w-22 bg-white/5 rounded-md"></div>
+            </div>
+          </div>
         </div>
 
-        {/* Hero Visual - Website Preview */}
+        {/* Hero Visual */}
         <div className="relative flex items-center justify-center">
           <div className="relative opacity-0 animate-fade-in animate-delay-4">
-            {/* Website Preview Frame */}
-            <div className="relative z-10 glass-card rounded-2xl overflow-hidden shadow-2xl border border-white/20 opacity-0 animate-scale-in animate-delay-4">
-              <div className="bg-secondary/80 p-3 border-b border-white/10 flex items-center">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
-                </div>
-                <div className="mx-auto text-sm text-white/60">Website Preview</div>
-              </div>
-              <div className="bg-background/90 p-4 h-[300px] overflow-hidden">
-                <div className="flex flex-col h-full">
-                  <div className="flex justify-between items-center py-2 border-b border-white/10 mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-primary/30 flex items-center justify-center">
-                        <Globe className="w-4 h-4 text-primary" />
-                      </div>
-                      <span className="font-medium text-white">YourBrand</span>
-                    </div>
-                    <div className="flex gap-3">
-                      <div className="w-12 h-2 rounded-full bg-white/10"></div>
-                      <div className="w-12 h-2 rounded-full bg-white/10"></div>
-                      <div className="w-12 h-2 rounded-full bg-white/10"></div>
-                    </div>
+            {/* 3D Mockup */}
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/fd3c2b52-1483-427d-af73-ec691509c0b9.png" 
+                alt="Website mockup on laptop" 
+                className="relative z-10 opacity-0 animate-scale-in animate-delay-4 max-w-full"
+              />
+              
+              {/* Glow effect */}
+              <div className="absolute -inset-10 bg-primary/20 rounded-full filter blur-[80px] opacity-60 animate-pulse-slow"></div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-10 right-12 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-6 animate-float">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="flex-1 grid grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-3">
-                      <div className="h-6 w-full bg-primary/10 rounded"></div>
-                      <div className="h-4 w-3/4 bg-white/10 rounded"></div>
-                      <div className="h-4 w-5/6 bg-white/10 rounded"></div>
-                      <div className="h-4 w-2/3 bg-white/10 rounded"></div>
-                      <div className="h-8 w-28 bg-primary/20 rounded mt-4"></div>
-                    </div>
-                    <div className="h-full bg-white/5 rounded flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Globe className="w-8 h-8 text-primary/80" />
-                      </div>
-                    </div>
+                  <div className="text-sm">
+                    <p className="font-medium">Custom WordPress</p>
+                    <p className="text-xs text-foreground/70">Tailored themes & plugins</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="absolute bottom-6 -left-14 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-xl opacity-0 animate-fade-in animate-delay-7 animate-float-reverse">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="text-sm">
+                    <p className="font-medium">React Development</p>
+                    <p className="text-xs text-foreground/70">Modern & scalable applications</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Decorative Elements */}
-            <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/10 rounded-lg rotate-12 animate-float"></div>
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary/20 rounded-lg -rotate-12 animate-float" style={{animationDelay: '1s'}}></div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in animate-delay-8">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-foreground/60">Scroll to explore</span>
+          <div className="w-0.5 h-10 bg-gradient-to-b from-foreground/0 via-foreground/30 to-foreground/0">
+            <div className="w-full h-4 bg-foreground/60 animate-move-down"></div>
           </div>
         </div>
       </div>
