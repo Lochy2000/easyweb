@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap');
 
@@ -185,4 +186,16 @@
 
 .animate-scroll-y {
   animation: scroll-y 15s linear infinite;
+}
+
+/* Extra small screens - Added for even better mobile support */
+@media (max-width: 475px) {
+  .xs\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  
+  .xs\:text-\[10px\] {
+    font-size: 10px;
+  }
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { ArrowRight, Sparkles, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -10,6 +11,7 @@ const Hero = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
   const isMounted = useRef(true);
+  const isMobile = useIsMobile();
 
   const headlines = [
     'Web Design Crafted for Your Vision',
@@ -64,11 +66,11 @@ const Hero = () => {
   }, [displayText, isDeleting, loopNum, typingSpeed, headlines]);
 
   return (
-    <section className="relative min-h-screen pt-32 pb-16 flex items-center overflow-hidden">
+    <section className="relative min-h-screen pt-24 md:pt-32 pb-16 flex items-center overflow-hidden">
       {/* Interactive Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[100px] animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/10 blur-[80px] animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] rounded-full bg-primary/5 blur-[80px] md:blur-[100px] animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] rounded-full bg-accent/10 blur-[60px] md:blur-[80px] animate-float" style={{animationDelay: '2s'}}></div>
         
         {/* Moving gradient background */}
         <div className="absolute -top-[200px] -left-[200px] w-[calc(100%+400px)] h-[calc(100%+400px)] opacity-20 animate-spin-slow pointer-events-none">
@@ -79,7 +81,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
       </div>
 
-      <div className="container-custom relative grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
+      <div className="container-custom relative grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-6 items-center">
         {/* Hero Content */}
         <div className="max-w-3xl z-10">
           <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
@@ -87,14 +89,14 @@ const Hero = () => {
             <span>Custom Web Development</span>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight text-balance opacity-0 animate-fade-in animate-delay-1">
             <span className="text-gradient">
               {displayText}
             </span>
             <span className="animate-pulse">|</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl text-balance opacity-0 animate-fade-in animate-delay-2">
+          <p className="text-base md:text-lg lg:text-xl text-foreground/80 mb-6 md:mb-8 max-w-2xl text-balance opacity-0 animate-fade-in animate-delay-2">
             We create stunning websites tailored to your specific needs - whether it's WordPress, React, or Wix. We adapt our solutions to your business, not the other way around.
           </p>
           
@@ -102,7 +104,7 @@ const Hero = () => {
             <Link to="/templates">
               <Button 
                 variant="primary" 
-                size="lg" 
+                size={isMobile ? "default" : "lg"} 
                 shine
                 icon={<ArrowRight className="w-5 h-5" />}
                 iconPosition="right"
@@ -113,7 +115,7 @@ const Hero = () => {
             </Link>
             <Button 
               variant="outline" 
-              size="lg"
+              size={isMobile ? "default" : "lg"}
               onClick={() => window.open('https://calendly.com/your-booking-link', '_blank')}
               className="backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10 w-full sm:w-auto"
             >
@@ -121,31 +123,31 @@ const Hero = () => {
             </Button>
           </div>
           
-          {/* Client logos or trust badges */}
-          <div className="mt-12 opacity-0 animate-fade-in animate-delay-5">
+          {/* Client logos or trust badges - hidden on smallest screens */}
+          <div className="mt-8 md:mt-12 hidden sm:block opacity-0 animate-fade-in animate-delay-5">
             <p className="text-sm text-foreground/60 mb-4">Trusted by forward-thinking businesses</p>
-            <div className="flex flex-wrap gap-8 items-center">
-              <div className="h-8 w-24 bg-white/5 rounded-md"></div>
-              <div className="h-8 w-20 bg-white/5 rounded-md"></div>
-              <div className="h-8 w-28 bg-white/5 rounded-md"></div>
-              <div className="h-8 w-22 bg-white/5 rounded-md"></div>
+            <div className="flex flex-wrap gap-6 md:gap-8 items-center">
+              <div className="h-6 md:h-8 w-20 md:w-24 bg-white/5 rounded-md"></div>
+              <div className="h-6 md:h-8 w-16 md:w-20 bg-white/5 rounded-md"></div>
+              <div className="h-6 md:h-8 w-24 md:w-28 bg-white/5 rounded-md"></div>
+              <div className="h-6 md:h-8 w-18 md:w-22 bg-white/5 rounded-md"></div>
             </div>
           </div>
         </div>
 
-        {/* Hero Visual - Updated with modern web tech showcase */}
-        <div className="relative z-10">
+        {/* Hero Visual - Technology Showcase */}
+        <div className="relative z-10 mt-4 sm:mt-0">
           <div className="relative perspective-[1000px] md:ml-10 lg:ml-0 opacity-0 animate-fade-in animate-delay-4">
             {/* Main Content */}
             <div className="relative transform-style-3d">
-              {/* Tech Showcase Window */}
-              <div className="relative z-10 rounded-xl overflow-hidden border border-white/20 shadow-2xl bg-gradient-to-b from-[#1a1921] to-[#121218] animate-float" style={{maxWidth: "600px"}}>
+              {/* Tech Showcase Window - Smaller on mobile */}
+              <div className="relative z-10 rounded-xl overflow-hidden border border-white/20 shadow-2xl bg-gradient-to-b from-[#1a1921] to-[#121218] animate-float" style={{maxWidth: isMobile ? "100%" : "600px"}}>
                 {/* Window Header */}
-                <div className="bg-[#131217] px-4 py-3 border-b border-white/10 flex items-center">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                    <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                <div className="bg-[#131217] px-3 sm:px-4 py-2 sm:py-3 border-b border-white/10 flex items-center">
+                  <div className="flex gap-1 sm:gap-1.5">
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/20"></div>
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/20"></div>
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/20"></div>
                   </div>
                   <div className="flex-1 text-center">
                     <div className="inline-flex items-center gap-2 text-xs font-medium text-white/60">
@@ -154,11 +156,11 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Code Editor Content */}
-                <div className="p-6 relative h-[360px] overflow-hidden">
-                  {/* Background code */}
+                {/* Code Editor Content - Adjust height for mobile */}
+                <div className="p-4 sm:p-6 relative h-[260px] sm:h-[300px] md:h-[360px] overflow-hidden">
+                  {/* Background code - Smaller text on mobile */}
                   <div className="opacity-30 animate-scroll-y">
-                    <pre className="text-xs text-primary/80 font-mono leading-tight">
+                    <pre className="text-[10px] xs:text-xs text-primary/80 font-mono leading-tight">
 {`// Modern React Component
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -216,12 +218,12 @@ async function fetchData() {
                   
                   {/* Centered Content */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    {/* "Easyweb" Logo Card */}
-                    <div className="glass-card p-5 rounded-xl rotate-3 transform-gpu hover:rotate-0 transition-all duration-500 backdrop-blur-md">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                          <div className="text-primary text-xl font-bold">
-                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* "Easyweb" Logo Card - Smaller on mobile */}
+                    <div className="glass-card p-3 sm:p-5 rounded-xl rotate-3 transform-gpu hover:rotate-0 transition-all duration-500 backdrop-blur-md">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                          <div className="text-primary text-lg sm:text-xl font-bold">
+                            <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
                               <path d="M7 12H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                               <path d="M12 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -229,52 +231,52 @@ async function fetchData() {
                           </div>
                         </div>
                         <div>
-                          <h3 className="text-2xl font-bold text-white">easyweb</h3>
-                          <p className="text-sm text-white/70">Custom web development</p>
+                          <h3 className="text-xl sm:text-2xl font-bold text-white">easyweb</h3>
+                          <p className="text-xs sm:text-sm text-white/70">Custom web development</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Interactive Elements */}
-                  <div className="absolute top-10 left-8 glass-card p-3 rounded-lg -rotate-2 transform-gpu shadow-lg opacity-80 animate-float-reverse" style={{animationDelay: '1s'}}>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Interactive Elements - Adjusted for mobile */}
+                  <div className={`absolute top-8 sm:top-10 left-6 sm:left-8 glass-card p-2 sm:p-3 rounded-lg -rotate-2 transform-gpu shadow-lg opacity-80 animate-float-reverse ${isMobile ? 'scale-90' : ''}`} style={{animationDelay: '1s'}}>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="w-6 sm:w-8 h-6 sm:h-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
+                        <svg className="w-3 sm:w-4 h-3 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M4 20H8L18 10L14 6L4 16V20Z" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M14 6L18 10" stroke="currentColor" strokeWidth="2"/>
                         </svg>
                       </div>
-                      <div className="text-xs text-white">
+                      <div className="text-[10px] xs:text-xs text-white">
                         <p className="font-medium">WordPress</p>
-                        <p className="text-white/60 text-xs">Custom themes</p>
+                        <p className="text-white/60 text-[8px] xs:text-[10px] sm:text-xs">Custom themes</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="absolute bottom-12 right-6 glass-card p-3 rounded-lg rotate-3 transform-gpu shadow-lg opacity-80 animate-float" style={{animationDelay: '0.5s'}}>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-accent/20 text-accent rounded-lg flex items-center justify-center">
-                        <Code className="w-4 h-4" />
+                  <div className={`absolute bottom-10 sm:bottom-12 right-4 sm:right-6 glass-card p-2 sm:p-3 rounded-lg rotate-3 transform-gpu shadow-lg opacity-80 animate-float ${isMobile ? 'scale-90' : ''}`} style={{animationDelay: '0.5s'}}>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="w-6 sm:w-8 h-6 sm:h-8 bg-accent/20 text-accent rounded-lg flex items-center justify-center">
+                        <Code className="w-3 sm:w-4 h-3 sm:h-4" />
                       </div>
-                      <div className="text-xs text-white">
+                      <div className="text-[10px] xs:text-xs text-white">
                         <p className="font-medium">React</p>
-                        <p className="text-white/60 text-xs">Modern apps</p>
+                        <p className="text-white/60 text-[8px] xs:text-[10px] sm:text-xs">Modern apps</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="absolute bottom-32 left-10 glass-card p-3 rounded-lg rotate-1 transform-gpu shadow-lg opacity-80 animate-float-reverse" style={{animationDelay: '1.5s'}}>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-white/10 text-white rounded-lg flex items-center justify-center">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <div className={`absolute bottom-28 sm:bottom-32 left-8 sm:left-10 glass-card p-2 sm:p-3 rounded-lg rotate-1 transform-gpu shadow-lg opacity-80 animate-float-reverse ${isMobile ? 'scale-90' : ''}`} style={{animationDelay: '1.5s'}}>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="w-6 sm:w-8 h-6 sm:h-8 bg-white/10 text-white rounded-lg flex items-center justify-center">
+                        <svg className="w-3 sm:w-4 h-3 sm:h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
                           <path d="M3 9H21" stroke="currentColor" strokeWidth="2"/>
                         </svg>
                       </div>
-                      <div className="text-xs text-white">
+                      <div className="text-[10px] xs:text-xs text-white">
                         <p className="font-medium">Wix</p>
-                        <p className="text-white/60 text-xs">Custom solutions</p>
+                        <p className="text-white/60 text-[8px] xs:text-[10px] sm:text-xs">Custom solutions</p>
                       </div>
                     </div>
                   </div>
@@ -282,18 +284,18 @@ async function fetchData() {
               </div>
               
               {/* Glow effect and other decorative elements */}
-              <div className="absolute -inset-10 bg-primary/10 rounded-full filter blur-[80px] opacity-60 animate-pulse-slow -z-10"></div>
+              <div className="absolute -inset-6 sm:-inset-10 bg-primary/10 rounded-full filter blur-[50px] sm:blur-[80px] opacity-60 animate-pulse-slow -z-10"></div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in animate-delay-8">
+      {/* Scroll indicator - Hidden on small screens */}
+      <div className="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in animate-delay-8 hidden sm:block">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-foreground/60">Scroll to explore</span>
-          <div className="w-0.5 h-10 bg-gradient-to-b from-foreground/0 via-foreground/30 to-foreground/0">
-            <div className="w-full h-4 bg-foreground/60 animate-move-down"></div>
+          <span className="text-xs sm:text-sm text-foreground/60">Scroll to explore</span>
+          <div className="w-0.5 h-8 sm:h-10 bg-gradient-to-b from-foreground/0 via-foreground/30 to-foreground/0">
+            <div className="w-full h-3 sm:h-4 bg-foreground/60 animate-move-down"></div>
           </div>
         </div>
       </div>
