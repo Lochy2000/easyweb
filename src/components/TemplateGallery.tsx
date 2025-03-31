@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
+import TemplateDemo, { Template } from './TemplateDemo';
 
 // Template data
 const templates = [
@@ -12,42 +12,48 @@ const templates = [
     title: "Portfolio Pro",
     category: "portfolio",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-    description: "Perfect for creatives and professionals showcasing their work."
+    description: "Perfect for creatives and professionals showcasing their work.",
+    demoUrl: "https://templates.easyweb.dev/portfolio-pro"
   },
   {
     id: 2,
     title: "Business Plus",
     category: "business",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    description: "Professional layout designed for small to medium businesses."
+    description: "Professional layout designed for small to medium businesses.",
+    demoUrl: "https://templates.easyweb.dev/business-plus"
   },
   {
     id: 3,
     title: "Shop Simple",
     category: "ecommerce",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-    description: "Clean e-commerce template with optimized product layouts."
+    description: "Clean e-commerce template with optimized product layouts.",
+    demoUrl: "https://templates.easyweb.dev/shop-simple"
   },
   {
     id: 4,
     title: "Agency Edge",
     category: "business",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
-    description: "Modern and bold design for forward-thinking agencies."
+    description: "Modern and bold design for forward-thinking agencies.",
+    demoUrl: "https://templates.easyweb.dev/agency-edge"
   },
   {
     id: 5,
     title: "Minimal Blog",
     category: "blog",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    description: "Elegant and focused layout for bloggers and writers."
+    description: "Elegant and focused layout for bloggers and writers.",
+    demoUrl: "https://templates.easyweb.dev/minimal-blog"
   },
   {
     id: 6,
     title: "Landing Launch",
     category: "landing",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-    description: "High-conversion landing page template for products and services."
+    description: "High-conversion landing page template for products and services.",
+    demoUrl: "https://templates.easyweb.dev/landing-launch"
   }
 ];
 
@@ -64,11 +70,29 @@ const categories = [
 const TemplateGallery = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredTemplate, setHoveredTemplate] = useState<number | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
   const navigate = useNavigate();
 
   const filteredTemplates = activeCategory === "all" 
     ? templates 
     : templates.filter(template => template.category === activeCategory);
+
+  const handleViewDemo = (template: Template) => {
+    setSelectedTemplate(template);
+    setDemoLoading(true);
+    setDemoOpen(true);
+  };
+
+  const handleCloseDemoModal = () => {
+    setDemoOpen(false);
+    // Reset after animation completes
+    setTimeout(() => {
+      setSelectedTemplate(null);
+      setDemoLoading(false);
+    }, 300);
+  };
 
   return (
     <section id="templates" className="section relative overflow-hidden">
@@ -141,10 +165,16 @@ const TemplateGallery = () => {
                         variant="outline" 
                         className="backdrop-blur-sm bg-white/10 border border-white/20 text-white hover:bg-white/20"
                         icon={<ExternalLink className="w-4 h-4" />}
+                        onClick={() => handleViewDemo(template)}
                       >
                         View Demo
                       </Button>
-                      <Button className="bg-gradient-to-r from-primary to-accent">Get Started</Button>
+                      <Button 
+                        className="bg-gradient-to-r from-primary to-accent"
+                        onClick={() => navigate(`/templates/${template.id}`)}
+                      >
+                        Get Started
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -177,6 +207,22 @@ const TemplateGallery = () => {
           </Button>
         </div>
       </div>
+
+      {/* Template Demo Modal */}
+      <TemplateDemo
+        isOpen={demoOpen}
+        onClose={handleCloseDemoModal}
+        template={selectedTemplate}
+        setLoading={setDemoLoading}
+      />
+
+      {/* Background blur overlay when demo is open */}
+      {demoOpen && (
+        <div 
+          className="fixed inset-0 bg-background/50 backdrop-blur-sm z-40"
+          onClick={handleCloseDemoModal}
+        />
+      )}
     </section>
   );
 };
