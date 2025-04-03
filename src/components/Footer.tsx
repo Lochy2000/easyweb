@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <a href="/" className="text-2xl font-display font-bold flex items-center gap-1 mb-4">
+            <Link to="/" className="text-2xl font-display font-bold flex items-center gap-1 mb-4">
               <span className="text-primary">Easy</span>
               <span>Webs</span>
-            </a>
+            </Link>
             <p className="text-foreground/70 mb-6">
               Simple & scalable websites tailored to your unique needs. Modern design with a personal touch.
             </p>
@@ -39,11 +39,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <FooterLink href="#templates">Templates</FooterLink>
+              <FooterLink to="/templates">Templates</FooterLink>
               <FooterLink href="#consultation">Consultations</FooterLink>
               <FooterLink href="#about">About Us</FooterLink>
               <FooterLink href="#contact">Contact</FooterLink>
-              <FooterLink href="#">Blog</FooterLink>
+              <FooterLink to="/blog">Blog</FooterLink>
             </ul>
           </div>
 
@@ -51,11 +51,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Templates</h3>
             <ul className="space-y-3">
-              <FooterLink href="#">Portfolio</FooterLink>
-              <FooterLink href="#">E-commerce</FooterLink>
-              <FooterLink href="#">Business</FooterLink>
-              <FooterLink href="#">Blog</FooterLink>
-              <FooterLink href="#">Landing Pages</FooterLink>
+              <FooterLink to="/templates">Portfolio</FooterLink>
+              <FooterLink to="/templates">E-commerce</FooterLink>
+              <FooterLink to="/templates">Business</FooterLink>
+              <FooterLink to="/templates">Blog</FooterLink>
+              <FooterLink to="/templates">Landing Pages</FooterLink>
             </ul>
           </div>
 
@@ -90,9 +90,9 @@ const Footer = () => {
         <div className="pt-8 border-t border-border/50 text-center text-foreground/60 text-sm">
           <p>© {new Date().getFullYear()} EasyWebs. All rights reserved.</p>
           <div className="flex justify-center space-x-6 mt-3">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-foreground transition-colors">Cookie Policy</a>
+            <Link to="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <Link to="/cookie-policy" className="hover:text-foreground transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>
@@ -119,19 +119,24 @@ const SocialLink = ({ href, children, 'aria-label': ariaLabel }: SocialLinkProps
 };
 
 interface FooterLinkProps {
-  href: string;
+  href?: string;
+  to?: string;
   children: React.ReactNode;
 }
 
-const FooterLink = ({ href, children }: FooterLinkProps) => {
+const FooterLink = ({ href, to, children }: FooterLinkProps) => {
+  const linkClass = "text-foreground/70 hover:text-primary transition-colors";
   return (
     <li>
-      <a 
-        href={href} 
-        className="text-foreground/70 hover:text-primary transition-colors"
-      >
-        {children}
-      </a>
+      {to ? (
+        <Link to={to} className={linkClass}>
+          {children}
+        </Link>
+      ) : (
+        <a href={href} className={linkClass}>
+          {children}
+        </a>
+      )}
     </li>
   );
 };

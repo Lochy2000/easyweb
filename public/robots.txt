@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# TODO: Add the full URL to your sitemap file once generated
+# Sitemap: https://your-easyweb-site.com/sitemap.xml

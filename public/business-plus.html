@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Plus Template | EasyWeb</title>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #60a5fa;
+      --secondary: #475569;
+      --accent: #0ea5e9;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 0.5rem;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--gray-700);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--gray-900);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    .text-gradient {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--gray-600);
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow-sm);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--gray-700);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 10rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text p {
+      color: var(--gray-600);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background-image: radial-gradient(var(--primary-light) 2px, transparent 2px);
+      background-size: 30px 30px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 0;
+      background-color: var(--gray-50);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      background-color: var(--primary-light);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--gray-900);
+    }
+
+    .feature-card p {
+      color: var(--gray-600);
+      margin-bottom: 0;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 6rem 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background-color: white;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+
+    .service-content {
+      padding: 1.5rem;
+    }
+
+    .service-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-content p {
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      padding: 6rem 0;
+      background-color: var(--gray-50);
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .testimonial-slide {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .testimonial-quote {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--gray-700);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .testimonial-quote::before,
+    .testimonial-quote::after {
+      content: '"';
+      font-size: 3rem;
+      color: var(--primary-light);
+      position: absolute;
+      opacity: 0.3;
+    }
+
+    .testimonial-quote::before {
+      top: -1rem;
+      left: -1rem;
+    }
+
+    .testimonial-quote::after {
+      bottom: -2rem;
+      right: -1rem;
+    }
+
+    .testimonial-author {
+      margin-top: 2rem;
+    }
+
+    .author-avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--primary-light);
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .author-position {
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
+
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      background-color: var(--gray-300);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    /* Call to Action Section */
+    .cta {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-light {
+      background-color: white;
+      color: var(--primary);
+    }
+
+    .btn-light:hover {
+      background-color: var(--gray-100);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-ghost:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--gray-900);
+      color: var(--gray-400);
+      padding: 5rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-description {
+      margin-bottom: 1.5rem;
+      max-width: 300px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--gray-800);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: var(--gray-300);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-heading {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 3rem;
+      }
+      
+      h2 {
+        font-size: 2.25rem;
+      }
+      
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .hero-image {
+        order: -1;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .nav-links, .header-buttons {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .features-grid, .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="logo">Business Plus</a>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="header-buttons">
+          <a href="#contact" class="btn btn-outline">Get Started</a>
+        </div>
+        <button class="mobile-menu-toggle">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text fade-in">
+          <h1>Grow Your Business with <span class="text-gradient">Strategic Solutions</span></h1>
+          <p>We help businesses scale through innovative strategies, cutting-edge technology, and data-driven insights. Partner with us to transform your vision into reality.</p>
+          <div class="hero-buttons">
+            <a href="#services" class="btn btn-primary">Our Services</a>
+            <a href="#contact" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-image fade-in delay-2">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Business Team">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Why Choose <span class="text-gradient">Us</span></h2>
+        <p>We provide comprehensive business solutions tailored to your unique needs and objectives.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">
+            <span>💡</span>
+          </div>
+          <h3>Innovative Approach</h3>
+          <p>We stay ahead of industry trends to deliver forward-thinking solutions that give your business a competitive edge.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">
+            <span>📊</span>
+          </div>
+          <h3>Data-Driven Strategy</h3>
+          <p>Our decisions are backed by comprehensive data analysis and market research to ensure measurable results.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">
+            <span>👥</span>
+          </div>
+          <h3>Expert Team</h3>
+          <p>Our team of seasoned professionals brings decades of combined experience across various industries.</p>
+        </div>
+        <div class="feature-card fade-in delay-4">
+          <div class="feature-icon">
+            <span>🔒</span>
+          </div>
+          <h3>Reliable Support</h3>
+          <p>We provide ongoing support and maintenance to ensure your business operations run smoothly at all times.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Our <span class="text-gradient">Services</span></h2>
+        <p>Comprehensive solutions designed to address your business challenges and drive growth.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-in delay-1">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Market Analysis">
+          </div>
+          <div class="service-content">
+            <h3>Market Analysis</h3>
+            <p>Comprehensive market research and competitive analysis to identify opportunities and threats in your industry.</p>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Business Strategy">
+          </div>
+          <div class="service-content">
+            <h3>Business Strategy</h3>
+            <p>Strategic planning and roadmap development to achieve your short-term and long-term business objectives.</p>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="service-card fade-in delay-3">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Digital Transformation">
+          </div>
+          <div class="service-content">
+            <h3>Digital Transformation</h3>
+            <p>Modernize your business operations through digitalization, automation, and technology implementation.</p>
+            <a href="#" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>What Our <span class="text-gradient">Clients Say</span></h2>
+        <p>Hear from businesses that have transformed their operations with our solutions.</p>
+      </div>
+      <div class="testimonial-slider fade-in delay-1">
+        <div class="testimonial-slide" id="slide-1">
+          <div class="testimonial-quote">
+            "Working with Business Plus transformed our company's approach to digital marketing. Their strategic insights and execution resulted in a 60% increase in lead generation within just three months. I highly recommend their services to any business looking to grow in the digital space."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="John Roberts">
+            </div>
+            <div class="author-name">John Roberts</div>
+            <div class="author-position">CEO, TechAdvance Inc.</div>
+          </div>
+        </div>
+        <div class="testimonial-dots">
+          <div class="dot active" onclick="showSlide(1)"></div>
+          <div class="dot" onclick="showSlide(2)"></div>
+          <div class="dot" onclick="showSlide(3)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Elevate Your Business?</h2>
+      <p>Schedule a consultation with our experts to discuss your business needs and discover how we can help you achieve your goals.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-light">Get Started</a>
+        <a href="#" class="btn btn-ghost">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">Business Plus</div>
+          <p class="footer-description">We provide comprehensive business solutions to help companies achieve sustainable growth and competitive advantage.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">TW</a>
+            <a href="#" class="social-icon">IN</a>
+            <a href="#" class="social-icon">LI</a>
+          </div>
+        </div>
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#">Market Analysis</a></li>
+            <li><a href="#">Business Strategy</a></li>
+            <li><a href="#">Digital Transformation</a></li>
+            <li><a href="#">Process Optimization</a></li>
+            <li><a href="#">Financial Planning</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">News & Updates</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Webinars</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Business Plus Template. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Simple testimonial slider
+    const testimonials = [
+      {
+        quote: "Working with Business Plus transformed our company's approach to digital marketing. Their strategic insights and execution resulted in a 60% increase in lead generation within just three months. I highly recommend their services to any business looking to grow in the digital space.",
+        name: "John Roberts",
+        position: "CEO, TechAdvance Inc.",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        quote: "Business Plus helped us navigate a complex digital transformation with remarkable efficiency. Their team's expertise and dedication were evident throughout the process, and the results speak for themselves. Our operational efficiency has improved by 40%.",
+        name: "Sarah Johnson",
+        position: "COO, Retail Solutions Group",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        quote: "After struggling with stagnant growth for years, Business Plus helped us identify key opportunities in our market. Their actionable insights and strategic guidance have been instrumental in our recent expansion. We've seen a 75% increase in revenue within a year.",
+        name: "Michael Chang",
+        position: "Founder, Innovate Tech",
+        avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+    
+    function showSlide(index) {
+      const slide = document.getElementById('slide-1');
+      const testimonial = testimonials[index - 1];
+      
+      // Update content
+      slide.querySelector('.testimonial-quote').textContent = testimonial.quote;
+      slide.querySelector('.author-name').textContent = testimonial.name;
+      slide.querySelector('.author-position').textContent = testimonial.position;
+      slide.querySelector('.author-avatar img').src = testimonial.avatar;
+      
+      // Update active dot
+      document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index - 1);
+      });
+    }
+    
+    // Animate elements when they come into view
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeElems = document.querySelectorAll('.fade-in');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElems.forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+      });
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      const headerButtons = document.querySelector('.header-buttons');
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+          headerButtons.style.display = headerButtons.style.display === 'flex' ? 'none' : 'flex';
+          
+          if (navLinks.style.display === 'flex') {
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = 0;
+            navLinks.style.right = 0;
+            navLinks.style.backgroundColor = 'white';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = 'var(--shadow)';
+            
+            headerButtons.style.flexDirection = 'column';
+            headerButtons.style.position = 'absolute';
+            headerButtons.style.top = 'calc(100% + ' + navLinks.offsetHeight + 'px)';
+            headerButtons.style.left = 0;
+            headerButtons.style.right = 0;
+            headerButtons.style.backgroundColor = 'white';
+            headerButtons.style.padding = '1rem';
+            headerButtons.style.boxShadow = 'var(--shadow)';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

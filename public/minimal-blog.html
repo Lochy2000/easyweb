@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Blog | EasyWeb Template</title>
+  <style>
+    /* Base Styles */
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #64748b;
+      --dark: #1f2937;
+      --darker: #111827;
+      --light: #f9fafb;
+      --lighter: #ffffff;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --max-width: 70rem;
+      --content-width: 45rem;
+      --radius: 0.5rem;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--gray-800);
+      background-color: var(--light);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-serif);
+      color: var(--gray-900);
+      line-height: 1.3;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .content-container {
+      max-width: var(--content-width);
+      margin: 0 auto;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--lighter);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1.5rem 0;
+      margin-bottom: 3rem;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      letter-spacing: -0.025em;
+    }
+
+    .logo:hover {
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: block;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--gray-800);
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: var(--gray-700);
+        font-weight: 500;
+      }
+
+      .nav-links a:hover, .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+
+    /* Featured Post */
+    .featured-post {
+      margin-bottom: 4rem;
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .featured-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .featured-card:hover .featured-image img {
+      transform: scale(1.03);
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: var(--gray-500);
+    }
+
+    .category {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .featured-title {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .featured-excerpt {
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .featured-card {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+
+      .featured-title {
+        font-size: 2.25rem;
+      }
+    }
+
+    /* Post Grid */
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .post-card {
+      transition: transform 0.3s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .post-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 200px;
+      margin-bottom: 1.25rem;
+    }
+
+    .post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .post-card:hover .post-image img {
+      transform: scale(1.05);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    .post-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .post-excerpt {
+      color: var(--gray-600);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background-color: var(--gray-100);
+      padding: 3rem 0;
+      margin-bottom: 4rem;
+      border-radius: var(--radius);
+    }
+
+    .newsletter-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 1rem;
+    }
+
+    .newsletter p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: var(--gray-600);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--gray-300);
+      border-right: none;
+      border-radius: var(--radius) 0 0 var(--radius);
+      font-size: 0.875rem;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .newsletter-button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .newsletter-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* Blog Post */
+    .blog-post {
+      padding: 3rem 0;
+    }
+
+    .post-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .post-header h1 {
+      margin-bottom: 1rem;
+    }
+
+    .post-header-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--gray-500);
+      font-size: 0.875rem;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .author-image {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .author-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-cover {
+      margin-bottom: 2.5rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .post-content {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--gray-800);
+      line-height: 1.8;
+    }
+
+    .post-content h2 {
+      margin-top: 2.5rem;
+    }
+
+    .post-content h3 {
+      margin-top: 2rem;
+    }
+
+    .post-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-content blockquote {
+      border-left: 4px solid var(--primary);
+      padding-left: 1.5rem;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: var(--gray-600);
+    }
+
+    .post-content ul, .post-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .post-content img {
+      margin: 2rem auto;
+      border-radius: var(--radius);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--darker);
+      color: var(--gray-400);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span {
+      color: var(--primary);
+    }
+
+    .footer-text {
+      margin-bottom: 1.5rem;
+      max-width: 400px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--gray-800);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      color: var(--gray-300);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-heading {
+      color: white;
+      font-size: 1.125rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="logo">Minimal<span>Blog</span></a>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Articles</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-toggle">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="featured-post">
+      <div class="container">
+        <a href="blog-post.html" class="featured-card">
+          <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Featured Post">
+          </div>
+          <div class="featured-content">
+            <div class="featured-meta">
+              <span class="category">Design</span>
+              <span class="date">June 15, 2023</span>
+            </div>
+            <h2 class="featured-title">The Art of Minimal Design: Less is More in the Digital Age</h2>
+            <p class="featured-excerpt">Exploring how minimalism in design has evolved and why it's more relevant than ever in today's cluttered digital landscape. Learn the key principles that make minimal design both beautiful and effective.</p>
+            <div class="read-more">Read article →</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="latest-posts">
+      <div class="container">
+        <h2>Latest Articles</h2>
+        <div class="post-grid">
+          <article class="post-card">
+            <a href="blog-post.html">
+              <div class="post-image">
+                <img src="https://images.unsplash.com/photo-1516383607781-913a19294fd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog Post">
+              </div>
+              <div class="post-meta">
+                <span class="category">Technology</span>
+                <span class="date">June 10, 2023</span>
+              </div>
+              <h3 class="post-title">The Rise of AI in Content Creation: Friend or Foe?</h3>
+              <p class="post-excerpt">As artificial intelligence tools become more sophisticated, content creators face both exciting opportunities and challenging questions about the future of their craft.</p>
+              <div class="read-more">Read more →</div>
+            </a>
+          </article>
+          
+          <article class="post-card">
+            <a href="blog-post.html">
+              <div class="post-image">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog Post">
+              </div>
+              <div class="post-meta">
+                <span class="category">Business</span>
+                <span class="date">June 7, 2023</span>
+              </div>
+              <h3 class="post-title">Remote Work Revolution: Building Culture Across Distances</h3>
+              <p class="post-excerpt">How leading companies are reimagining workplace culture and team building in an era where distributed teams have become the norm rather than the exception.</p>
+              <div class="read-more">Read more →</div>
+            </a>
+          </article>
+          
+          <article class="post-card">
+            <a href="blog-post.html">
+              <div class="post-image">
+                <img src="https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog Post">
+              </div>
+              <div class="post-meta">
+                <span class="category">Productivity</span>
+                <span class="date">June 5, 2023</span>
+              </div>
+              <h3 class="post-title">Deep Work in a Distracted World: Reclaiming Your Focus</h3>
+              <p class="post-excerpt">Practical strategies for cultivating the ability to concentrate deeply in an age of constant notifications, endless scrolling, and fractured attention spans.</p>
+              <div class="read-more">Read more →</div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter-content">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Stay updated with our latest articles, tips, and insights delivered straight to your inbox. No spam, we promise.</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-post content-container">
+      <article>
+        <header class="post-header">
+          <h1>The Art of Minimal Design: Less is More in the Digital Age</h1>
+          <div class="post-header-meta">
+            <div class="author">
+              <div class="author-image">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Author">
+              </div>
+              <span>By Alex Johnson</span>
+            </div>
+            <span class="date">June 15, 2023</span>
+            <span class="category">Design</span>
+          </div>
+        </header>
+        
+        <div class="post-cover">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Featured Image">
+        </div>
+        
+        <div class="post-content">
+          <p>In a world of constant digital noise, there's a growing appreciation for minimalism. The "less is more" philosophy, famously championed by architect Ludwig Mies van der Rohe, is finding renewed significance in today's digital design landscape.</p>
+          
+          <p>As screens get smaller and attention spans shorter, the ability to communicate clearly with fewer elements has become essential. This article explores the principles of minimal design and why it continues to resonate in our overcrowded digital environment.</p>
+          
+          <h2>The Core Principles of Minimal Design</h2>
+          
+          <p>At its heart, minimal design isn't simply about using fewer elements—it's about achieving maximum impact with minimum means. Here are the key principles that define truly effective minimal design:</p>
+          
+          <h3>1. Intentional Reduction</h3>
+          
+          <p>Minimalism begins with the question: "What can I remove without compromising function?" Rather than starting with a blank canvas and adding elements, minimal design often involves starting with complexity and strategically reducing until reaching the essence of what's needed.</p>
+          
+          <blockquote>
+            "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away." — Antoine de Saint-Exupéry
+          </blockquote>
+          
+          <h3>2. Purposeful White Space</h3>
+          
+          <p>White space (or negative space) in minimal design isn't empty—it's a powerful active element that provides breathing room, creates emphasis, and improves legibility. Properly used white space guides the user's eye to what's important and creates a sense of elegance and sophistication.</p>
+          
+          <h3>3. Typographic Hierarchy</h3>
+          
+          <p>When visual elements are reduced, typography must work harder. Minimal designs rely on thoughtful type choices and clear hierarchies to organize information and guide users through content without the need for decorative elements.</p>
+          
+          <h2>Why Minimalism Matters Now More Than Ever</h2>
+          
+          <p>The rise of mobile devices has made minimalism not just an aesthetic choice but a practical necessity. On small screens, cluttered designs become unusable. Minimal interfaces adapt more gracefully to different screen sizes while requiring less bandwidth and processing power.</p>
+          
+          <p>Additionally, as users face an ever-increasing bombardment of information, minimal design provides a respite. Clean, focused interfaces reduce cognitive load and make decision-making easier for users.</p>
+          
+          <h3>Finding the Balance</h3>
+          
+          <p>Of course, minimalism can be taken too far. When essential elements are removed for the sake of austerity, designs can become confusing or ineffective. The goal should always be clarity and purpose, not bareness for its own sake.</p>
+          
+          <p>The most successful minimal designs strike a balance—they contain exactly what's needed, no more and no less. They understand that simplicity isn't about making something basic; it's about making something clear.</p>
+          
+          <h2>Conclusion</h2>
+          
+          <p>As our digital environments grow increasingly complex, the principles of minimal design offer both practical solutions and aesthetic relief. By focusing on what truly matters and eliminating the unnecessary, designers can create experiences that communicate clearly and stand the test of time.</p>
+          
+          <p>Remember that minimal design isn't about following a trend—it's about embracing a timeless principle: in a world of ever-increasing noise, clarity becomes the ultimate luxury.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">Minimal<span>Blog</span></div>
+          <p class="footer-text">A clean and minimalist blog template focused on creating exceptional reading experiences for your audience.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">TW</a>
+            <a href="#" class="social-icon">IG</a>
+            <a href="#" class="social-icon">LI</a>
+          </div>
+        </div>
+        
+        <div class="footer-links-group">
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Productivity</a></li>
+            <li><a href="#">Creativity</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-group">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2023 Minimal Blog Template. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+          navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+          
+          if (navLinks.style.display === 'flex') {
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = 0;
+            navLinks.style.right = 0;
+            navLinks.style.backgroundColor = 'white';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = 'var(--shadow)';
+            navLinks.style.zIndex = 10;
+          }
+        });
+      }
+      
+      // Newsletter form submission
+      const newsletterForm = document.querySelector('.newsletter-form');
+      
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const input = this.querySelector('.newsletter-input');
+          const email = input.value;
+          
+          if (email) {
+            // In a real implementation, you would send this to your server
+            console.log('Subscribing email:', email);
+            
+            // Show a success message
+            input.value = '';
+            
+            const button = this.querySelector('.newsletter-button');
+            const originalText = button.textContent;
+            button.textContent = 'Subscribed!';
+            button.style.backgroundColor = '#10b981'; // Success color
+            
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.style.backgroundColor = '';
+            }, 2000);
+          }
+        });
+      }
+      
+      // Reading time calculator
+      const article = document.querySelector('.post-content');
+      
+      if (article) {
+        const text = article.textContent;
+        const wordCount = text.split(/\s+/).length;
+        const readingTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
+        
+        const readingTimeEl = document.createElement('span');
+        readingTimeEl.classList.add('reading-time');
+        readingTimeEl.textContent = `${readingTime} min read`;
+        
+        const metaSection = document.querySelector('.post-header-meta');
+        if (metaSection) {
+          metaSection.appendChild(readingTimeEl);
+        }
+      }
+    });
+  </script>
+</body>
+</html> 

@@ -21,19 +21,31 @@ const ServiceCard = ({ icon, title, description, delay = 0 }: ServiceCardProps) 
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+    className="group flex relative h-full"
   >
-    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
-      {icon}
+    {/* Card with animated border */}
+    <div className="relative w-full p-[1px] rounded-2xl overflow-hidden">
+      {/* Animated gradient border */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary opacity-0 group-hover:opacity-100 group-hover:animate-rotation rounded-2xl"></div>
+      
+      {/* Card inner background */}
+      <div className="absolute inset-[1px] bg-black rounded-xl"></div>
+      
+      {/* Card content */}
+      <div className="relative z-10 h-full p-6 bg-[#0f0f12] rounded-xl">
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+          {icon}
+        </div>
+        <h3 className="text-xl font-semibold mb-3">{title}</h3>
+        <p className="text-foreground/70 leading-relaxed">{description}</p>
+      </div>
     </div>
-    <h3 className="text-xl font-semibold mb-3">{title}</h3>
-    <p className="text-foreground/70 leading-relaxed">{description}</p>
   </motion.div>
 );
 
 export const Services = () => {
   return (
-    <section className="py-24 relative">
+    <section id="about" className="py-24 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

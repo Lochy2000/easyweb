@@ -38,7 +38,7 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   // If no template is provided, don't render anything
   if (!template) return null;
 
-  // Use the local demo for testing, or fall back to template's demoUrl if available
+  // Use the template's demoUrl if available, or fall back to demo-template.html
   const demoUrl = template.demoUrl || `/demo-template.html?template=${encodeURIComponent(template.title)}`;
 
   const handleIframeLoad = () => {
@@ -131,7 +131,11 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
               Open in New Tab
               <ExternalLink className="h-4 w-4" />
             </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button 
+              size="sm" 
+              className="bg-primary hover:bg-primary/90"
+              onClick={() => window.open(demoUrl, '_blank')}
+            >
               Use This Template
             </Button>
           </div>

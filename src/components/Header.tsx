@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
@@ -27,17 +26,17 @@ const Header = () => {
       )}
     >
       <div className="container-custom flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo - Reverted to text/icon with hover effect */}
         <Link 
           to="/" 
-          className="text-2xl font-display font-bold text-foreground flex items-center gap-2"
+          className="text-2xl font-display font-bold text-foreground flex items-center gap-2 group"
         >
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/20">
-            <Globe className="w-6 h-6 text-primary" />
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
+            <Globe className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
           </div>
           <div className="flex items-center">
-            <span className="text-primary">easy</span>
-            <span>web</span>
+            <span className="text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent transition-colors duration-300">easy</span>
+            <span className="group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent transition-colors duration-300">web</span>
           </div>
         </Link>
 
@@ -47,9 +46,8 @@ const Header = () => {
           <NavLink href="#about">About</NavLink>
           <NavLink href="#team">Team</NavLink>
           <Button 
-            variant="primary" 
-            className="bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-primary/20"
-            onClick={() => window.open('https://calendly.com/your-booking-link', '_blank')}
+            variant="3d"
+            onClick={() => window.open('https://calendly.com/lochlann_oht/discussion', '_blank')}
           >
             Book Consultation
           </Button>
@@ -86,10 +84,10 @@ const Header = () => {
           <MobileNavLink href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
           <MobileNavLink href="#team" onClick={() => setIsMobileMenuOpen(false)}>Team</MobileNavLink>
           <Button 
-            className="w-full mt-4 bg-gradient-to-r from-primary to-accent" 
-            variant="primary"
+            className="w-full mt-4"
+            variant="3d"
             onClick={() => {
-              window.open('https://calendly.com/your-booking-link', '_blank');
+              window.open('https://calendly.com/lochlann_oht/discussion', '_blank');
               setIsMobileMenuOpen(false);
             }}
           >

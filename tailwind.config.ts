@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -117,6 +116,14 @@ export default {
 				'move-down': {
 					'0%, 100%': { transform: 'translateY(0)', opacity: '0' },
 					'50%': { transform: 'translateY(6px)', opacity: '1' }
+				},
+				'rotation': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'rotate-y': {
+					'0%': { transform: 'rotateY(180deg)' },
+					'100%': { transform: 'rotateY(360deg)' }
 				}
 			},
 			animation: {
@@ -132,11 +139,16 @@ export default {
 				'spin-slow': 'spin-slow 60s linear infinite',
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
 				'move-down': 'move-down 2s ease-in-out infinite',
-				'background-shine': 'background-shine 8s linear infinite'
+				'background-shine': 'background-shine 8s linear infinite',
+				'rotation': 'rotation 8s linear infinite',
+				'rotate-y': 'rotate-y 1s forwards'
 			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				display: ['Satoshi', 'Inter', 'system-ui', 'sans-serif']
+			},
+			perspective: {
+				'30rem': '30rem',
 			}
 		}
 	},

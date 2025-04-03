@@ -21,7 +21,7 @@ const TestimonialCard = ({ name, role, company, image, content, delay = 0 }: Tes
   >
     <div className="flex items-center gap-4 mb-6">
       <Avatar className="w-12 h-12">
-        <AvatarImage src={image} />
+        <AvatarImage src={image} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div>

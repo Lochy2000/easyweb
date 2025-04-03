@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { TextReveal } from "./TextReveal";
+import { Link } from "react-router-dom";
 
 
 const Hero = () => {
@@ -66,27 +67,22 @@ const Hero = () => {
             We build beautiful, functional websites that help your business grow.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8"
+            className="flex justify-center items-center mb-6 sm:mb-8"
           >
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 min-w-[160px] sm:min-w-[200px] text-sm sm:text-base group"
+            <Link
+              to="/templates"
+              className="relative group px-6 py-3 min-w-[200px] rounded-[10px] font-medium text-white overflow-hidden text-center"
             >
-              Start Here
-              <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10 min-w-[160px] sm:min-w-[200px] text-sm sm:text-base"
-            >
-              View Our Work
-            </Button>
+              <span className="absolute inset-0 bg-gradient-to-r from-[#0ce39a] via-[#69007f] to-[#fc0987] transition-all duration-500 group-hover:blur-[15px] group-hover:opacity-80 opacity-0"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-[#0ce39a] via-[#69007f] to-[#fc0987]"></span>
+              <span className="absolute inset-[1px] rounded-[9px] bg-[#272727] transition-opacity duration-500 group-hover:opacity-70"></span>
+              <span className="relative z-10">View Templates</span>
+            </Link>
           </motion.div>
         </div>
         

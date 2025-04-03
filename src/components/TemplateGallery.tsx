@@ -6,6 +6,9 @@ import { ExternalLink } from 'lucide-react';
 import TemplateDemo, { Template } from './TemplateDemo';
 
 // Template data
+// TODO: Replace placeholder Unsplash images with actual template preview images.
+//       Create optimized images (e.g., WebP) and place them in the public directory.
+//       Update the 'image' paths below accordingly.
 const templates = [
   {
     id: 1,
@@ -13,7 +16,7 @@ const templates = [
     category: "portfolio",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     description: "Perfect for creatives and professionals showcasing their work.",
-    demoUrl: "https://templates.easyweb.dev/portfolio-pro"
+    demoUrl: "/portfolio-pro.html"
   },
   {
     id: 2,
@@ -21,7 +24,7 @@ const templates = [
     category: "business",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
     description: "Professional layout designed for small to medium businesses.",
-    demoUrl: "https://templates.easyweb.dev/business-plus"
+    demoUrl: "/business-plus.html"
   },
   {
     id: 3,
@@ -29,7 +32,7 @@ const templates = [
     category: "ecommerce",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     description: "Clean e-commerce template with optimized product layouts.",
-    demoUrl: "https://templates.easyweb.dev/shop-simple"
+    demoUrl: "/shop-simple.html"
   },
   {
     id: 4,
@@ -37,7 +40,7 @@ const templates = [
     category: "business",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
     description: "Modern and bold design for forward-thinking agencies.",
-    demoUrl: "https://templates.easyweb.dev/agency-edge"
+    demoUrl: "/demo-template.html?template=Agency%20Edge"
   },
   {
     id: 5,
@@ -45,7 +48,7 @@ const templates = [
     category: "blog",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
     description: "Elegant and focused layout for bloggers and writers.",
-    demoUrl: "https://templates.easyweb.dev/minimal-blog"
+    demoUrl: "/minimal-blog.html"
   },
   {
     id: 6,
@@ -53,7 +56,7 @@ const templates = [
     category: "landing",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     description: "High-conversion landing page template for products and services.",
-    demoUrl: "https://templates.easyweb.dev/landing-launch"
+    demoUrl: "/demo-template.html?template=Landing%20Launch"
   }
 ];
 
@@ -170,8 +173,8 @@ const TemplateGallery = () => {
                         View Demo
                       </Button>
                       <Button 
-                        className="bg-gradient-to-r from-primary to-accent"
-                        onClick={() => navigate(`/templates/${template.id}`)}
+                        variant="gradient"
+                        onClick={() => window.open(template.demoUrl, '_blank')}
                       >
                         Get Started
                       </Button>
@@ -195,12 +198,10 @@ const TemplateGallery = () => {
         {/* See All Button */}
         <div className="text-center mt-12 opacity-0 animate-fade-in animate-delay-8">
           <Button 
-            variant="outline" 
+            variant="gradient"
             size="lg" 
-            className="backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10"
             onClick={() => {
-              // Could link to a more comprehensive template gallery in the future
-              window.open('https://your-template-gallery-external-link.com', '_blank');
+              navigate('/templates');
             }}
           >
             See All Templates

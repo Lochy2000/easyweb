@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Button from './Button';
 
@@ -149,7 +148,7 @@ const ConsultationSection = () => {
                 </div>
                 
                 <div>
-                  <Button className="w-full" size="lg" shine>
+                  <Button className="w-full" size="lg" variant="gradient">
                     Schedule Consultation
                   </Button>
                   <p className="text-sm text-center text-foreground/60 mt-3">
