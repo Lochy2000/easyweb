@@ -8,28 +8,28 @@
 @layer base {
   :root {
     --background: 260 20% 10%;
-    --foreground: 0 0% 98%;
+    --foreground: hsl(0 0% 98%);
 
     --card: 260 20% 12%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: hsl(0 0% 98%);
 
     --popover: 260 20% 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: hsl(0 0% 98%);
 
     --primary: 267 100% 67%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: hsl(0 0% 100%);
 
     --secondary: 260 15% 20%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: hsl(0 0% 98%);
 
     --muted: 260 15% 20%;
     --muted-foreground: 215 20% 75%;
 
     --accent: 267 80% 65%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: hsl(0 0% 98%);
 
     --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: hsl(0 0% 98%);
 
     --border: 260 15% 20%;
     --input: 260 15% 20%;
@@ -49,11 +49,13 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans selection:bg-primary/20;
+    @apply bg-background font-sans selection:bg-primary/20;
+    color: var(--foreground);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold tracking-tight;
+    color: inherit;
   }
 }
 
@@ -228,4 +230,291 @@
   .xs\:text-\[10px\] {
     font-size: 10px;
   }
+}
+
+/* Loading Animation Styles */
+.cssloader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.triangle1 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 50px 0 0;
+  /* Specific color matching example */
+  border-color: #6a5acd transparent transparent transparent; 
+  margin: 0 auto;
+  animation: shk1 1s ease-in-out infinite normal;
+}
+
+.triangle2 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 50px 50px;
+  /* Specific color matching example */
+  border-color: transparent transparent #8a7ff0 transparent; 
+  margin: -50px auto 0;
+  animation: shk2 1s ease-in-out infinite alternate;
+}
+
+@keyframes shk1 {
+  0% {
+    transform: rotate(0deg); /* Start from 0 */
+  }
+  100% {
+    transform: rotate(360deg); /* Rotate fully */
+  }
+}
+
+@keyframes shk2 {
+  0% {
+    transform: rotate(0deg); /* Start from 0 */
+  }
+  100% {
+     transform: rotate(360deg); /* Rotate fully */
+  }
+}
+
+.loading-text {
+  /* Use foreground color for better visibility */
+  color: var(--foreground);
+  margin: 30px auto;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 4px;
+}
+
+/* Ensure background covers everything */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* You might have other global styles here */
+
+/* Team Profile Card Styles (About Page) */
+.team-card-container {
+  perspective: 1000px; 
+  display: flex; 
+  justify-content: center;
+}
+
+.team-card {
+  position: relative;
+  width: 220px; 
+  height: 300px; 
+  background-color: #1a1a1a; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  padding: 1.25rem; 
+  gap: 0.75rem; 
+  border-radius: 10px; 
+  cursor: pointer;
+  color: white;
+  overflow: hidden; /* Keep overflow hidden */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+/* --- TEMPORARILY COMMENTED OUT for debugging --- */
+/*
+.team-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  top: -5px; 
+  margin: auto;
+  width: calc(100% + 10px); 
+  height: calc(100% + 10px); 
+  border-radius: 15px; 
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.team-card::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(25px); 
+  transition: filter 0.6s ease; 
+}
+*/
+/* --- END OF TEMPORARY COMMENT --- */
+
+.team-card .heading {
+  font-size: 1.5rem; 
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 0.25rem; 
+}
+
+.team-card .role-bio {
+  font-size: 0.9rem; 
+  color: #cccccc; 
+  line-height: 1.4;
+}
+
+.team-card .linkedin-link {
+  color: #40c9ff; 
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.85rem;
+  display: inline-block; 
+  margin-top: 0.5rem;
+}
+
+.team-card .linkedin-link:hover {
+  color: #e81cff; 
+}
+
+.team-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1; 
+  opacity: 0.7; 
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* --- TEMPORARILY COMMENTED OUT for debugging --- */
+/*
+.team-card:hover .team-card-image {
+  opacity: 0.9; 
+  transform: scale(1.05);
+}
+*/
+/* --- END OF TEMPORARY COMMENT --- */
+
+.team-card-content {
+  position: relative;
+  z-index: 2; 
+}
+
+/* --- TEMPORARILY COMMENTED OUT for debugging --- */
+/*
+.team-card:hover::after {
+  filter: blur(35px); 
+}
+
+.team-card:hover::before {
+  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+}
+*/
+/* --- END OF TEMPORARY COMMENT --- */
+
+/* From Uiverse.io by Pravins01 */ 
+.card {
+  position: relative;
+  width: 240px;
+  height: 320px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+  background-size: 200% 200%;
+  border-radius: 10px;
+  z-index: -2;
+  pointer-events: none;
+  animation: gradient-animation 4s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  border-radius: 6px;
+  z-index: -1;
+}
+
+/* Glow effect always present with stronger glow on hover */
+.card::before {
+  filter: blur(3px);
+}
+
+.card:hover::before {
+  filter: blur(5px);
+}
+
+.heading {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+.card p:not(.heading) {
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Add a basic style for the image within the card */
+.card-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep linkedin link style distinct */
+.linkedin-link {
+  color: #40c9ff; /* Match gradient color */
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  /* align-self: flex-start; Align link to the start */
+}
+
+.linkedin-link:hover {
+  color: #e81cff; /* Other gradient color on hover */
 }

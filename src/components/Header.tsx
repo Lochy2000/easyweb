@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
 import { Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink as RouterNavLink } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,8 +43,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           <NavLink to="/templates">Templates</NavLink>
-          <NavLink href="#about">About</NavLink>
-          <NavLink href="#team">Team</NavLink>
+          <NavLink to="/about">About</NavLink>
           <Button 
             variant="3d"
             onClick={() => window.open('https://calendly.com/lochlann_oht/discussion', '_blank')}
@@ -81,8 +80,7 @@ const Header = () => {
       )}>
         <nav className="flex flex-col gap-6 p-4">
           <MobileNavLink to="/templates" onClick={() => setIsMobileMenuOpen(false)}>Templates</MobileNavLink>
-          <MobileNavLink href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
-          <MobileNavLink href="#team" onClick={() => setIsMobileMenuOpen(false)}>Team</MobileNavLink>
+          <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
           <Button 
             className="w-full mt-4"
             variant="3d"
@@ -106,26 +104,11 @@ interface NavLinkProps {
   onClick?: () => void;
 }
 
-const NavLink = ({ href, to, children }: NavLinkProps) => {
+const NavLink = ({ href, to, children, ...props }: NavLinkProps) => {
   if (to) {
-    return (
-      <Link 
-        to={to} 
-        className="relative text-foreground/80 hover:text-foreground transition-colors font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-      >
-        {children}
-      </Link>
-    );
-  }
-  
-  return (
-    <a 
-      href={href} 
-      className="relative text-foreground/80 hover:text-foreground transition-colors font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-    >
-      {children}
-    </a>
-  );
+    return <RouterNavLink to={to} className={({ isActive }: any) => cn("text-foreground/70 hover:text-foreground transition-colors font-medium", isActive && "text-primary")} {...props}>{children}</RouterNavLink>;
+  } 
+  return <a href={href} className="text-foreground/70 hover:text-foreground transition-colors font-medium" {...props}>{children}</a>;
 };
 
 const MobileNavLink = ({ href, to, children, onClick }: NavLinkProps) => {
