@@ -1,0 +1,30 @@
+/* Font face declarations with font-display swap */
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/inter-var.woff2') format('woff2');
+}
+
+/* Optimize font loading with size-adjust and ascent-override */
+@font-face {
+  font-family: 'Inter var fallback';
+  src: local('Arial');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
+/* Font class utilities */
+.font-inter {
+  font-family: 'Inter var', 'Inter var fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Optional: Font feature settings for better typography */
+.font-features {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+} 

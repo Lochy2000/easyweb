@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // We'll add the CSS for this in a global stylesheet later
@@ -8,25 +8,32 @@ interface LoadingScreenProps {
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
-  React.useEffect(() => {
-    // Simulate loading time (e.g., 2.5 seconds)
-    const timer = setTimeout(() => {
+  useEffect(() => {
+    // Check if the document is ready
+    if (document.readyState === 'complete') {
       onLoaded();
-    }, 2500);
-
-    return () => clearTimeout(timer); // Cleanup timer on unmount
+    } else {
+      // Listen for when everything is loaded
+      window.addEventListener('load', onLoaded);
+      // Fallback timeout of 1.5s max
+      const fallbackTimer = setTimeout(onLoaded, 1500);
+      
+      return () => {
+        window.removeEventListener('load', onLoaded);
+        clearTimeout(fallbackTimer);
+      };
+    }
   }, [onLoaded]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background text-center"
-      // initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
+      exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } }}
     >
       <div className="cssloader">
         <div className="triangle1"></div>
         <div className="triangle2"></div>
-        <p className="text loading-text">Loading .....</p> {/* Added loading-text class */}
+        <p className="loading-text">Loading...</p>
       </div>
     </motion.div>
   );

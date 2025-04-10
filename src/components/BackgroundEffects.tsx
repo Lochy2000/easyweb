@@ -1,57 +1,61 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export const BackgroundEffects = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    <div className="fixed inset-0 -z-[1] overflow-hidden pointer-events-none">
-      {/* Dotted Grid Pattern */}
+    <div className="fixed inset-0 -z-[1] overflow-hidden pointer-events-none bg-[#0d0b1a]">
+      {/* Horizontal Grid Lines */}
+      <div className="absolute inset-0">
+        {[...Array(25)].map((_, i) => (
+          <div
+            key={`h-${i}`}
+            className="absolute w-full h-[1px] bg-white/20"
+            style={{
+              top: `${(i + 1) * 4}%`,
+              animation: `pulseOpacity ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Vertical Grid Lines */}
+      <div className="absolute inset-0">
+        {[...Array(25)].map((_, i) => (
+          <div
+            key={`v-${i}`}
+            className="absolute h-full w-[1px] bg-white/20"
+            style={{
+              left: `${(i + 1) * 4}%`,
+              animation: `pulseOpacity ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Subtle Vignette Effect */}
       <div 
         className="absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(rgba(168, 85, 247, 0.15) 1.5px, transparent 1.5px)`,
-          backgroundSize: '32px 32px',
-          backgroundPosition: '-1px -1px'
+          background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.7) 100%)'
         }}
       />
 
-      {/* Gradient Orbs */}
-      <motion.div
-        animate={{
-          scale: [1, 1.4, 1],
-          opacity: [0.25, 0.15, 0.25],
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 left-1/4 w-[900px] h-[900px] rounded-full bg-gradient-to-br from-purple-500/25 via-purple-500/10 to-transparent blur-[100px]"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.5, 1],
-          opacity: [0.25, 0.15, 0.25],
-          x: [0, -80, 0],
-          y: [0, 70, 0],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-        className="absolute bottom-1/4 right-1/4 w-[900px] h-[900px] rounded-full bg-gradient-to-tr from-violet-500/25 via-violet-500/10 to-transparent blur-[100px]"
-      />
-
-      {/* Very Subtle Noise Texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.05] mix-blend-soft-light"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          backgroundSize: '256px 256px'
-        }}
-      />
+      {/* Add the animation keyframes via style tag */}
+      <style>
+        {`
+          @keyframes pulseOpacity {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+          }
+        `}
+      </style>
     </div>
   );
 }; 

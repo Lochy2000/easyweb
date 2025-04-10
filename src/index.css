@@ -220,6 +220,23 @@
   animation: scroll-y 15s linear infinite;
 }
 
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
 /* Extra small screens - Added for even better mobile support */
 @media (max-width: 475px) {
   .xs\:text-xs {
@@ -417,104 +434,127 @@ html, body, #root {
 */
 /* --- END OF TEMPORARY COMMENT --- */
 
-/* From Uiverse.io by Pravins01 */ 
+/* New M2-style card design */
 .card {
-  position: relative;
-  width: 240px;
-  height: 320px;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  padding: 12px;
-  gap: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  color: white;
-  z-index: 1;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  @apply relative w-[300px] h-[400px] bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-lg rounded-xl p-6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .card::before {
   content: '';
   position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-  background-size: 200% 200%;
-  border-radius: 10px;
-  z-index: -2;
-  pointer-events: none;
-  animation: gradient-animation 4s ease infinite;
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.card::after {
-  content: "";
-  position: absolute;
   inset: 0;
-  background: #000;
-  border-radius: 6px;
-  z-index: -1;
-}
-
-/* Glow effect always present with stronger glow on hover */
-.card::before {
-  filter: blur(3px);
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .card:hover::before {
-  filter: blur(5px);
+  opacity: 1;
 }
 
-.heading {
-  font-size: 20px;
-  text-transform: capitalize;
-  font-weight: 700;
+.card-image {
+  @apply w-[180px] h-[180px] rounded-full object-cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.card .heading {
+  font-size: 24px;
+  background-image: linear-gradient(to right, #626262, #fff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  margin: 10px 0;
   position: relative;
   z-index: 1;
 }
 
 .card p:not(.heading) {
   font-size: 14px;
+  color: #a0a0a0;
+  text-align: center;
+  margin: 5px 0;
   position: relative;
   z-index: 1;
 }
 
-/* Add a basic style for the image within the card */
-.card-image {
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* Keep linkedin link style distinct */
 .linkedin-link {
-  color: #40c9ff; /* Match gradient color */
-  font-weight: 600;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  /* align-self: flex-start; Align link to the start */
+  @apply flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300;
 }
 
-.linkedin-link:hover {
-  color: #e81cff; /* Other gradient color on hover */
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 5));
+  }
+}
+
+/* Client logo scroll container */
+.client-scroll-container {
+  position: relative;
+}
+
+.client-scroll-container::before,
+.client-scroll-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.client-scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, hsl(260 20% 10%), hsla(260, 20%, 10%, 0));
+}
+
+.client-scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, hsl(260 20% 10%), hsla(260, 20%, 10%, 0));
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 6rem)); /* Accounts for gap between items */
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Ensure background color matches the gradient */
+.from-background {
+  --tw-gradient-from: hsl(var(--background));
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 0 0 / 0));
 }

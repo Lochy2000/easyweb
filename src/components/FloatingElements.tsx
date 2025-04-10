@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface FloatingElement {
@@ -6,24 +5,26 @@ interface FloatingElement {
   x: number;
   y: number;
   size: number;
-  duration: number;
-  delay: number;
+  animationDuration: number;
+  animationDelay: number;
 }
 
 export const FloatingElements = () => {
   const [elements, setElements] = useState<FloatingElement[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const generateElements = () => {
       const newElements: FloatingElement[] = [];
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 8; i++) {
         newElements.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 40 + 10,
-          duration: Math.random() * 20 + 10,
-          delay: Math.random() * -20,
+          size: Math.random() * 30 + 10,
+          animationDuration: Math.random() * 10 + 10,
+          animationDelay: Math.random() * -10,
         });
       }
       setElements(newElements);
@@ -32,28 +33,21 @@ export const FloatingElements = () => {
     generateElements();
   }, []);
 
+  if (!mounted) return null;
+
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
       {elements.map((element) => (
-        <motion.div
+        <div
           key={element.id}
-          className="absolute rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-xl"
+          className="absolute rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-lg animate-float"
           style={{
             left: `${element.x}%`,
             top: `${element.y}%`,
             width: element.size,
             height: element.size,
-          }}
-          animate={{
-            y: [0, -50, 0],
-            x: [0, 30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: element.duration,
-            repeat: Infinity,
-            delay: element.delay,
-            ease: "easeInOut",
+            animationDuration: `${element.animationDuration}s`,
+            animationDelay: `${element.animationDelay}s`,
           }}
         />
       ))}
