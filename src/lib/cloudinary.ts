@@ -33,15 +33,15 @@ export const generateCloudinaryUrl = (
 // Predefined sizes for different use cases
 export const IMAGE_SIZES = {
   blogCard: {
-    width: 400,  // Square dimensions for cards
-    height: 400
+    width: 200,  // Smaller card size
+    height: 200
   },
   blogHero: {
-    width: 600, // Square dimensions for hero images
-    height: 600
+    width: 400, // Smaller hero/preview image
+    height: 400
   },
   thumbnail: {
-    width: 100,
-    height: 100
+    width: 48,
+    height: 48
   }
 } as const; 

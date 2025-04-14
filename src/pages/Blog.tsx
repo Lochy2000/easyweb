@@ -274,12 +274,14 @@ const Sidebar = ({
 
 const BlogPostContent = ({ post }: { post: BlogPost }) => (
   <article className="max-w-4xl mx-auto px-4">
-    <div className="aspect-[21/9] w-full rounded-2xl overflow-hidden mb-8">
-      <img 
-        src={post.imageUrl} 
-        alt={post.title}
-        className="w-full h-full object-cover"
-      />
+    <div className="max-w-sm mx-auto mb-8">
+      <div className="aspect-square w-full rounded-2xl overflow-hidden">
+        <img 
+          src={generateCloudinaryUrl(post.imageUrl.split('/').pop()?.split('.')[0] || '', IMAGE_SIZES.blogHero)} 
+          alt={post.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
     </div>
     <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm">
       {post.category}
@@ -301,23 +303,23 @@ const BlogPostContent = ({ post }: { post: BlogPost }) => (
 );
 
 const BlogCard = ({ post, onClick }: { post: BlogPost; onClick: () => void }) => {
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const navigate = useNavigate();
+  
   const cardImageUrl = useMemo(() => {
-    // Extract the public ID from the full URL
     const publicId = post.imageUrl.split('/').pop()?.split('.')[0];
     return publicId ? generateCloudinaryUrl(publicId, IMAGE_SIZES.blogCard) : post.imageUrl;
   }, [post.imageUrl]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="group cursor-pointer"
-      onClick={onClick}
-    >
-      <div className="relative p-[1px] rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-blue-500/20 to-primary/20 opacity-0 group-hover:opacity-100 rounded-2xl"></div>
-        <div className="absolute inset-[1px] bg-black rounded-xl"></div>
-        <div className="relative z-10 bg-[#0f0f12] rounded-xl overflow-hidden">
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="group cursor-pointer"
+        onClick={() => setIsPreviewOpen(true)}
+      >
+        <div className="bg-[#1C1C24] rounded-xl overflow-hidden hover:ring-1 hover:ring-white/10 transition-all">
           <div className="aspect-square w-full overflow-hidden">
             <img 
               src={cardImageUrl} 
@@ -325,20 +327,66 @@ const BlogCard = ({ post, onClick }: { post: BlogPost; onClick: () => void }) =>
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="p-6">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
-              <Globe className="w-5 h-5" />
+          <div className="p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs text-primary px-2 py-1 rounded-full bg-primary/10">
+                {post.category}
+              </span>
             </div>
-            <h3 className="text-xl font-semibold mb-3">{post.title}</h3>
-            <p className="text-foreground/70 mb-4">{post.description}</p>
-            <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-              <span className="text-sm font-medium">Read article</span>
-              <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
-            </div>
+            <h3 className="text-base font-semibold mb-2 line-clamp-2">{post.title}</h3>
+            <p className="text-sm text-foreground/60 line-clamp-2">{post.description}</p>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-2xl h-[80vh] overflow-y-auto">
+          <div className="relative">
+            <div className="sticky top-0 z-10 flex justify-between items-center bg-background/95 backdrop-blur-lg py-4 mb-6">
+              <h2 className="text-xl font-semibold">{post.title}</h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    setIsPreviewOpen(false);
+                    navigate(`/blog/${post.id}`);
+                  }}
+                  className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Read full article
+                </button>
+                <button
+                  onClick={() => setIsPreviewOpen(false)}
+                  className="p-2 rounded-lg hover:bg-white/5"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="max-w-sm mx-auto aspect-square rounded-xl overflow-hidden mb-6">
+              <img 
+                src={post.imageUrl} 
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            <div className="prose prose-invert max-w-none">
+              <p className="text-lg mb-6">{post.content.introduction}</p>
+              
+              {post.content.sections.map((section, index) => (
+                <div key={index} className="mb-6">
+                  <h3 className="text-xl font-semibold mb-3">{section.title}</h3>
+                  <p>{section.content}</p>
+                </div>
+              ))}
+              
+              <p className="text-foreground/80 italic mt-8">{post.content.conclusion}</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
@@ -358,7 +406,7 @@ const BlogList = () => {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto mb-12">
+      <div className="max-w-4xl mx-auto mb-8">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 w-5 h-5" />
@@ -375,7 +423,7 @@ const BlogList = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   selectedCategory === category
                     ? "bg-primary text-white"
                     : "bg-white/5 text-foreground/70 hover:bg-white/10"
@@ -388,7 +436,7 @@ const BlogList = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
         {filteredPosts.map((post) => (
           <BlogCard
             key={post.id}
