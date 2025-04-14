@@ -319,22 +319,30 @@ const BlogCard = ({ post, onClick }: { post: BlogPost; onClick: () => void }) =>
         className="group cursor-pointer"
         onClick={() => setIsPreviewOpen(true)}
       >
-        <div className="bg-[#1C1C24] rounded-xl overflow-hidden hover:ring-1 hover:ring-white/10 transition-all">
-          <div className="aspect-square w-full overflow-hidden">
-            <img 
-              src={cardImageUrl} 
-              alt={post.title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div className="p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs text-primary px-2 py-1 rounded-full bg-primary/10">
+        <div className="bg-[#1C1C24] rounded-xl overflow-hidden hover:ring-1 hover:ring-primary/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] transition-all duration-300">
+          <div className="p-4 pb-0">
+            <div className="aspect-square w-40 mx-auto rounded-lg overflow-hidden mb-4">
+              <img 
+                src={cardImageUrl} 
+                alt={post.title}
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs text-primary px-2 py-1 rounded-full bg-primary/10 font-medium">
                 {post.category}
               </span>
             </div>
-            <h3 className="text-base font-semibold mb-2 line-clamp-2">{post.title}</h3>
-            <p className="text-sm text-foreground/60 line-clamp-2">{post.description}</p>
+            <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+              {post.title}
+            </h3>
+            <p className="text-sm text-foreground/60 line-clamp-2 mb-4">
+              {post.description}
+            </p>
+          </div>
+          <div className="px-4 py-3 border-t border-white/5 flex items-center justify-between">
+            <span className="text-xs text-foreground/40">Read article</span>
+            <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all" />
           </div>
         </div>
       </motion.div>

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
 import { Globe } from 'lucide-react';
-import { Link, NavLink as RouterNavLink } from 'react-router-dom';
+import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,8 +16,14 @@ const Header = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reset mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header 
@@ -41,7 +48,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav key={location.pathname} className="hidden md:flex items-center gap-8">
           <NavLink to="/templates">Templates</NavLink>
           <NavLink to="/blog">Resources</NavLink>
           <NavLink to="/about">About</NavLink>

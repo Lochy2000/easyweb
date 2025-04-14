@@ -10,7 +10,7 @@ export const generateCloudinaryUrl = (
   const {
     width = 'auto',
     height = 'auto',
-    quality = 'auto',
+    quality = 90,
     format = 'auto'
   } = options;
 
@@ -22,6 +22,8 @@ export const generateCloudinaryUrl = (
     width !== 'auto' ? `w_${width}` : '',
     height !== 'auto' ? `h_${height}` : '',
     'c_scale', // Scale mode instead of fill to maintain aspect ratio
+    'q_auto:best', // Use best quality auto-optimization
+    'f_auto', // Auto format selection
   ].filter(Boolean).join(',');
 
   // Return URL with transformations before version number
@@ -33,8 +35,8 @@ export const generateCloudinaryUrl = (
 // Predefined sizes for different use cases
 export const IMAGE_SIZES = {
   blogCard: {
-    width: 200,  // Smaller card size
-    height: 200
+    width: 160,  // Smaller card size
+    height: 160
   },
   blogHero: {
     width: 400, // Smaller hero/preview image
