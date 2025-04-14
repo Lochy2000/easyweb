@@ -14,6 +14,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 const Index = React.lazy(() => import("./pages/Index"));
 const Templates = React.lazy(() => import("./pages/Templates"));
 const AboutPage = React.lazy(() => import("./pages/About"));
+const Blog = React.lazy(() => import("./pages/Blog"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient({
@@ -49,6 +50,8 @@ function AppContent() {
           <Route path="/" element={<Index />} />
           <Route path="/templates" element={<Templates />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:postId" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

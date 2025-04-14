@@ -1,51 +1,151 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { 
   Globe, 
   Code2, 
   ShoppingBag, 
   Smartphone, 
   Palette, 
-  Database 
+  Database,
+  ArrowRight
 } from "lucide-react";
+import { ServiceModal } from "./ServiceModal";
 
-interface ServiceCardProps {
+interface ServiceData {
   icon: React.ReactNode;
   title: string;
-  description: string;
-  delay?: number;
+  quickView: string;
+  details: {
+    description: string;
+    features: string[];
+  };
 }
 
-const ServiceCard = ({ icon, title, description, delay = 0 }: ServiceCardProps) => (
+const servicesData: ServiceData[] = [
+  {
+    icon: <Globe className="w-6 h-6" />,
+    title: "WordPress Development",
+    quickView: "Beautiful WordPress websites tailored to your brand, with all the flexibility you need.",
+    details: {
+      description: "We build custom WordPress websites from scratch — no bloated themes, just clean code and intuitive design. Whether it's a blog, portfolio, or e-commerce, we craft it to fit your vision.",
+      features: [
+        "Custom plugins or integrations (if needed)",
+        "Easy-to-use admin panel",
+        "Fast load times + SEO basics baked in"
+      ]
+    }
+  },
+  {
+    icon: <Code2 className="w-6 h-6" />,
+    title: "React Applications",
+    quickView: "Fast, modern apps built using React — perfect for interactive websites and platforms.",
+    details: {
+      description: "We use React to build dynamic frontends for web platforms, dashboards, and tools. Think: booking systems, portals, custom interfaces.",
+      features: [
+        "Snappy performance",
+        "Fully responsive design",
+        "Future-proof, scalable code"
+      ]
+    }
+  },
+  {
+    icon: <ShoppingBag className="w-6 h-6" />,
+    title: "E-commerce Solutions",
+    quickView: "Online stores that don't just look good — they convert visitors into loyal customers.",
+    details: {
+      description: "From product pages to payment systems, we create end-to-end e-commerce setups that fit your business.",
+      features: [
+        "WooCommerce integration",
+        "Shopify development",
+        "Custom stores built from scratch",
+        "Smooth checkout experience",
+        "Performance optimization"
+      ]
+    }
+  },
+  {
+    icon: <Smartphone className="w-6 h-6" />,
+    title: "Mobile Development",
+    quickView: "Mobile apps that feel native — whether Android, iOS, or cross-platform.",
+    details: {
+      description: "We build apps using tools like React Native or Flutter, tailored to your product and user needs.",
+      features: [
+        "Sleek UI/UX design",
+        "Fast, native performance",
+        "API connections to your backend",
+        "Cross-platform compatibility"
+      ]
+    }
+  },
+  {
+    icon: <Palette className="w-6 h-6" />,
+    title: "UI/UX Design",
+    quickView: "Design that's easy to use, nice to look at, and focused on your users.",
+    details: {
+      description: "We believe design is about function first. We start from your user's perspective and design around it.",
+      features: [
+        "Wireframing & prototyping",
+        "Figma mockups",
+        "Accessibility-conscious layouts",
+        "User testing & iteration"
+      ]
+    }
+  },
+  {
+    icon: <Database className="w-6 h-6" />,
+    title: "Backend Development",
+    quickView: "Scalable backend systems that power your platform behind the scenes.",
+    details: {
+      description: "Whether it's APIs, databases, or secure admin panels — we build solid backend systems using Node.js, Django, or PHP.",
+      features: [
+        "Clean and scalable logic",
+        "Secure user authentication",
+        "Database design + integration",
+        "API development",
+        "Performance optimization"
+      ]
+    }
+  }
+];
+
+interface ServiceCardProps {
+  service: ServiceData;
+  delay?: number;
+  onOpenModal: (service: ServiceData) => void;
+}
+
+const ServiceCard = ({ service, delay = 0, onOpenModal }: ServiceCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="group flex relative h-full"
+    className="group flex relative h-full cursor-pointer"
+    onClick={() => onOpenModal(service)}
   >
-    {/* Card with animated border */}
     <div className="relative w-full p-[1px] rounded-2xl overflow-hidden">
-      {/* Animated gradient border */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary opacity-0 group-hover:opacity-100 group-hover:animate-rotation rounded-2xl"></div>
-      
-      {/* Card inner background */}
       <div className="absolute inset-[1px] bg-black rounded-xl"></div>
-      
-      {/* Card content */}
       <div className="relative z-10 h-full p-6 bg-[#0f0f12] rounded-xl">
         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
-          {icon}
+          {service.icon}
         </div>
-        <h3 className="text-xl font-semibold mb-3">{title}</h3>
-        <p className="text-foreground/70 leading-relaxed">{description}</p>
+        <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+        <p className="text-foreground/70 leading-relaxed mb-4">{service.quickView}</p>
+        <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-sm font-medium">Learn more</span>
+          <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+        </div>
       </div>
     </div>
   </motion.div>
 );
 
 export const Services = () => {
+  const [selectedService, setSelectedService] = useState<ServiceData | null>(null);
+
   return (
-    <section id="about" className="py-24 relative">
+    <section id="services" className="py-24 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,44 +166,26 @@ export const Services = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ServiceCard
-            icon={<Globe className="w-6 h-6" />}
-            title="WordPress Development"
-            description="Custom WordPress themes and plugins tailored to your brand identity and business workflows."
-            delay={0.1}
-          />
-          <ServiceCard
-            icon={<Code2 className="w-6 h-6" />}
-            title="React Applications"
-            description="Modern, interactive web applications built with React and other cutting-edge frontend technologies."
-            delay={0.2}
-          />
-          <ServiceCard
-            icon={<ShoppingBag className="w-6 h-6" />}
-            title="E-commerce Solutions"
-            description="Custom online stores and e-commerce platforms that drive sales and enhance customer experience."
-            delay={0.3}
-          />
-          <ServiceCard
-            icon={<Smartphone className="w-6 h-6" />}
-            title="Mobile Development"
-            description="Native and cross-platform mobile applications that provide seamless user experiences."
-            delay={0.4}
-          />
-          <ServiceCard
-            icon={<Palette className="w-6 h-6" />}
-            title="UI/UX Design"
-            description="User-centered design that creates intuitive, engaging, and visually stunning interfaces."
-            delay={0.5}
-          />
-          <ServiceCard
-            icon={<Database className="w-6 h-6" />}
-            title="Backend Development"
-            description="Robust, scalable backend solutions that power your applications and handle complex business logic."
-            delay={0.6}
-          />
+          {servicesData.map((service, index) => (
+            <ServiceCard
+              key={service.title}
+              service={service}
+              delay={index * 0.1}
+              onOpenModal={setSelectedService}
+            />
+          ))}
         </div>
       </div>
+
+      {selectedService && (
+        <ServiceModal
+          isOpen={!!selectedService}
+          onClose={() => setSelectedService(null)}
+          title={selectedService.title}
+          quickView={selectedService.quickView}
+          details={selectedService.details}
+        />
+      )}
     </section>
   );
 }; 

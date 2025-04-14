@@ -43,6 +43,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           <NavLink to="/templates">Templates</NavLink>
+          <NavLink to="/blog">Resources</NavLink>
           <NavLink to="/about">About</NavLink>
           <Button 
             variant="3d"
@@ -80,6 +81,7 @@ const Header = () => {
       )}>
         <nav className="flex flex-col gap-6 p-4">
           <MobileNavLink to="/templates" onClick={() => setIsMobileMenuOpen(false)}>Templates</MobileNavLink>
+          <MobileNavLink to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Resources</MobileNavLink>
           <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
           <Button 
             className="w-full mt-4"
