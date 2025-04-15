@@ -25,6 +25,18 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header 
       className={cn(
@@ -32,7 +44,7 @@ const Header = () => {
         isScrolled ? "bg-background/80 backdrop-blur-md border-b border-white/10" : "bg-transparent"
       )}
     >
-      <div className="container-custom flex items-center justify-between">
+      <div className="container-custom flex items-center justify-between relative">
         {/* Logo - Reverted to text/icon with hover effect */}
         <Link 
           to="/" 
@@ -62,31 +74,38 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 p-2 z-50 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Menu"
         >
           <span className={cn(
-            "w-6 h-0.5 bg-foreground transition-all", 
-            isMobileMenuOpen && "transform rotate-45 translate-y-2"
+            "w-6 h-0.5 bg-foreground transition-all duration-300 absolute", 
+            isMobileMenuOpen ? "transform rotate-45" : "transform translate-y-[-4px]"
           )}></span>
           <span className={cn(
-            "w-6 h-0.5 bg-foreground transition-all", 
-            isMobileMenuOpen && "opacity-0"
+            "w-6 h-0.5 bg-foreground transition-all duration-300",
+            isMobileMenuOpen && "opacity-0 transform scale-0"
           )}></span>
           <span className={cn(
-            "w-6 h-0.5 bg-foreground transition-all", 
-            isMobileMenuOpen && "transform -rotate-45 -translate-y-2"
+            "w-6 h-0.5 bg-foreground transition-all duration-300 absolute",
+            isMobileMenuOpen ? "transform -rotate-45" : "transform translate-y-[4px]"
           )}></span>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={cn(
-        "md:hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-lg p-4 z-40 transform transition-transform ease-in-out duration-300",
-        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-      )}>
-        <nav className="flex flex-col gap-6 p-4">
+      <div 
+        className={cn(
+          "md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-background/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out z-40",
+          isMobileMenuOpen ? "translate-y-0" : "translate-y-full"
+        )}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setIsMobileMenuOpen(false);
+          }
+        }}
+      >
+        <nav className="flex flex-col gap-6 p-6 h-full overflow-y-auto">
           <MobileNavLink to="/templates" onClick={() => setIsMobileMenuOpen(false)}>Templates</MobileNavLink>
           <MobileNavLink to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Resources</MobileNavLink>
           <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>

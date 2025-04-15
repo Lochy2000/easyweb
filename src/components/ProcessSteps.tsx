@@ -129,10 +129,13 @@ export const ProcessSteps = () => {
           </p>
           <button
             onClick={() => setIsProcessModalOpen(true)}
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+            className="group inline-flex items-center justify-center gap-2 text-primary hover:text-primary/80 transition-colors px-4 py-2 rounded-lg hover:bg-primary/5 text-base sm:text-lg"
           >
-            <span>Learn about our process</span>
-            <ArrowRight className="w-4 h-4" />
+            <span className="relative">
+              Learn about our process
+              <span className="absolute inset-x-0 -bottom-1 h-px bg-current transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
+            </span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform group-hover:translate-x-1" />
           </button>
         </motion.div>
 

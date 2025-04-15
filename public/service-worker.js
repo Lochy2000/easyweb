@@ -32,6 +32,15 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Helper function to check if a request should be cached
+const shouldCache = (request) => {
+  const url = new URL(request.url);
+  // Don't cache chrome-extension requests, POST requests, or non-GET requests
+  return request.method === 'GET' && 
+         !url.protocol.includes('chrome-extension') &&
+         !url.pathname.includes('chrome-extension');
+};
+
 // Fetch event handler with network-first strategy for API calls
 // and cache-first strategy for static assets
 self.addEventListener('fetch', (event) => {
@@ -42,9 +51,12 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME)
-            .then((cache) => cache.put(event.request, responseClone));
+          if (shouldCache(event.request)) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, responseClone))
+              .catch(err => console.warn('Cache put failed:', err));
+          }
           return response;
         })
         .catch(() => caches.match(event.request))
@@ -60,12 +72,13 @@ self.addEventListener('fetch', (event) => {
           return response;
         }
         return fetch(event.request).then((response) => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+          if (!response || response.status !== 200 || response.type !== 'basic' || !shouldCache(event.request)) {
             return response;
           }
           const responseClone = response.clone();
           caches.open(CACHE_NAME)
-            .then((cache) => cache.put(event.request, responseClone));
+            .then((cache) => cache.put(event.request, responseClone))
+            .catch(err => console.warn('Cache put failed:', err));
           return response;
         });
       })

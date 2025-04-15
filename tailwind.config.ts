@@ -144,8 +144,8 @@ export default {
 				'rotate-y': 'rotate-y 1s forwards'
 			},
 			fontFamily: {
-				sans: ['Inter', 'system-ui', 'sans-serif'],
-				display: ['Satoshi', 'Inter', 'system-ui', 'sans-serif']
+				sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+				display: ['Inter var', 'Inter', 'system-ui', 'sans-serif']
 			},
 			perspective: {
 				'30rem': '30rem',
