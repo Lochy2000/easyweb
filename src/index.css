@@ -89,7 +89,7 @@
   }
   
   .container-custom {
-    @apply container mx-auto px-4 sm:px-6 max-w-[1400px];
+    @apply container mx-auto px-3 sm:px-6 max-w-[1400px] w-full;
   }
 
   .dark-gradient {

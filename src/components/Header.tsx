@@ -41,7 +41,7 @@ const Header = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+        isScrolled || isMobileMenuOpen ? "bg-background/80 backdrop-blur-md border-b border-white/10" : "bg-transparent"
       )}
     >
       <div className="container-custom flex items-center justify-between relative">
@@ -74,7 +74,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 p-2 z-50 relative"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 p-2 z-50 relative bg-foreground/10 rounded-md"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Menu"
         >
@@ -96,7 +96,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <div 
         className={cn(
-          "md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-background/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out z-40",
+          "md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-background/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out z-40 border-t border-white/10",
           isMobileMenuOpen ? "translate-y-0" : "translate-y-full"
         )}
         onClick={(e) => {

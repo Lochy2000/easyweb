@@ -22,7 +22,7 @@ export const ServiceModal: React.FC<ServiceModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[600px] bg-[#0f0f12] border border-white/10">
+      <DialogContent className="w-[95%] max-w-full sm:max-w-[500px] md:max-w-[600px] bg-[#0f0f12] border border-white/10 p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
         </DialogHeader>
