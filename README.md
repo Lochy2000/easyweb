@@ -1,54 +1,91 @@
-# Welcome to your Lovable project
+EasyWeb website is a modern, well-structured React application built with Vite and using a variety of modern web technologies. Here's an overview of the site's structure, styling, and functionality:
+Tech Stack & Dependencies
 
-## Project info
+Framework: React with TypeScript and Vite
+Routing: React Router DOM for navigation
+Styling: Tailwind CSS with customized configuration
+UI Components: Shadcn UI components (a collection of accessible UI components)
+Animations: Framer Motion for smooth animations and transitions
+State Management: React Query for data fetching and caching
+Form Handling: React Hook Form with Zod validation
+Icons: Lucide React for icons
+Analytics: Vercel Analytics and Speed Insights
+Deployment: Hosted on Vercel (currently working locally)
 
-**URL**: https://lovable.dev/projects/f0f8f37c-da54-4d06-9cbe-f2462466a15e
+## Project Structure
 
-## How can I edit this code?
+src/pages: Main page components (Index, Templates, About, Blog, NotFound)
+src/components: Reusable UI components
 
-There are several ways of editing your application.
+src/components/ui: Shadcn UI components
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f0f8f37c-da54-4d06-9cbe-f2462466a15e) and start prompting.
+src/lib: Utility functions
+src/hooks: Custom React hooks
+src/styles: CSS and styling files
 
-Changes made via Lovable will be committed automatically to this repo.
+## Styling Approach
 
-**Use your preferred IDE**
+The site uses Tailwind CSS with a customized theme and extended configuration
+Custom CSS variables for consistent color theming
+Dark mode by default with a purple/violet accent color scheme
+Custom animations defined in index.css and Tailwind config
+CSS utility classes for common styling patterns
+Custom components for buttons, cards, and other UI elements
+Responsive design for different screen sizes
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Key Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Modern UI/UX: Clean, modern design with animations and smooth transitions
+Responsive Layout: Mobile-friendly design with responsive navigation
+Loading Animations: Custom loading screen between page transitions
+Gradient Effects: Beautiful gradient color schemes throughout the site
+Interactive Components: Buttons, cards, and other interactive elements
+Animation Effects: Text reveals, background effects, and transition animations
 
-Follow these steps:
+## Page Structure
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Home Page: Hero section, Services, Process Steps, Testimonials
+Templates Page: Showcases website templates
+About Page: Information about the team/company
+Blog/Resources Page: Blog posts or resources
+404 Page: Custom not found page
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Performance Optimizations
 
-# Step 3: Install the necessary dependencies.
-npm i
+Lazy loading of pages
+Code splitting
+Loading screen during transitions
+Asset preloading
+React Query for efficient data fetching
+Vercel for fast deployment and CDN delivery
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Running Locally
+The site can be run locally using npm or bun commands:
 
-**Edit a file directly in GitHub**
+npm run dev or bun run dev - Start development server
+npm run build or bun run build - Build for production
+npm run preview or bun run preview - Preview build locally
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Deployment
+The site is configured to deploy on Vercel (as indicated by vercel.json). The deployment process is streamlined with Vercel's integration.
+Notable UI Components
 
-**Use GitHub Codespaces**
+Custom animated buttons with gradient and 3D effects
+A responsive header with mobile menu
+Hero section with animated text reveal
+Background effects for visual interest
+Custom card designs
+Testimonial carousel
+Process step visualization
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Styling Highlights
+
+Custom animations for hover states and transitions
+Gradient backgrounds and text
+Glassmorphism effects (backdrop blur with semi-transparent backgrounds)
+Custom keyframe animations for various UI elements
+Theme-consistent color palette with HSL variables
 
 ## What technologies are used for this project?
 
