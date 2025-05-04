@@ -55,7 +55,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
       <div className="cssloader">
         <div className="triangle1"></div>
         <div className="triangle2"></div>
-        <p className="loading-text">Loading...</p>
+        <div className="mt-8">
+          <span className="typing-animation text-[#8b5cf6] font-exo font-bold tracking-widest" style={{ fontFamily: "'Exo 2', sans-serif" }}>easyweb</span>
+        </div>
       </div>
     </motion.div>
   );
