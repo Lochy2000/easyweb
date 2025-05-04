@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // We'll add the CSS for this in a global stylesheet later
@@ -8,22 +8,44 @@ interface LoadingScreenProps {
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
+  const [loadTriggered, setLoadTriggered] = useState(false);
+  
   useEffect(() => {
     // Check if the document is ready
     if (document.readyState === 'complete') {
-      onLoaded();
+      // Document already loaded - trigger immediately with short delay
+      setTimeout(() => {
+        if (!loadTriggered) {
+          setLoadTriggered(true);
+          onLoaded();
+        }
+      }, 500);
     } else {
       // Listen for when everything is loaded
-      window.addEventListener('load', onLoaded);
-      // Fallback timeout of 1.5s max
-      const fallbackTimer = setTimeout(onLoaded, 1500);
+      const handleLoad = () => {
+        if (!loadTriggered) {
+          setLoadTriggered(true);
+          onLoaded();
+        }
+      };
+      
+      window.addEventListener('load', handleLoad);
+      
+      // Fallback timeout of 3s max
+      const fallbackTimer = setTimeout(() => {
+        if (!loadTriggered) {
+          setLoadTriggered(true);
+          onLoaded();
+          console.log('LoadingScreen fallback timeout triggered');
+        }
+      }, 3000);
       
       return () => {
-        window.removeEventListener('load', onLoaded);
+        window.removeEventListener('load', handleLoad);
         clearTimeout(fallbackTimer);
       };
     }
-  }, [onLoaded]);
+  }, [onLoaded, loadTriggered]);
 
   return (
     <motion.div

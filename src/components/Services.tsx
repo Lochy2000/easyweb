@@ -124,15 +124,15 @@ const ServiceCard = ({ service, delay = 0, onOpenModal }: ServiceCardProps) => (
     onClick={() => onOpenModal(service)}
   >
     <div className="relative w-full p-[1px] rounded-2xl overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary opacity-0 group-hover:opacity-100 group-hover:animate-rotation rounded-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary opacity-0 sm:group-hover:opacity-100 group-hover:animate-rotation rounded-2xl sm:opacity-0 active:opacity-100"></div>
       <div className="absolute inset-[1px] bg-black rounded-xl"></div>
-      <div className="relative z-10 h-full p-6 bg-[#0f0f12] rounded-xl">
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+      <div className="relative z-10 h-full p-4 sm:p-6 bg-[#0f0f12] rounded-xl">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6 text-primary group-hover:scale-110 transition-transform">
           {service.icon}
         </div>
-        <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-        <p className="text-foreground/70 leading-relaxed mb-4">{service.quickView}</p>
-        <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{service.title}</h3>
+        <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-3 sm:mb-4">{service.quickView}</p>
+        <div className="flex items-center text-primary sm:opacity-0 sm:group-hover:opacity-100 transition-opacity opacity-70">
           <span className="text-sm font-medium">Learn more</span>
           <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
         </div>
@@ -145,8 +145,8 @@ export const Services = () => {
   const [selectedService, setSelectedService] = useState<ServiceData | null>(null);
 
   return (
-    <section id="services" className="py-24 relative">
-      <div className="container mx-auto px-4">
+    <section id="services" className="py-16 sm:py-24 relative">
+      <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

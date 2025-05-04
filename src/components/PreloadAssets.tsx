@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
 export const PreloadAssets = () => {
+  useEffect(() => {
+    // Only register service worker in production mode
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  }, []);
+  
   return (
     <Helmet>
       {/* Load Inter font from Google Fonts */}
@@ -29,23 +44,6 @@ export const PreloadAssets = () => {
       
       {/* Preconnect to critical external domains */}
       <link rel="preconnect" href="https://www.linkedin.com" />
-      
-      {/* Register Service Worker */}
-      <script>
-        {`
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                  console.log('ServiceWorker registration successful');
-                })
-                .catch(err => {
-                  console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-          }
-        `}
-      </script>
     </Helmet>
   );
 }; 

@@ -22,13 +22,13 @@ export const ServiceModal: React.FC<ServiceModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95%] max-w-full sm:max-w-[500px] md:max-w-[600px] bg-[#0f0f12] border border-white/10 p-4 sm:p-6">
+      <DialogContent className="w-[95%] max-w-full sm:max-w-[500px] md:max-w-[600px] bg-[#0f0f12] border border-white/10 p-4 sm:p-6 overflow-y-auto max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
+          <DialogTitle className="text-xl sm:text-2xl font-bold">{title}</DialogTitle>
         </DialogHeader>
-        <div className="mt-4">
-          <p className="text-lg text-primary/90 mb-6">{quickView}</p>
-          <div className="space-y-4">
+        <div className="mt-3 sm:mt-4">
+          <p className="text-base sm:text-lg text-primary/90 mb-4 sm:mb-6">{quickView}</p>
+          <div className="space-y-3 sm:space-y-4">
             <p className="text-foreground/80">{details.description}</p>
             <ul className="space-y-2">
               {details.features.map((feature, index) => (

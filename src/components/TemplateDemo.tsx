@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -35,11 +35,29 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+    }
+  }, [isOpen, template]);
+
+  useEffect(() => {
+    // Add a timeout to ensure proper loading
+    const timer = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false);
+        if (setLoading) setLoading(false);
+      }
+    }, 1500);
+    
+    return () => clearTimeout(timer);
+  }, [isLoading, setLoading]);
+
   // If no template is provided, don't render anything
   if (!template) return null;
 
   // Use the template's demoUrl if available, or fall back to demo-template.html
-  const demoUrl = template.demoUrl || `/demo-template.html?template=${encodeURIComponent(template.title)}`;
+  const demoUrl = template.demoUrl || `/templates/demo-template.html?template=${encodeURIComponent(template.title)}`;
 
   const handleIframeLoad = () => {
     setIsLoading(false);
@@ -97,7 +115,7 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
         )}
 
         {/* Demo iframe */}
-        <div className="relative w-full overflow-hidden" style={{ height: "calc(90vh - 130px)" }}>
+        <div className="relative w-full overflow-hidden bg-white" style={{ height: "calc(90vh - 130px)" }}>
           <iframe
             src={demoUrl}
             className="w-full h-full border-0"
@@ -105,6 +123,14 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
             title={`${template.title} demo`}
             sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
             referrerPolicy="no-referrer"
+            loading="eager"
+            style={{ 
+              backgroundColor: 'white', 
+              display: 'block',
+              width: '100%', 
+              height: '100%',
+              border: 'none'
+            }}
           />
         </div>
 
@@ -145,4 +171,4 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   );
 };
 
-export default TemplateDemo; 
+export default TemplateDemo;

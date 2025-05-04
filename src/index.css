@@ -247,6 +247,24 @@
   .xs\:text-\[10px\] {
     font-size: 10px;
   }
+  
+  /* Mobile menu button enhancement */
+  .mobile-menu-button {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .menu-bar {
+    background-color: white !important;
+    height: 2px !important;
+  }
+  
+  /* Header enhancements for mobile */
+  .mobile-header {
+    background-color: rgba(22, 17, 30, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
 }
 
 /* Loading Animation Styles */

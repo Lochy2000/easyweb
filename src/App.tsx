@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,15 +29,33 @@ const queryClient = new QueryClient({
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
   const location = useLocation();
 
+  // Handle route changes
   useEffect(() => {
-    setIsLoading(true);
-  }, [location.pathname]);
+    if (!initialLoad) {
+      setIsLoading(true);
+    }
+  }, [location.pathname, initialLoad]);
 
   const handleLoaded = () => {
     setIsLoading(false);
+    setInitialLoad(false);
   };
+
+  // Force loading screen to close after 5 seconds in production
+  useEffect(() => {
+    if (isLoading) {
+      const forceLoadTimeoutId = setTimeout(() => {
+        setIsLoading(false);
+        setInitialLoad(false);
+        console.log('Force-closing loading screen');
+      }, 5000); // 5 seconds max
+      
+      return () => clearTimeout(forceLoadTimeoutId);
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -45,7 +63,20 @@ function AppContent() {
       <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen key={location.pathname} onLoaded={handleLoaded} />}
       </AnimatePresence>
-      <Suspense fallback={<LoadingScreen onLoaded={() => {}} />}>
+      <Suspense fallback={
+        <motion.div 
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <div className="cssloader">
+            <div className="triangle1"></div>
+            <div className="triangle2"></div>
+            <p className="loading-text">Loading...</p>
+          </div>
+        </motion.div>
+      }>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/templates" element={<Templates />} />
