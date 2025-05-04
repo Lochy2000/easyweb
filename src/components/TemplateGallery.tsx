@@ -104,7 +104,7 @@ const TemplateGallery = () => {
         <div className="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px]"></div>
         <div className="absolute bottom-40 -left-60 w-[300px] h-[300px] rounded-full bg-accent/10 blur-[80px]"></div>
         {/* Grid overlay */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.1]"></div>
       </div>
       
       <div className="container-custom">
