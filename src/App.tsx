@@ -44,14 +44,22 @@ function AppContent() {
     setInitialLoad(false);
   };
 
-  // Force loading screen to close after 5 seconds in production
+  // Force loading screen to close after 4 seconds
   useEffect(() => {
     if (isLoading) {
       const forceLoadTimeoutId = setTimeout(() => {
         setIsLoading(false);
         setInitialLoad(false);
         console.log('Force-closing loading screen');
-      }, 5000); // 5 seconds max
+        
+        // Clear force refresh flag on successful load
+        if (sessionStorage.getItem('refreshed')) {
+          // Wait a moment to ensure everything is visible
+          setTimeout(() => {
+            sessionStorage.removeItem('refreshed');
+          }, 1000);
+        }
+      }, 4000); // 4 seconds max to match LoadingScreen
       
       return () => clearTimeout(forceLoadTimeoutId);
     }

@@ -27,17 +27,8 @@ export const PreloadAssets = () => {
         rel="stylesheet"
       />
 
-      {/* Preload critical images */}
-      <link
-        rel="preload"
-        href="/assets/images/team/loch.png"
-        as="image"
-      />
-      <link
-        rel="preload"
-        href="/assets/images/team/cai.png"
-        as="image"
-      />
+      {/* Only preload truly critical assets */}
+      {/* Team images preloading removed as they're not immediately visible */}
 
       {/* DNS Prefetch for external resources */}
       <link rel="dns-prefetch" href="https://www.linkedin.com" />

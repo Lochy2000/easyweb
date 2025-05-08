@@ -13,32 +13,57 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
   useEffect(() => {
     // Check if the document is ready
     if (document.readyState === 'complete') {
-      // Document already loaded - trigger immediately with short delay
-      setTimeout(() => {
-        if (!loadTriggered) {
-          setLoadTriggered(true);
-          onLoaded();
+      // Check if essential CSS is loaded before proceeding
+      const checkCssLoaded = () => {
+        const styleSheets = document.styleSheets.length;
+        
+        // If we have at least some basic CSS loaded, proceed
+        if (styleSheets > 0) {
+          if (!loadTriggered) {
+            setLoadTriggered(true);
+            onLoaded();
+          }
+        } else {
+          // Try again shortly
+          setTimeout(checkCssLoaded, 100);
         }
-      }, 500);
+      };
+      
+      // Start with a small delay to allow resources to load
+      setTimeout(checkCssLoaded, 200);
     } else {
       // Listen for when everything is loaded
       const handleLoad = () => {
-        if (!loadTriggered) {
-          setLoadTriggered(true);
-          onLoaded();
-        }
+        // Give a slight delay to ensure CSS is applied
+        setTimeout(() => {
+          if (!loadTriggered) {
+            setLoadTriggered(true);
+            onLoaded();
+          }
+        }, 200);
       };
       
       window.addEventListener('load', handleLoad);
       
-      // Fallback timeout of 3s max
+      // Fallback timeout adjusted to match App.tsx (4s instead of 3s)
       const fallbackTimer = setTimeout(() => {
         if (!loadTriggered) {
+          // Check if we have CSS before proceeding
+          if (document.styleSheets.length === 0) {
+            console.log('No stylesheets loaded after timeout, forcing refresh');
+            // Use session storage to prevent refresh loops
+            if (!sessionStorage.getItem('refreshed')) {
+              sessionStorage.setItem('refreshed', 'true');
+              window.location.reload();
+              return;
+            }
+          }
+          
           setLoadTriggered(true);
           onLoaded();
           console.log('LoadingScreen fallback timeout triggered');
         }
-      }, 3000);
+      }, 4000);
       
       return () => {
         window.removeEventListener('load', handleLoad);

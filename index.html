@@ -14,12 +14,26 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/placeholder.svg" />
+    
+    <!-- Critical CSS fallback to prevent blank page while loading -->
+    <style>
+      /* Minimal styles to ensure page is never blank */
+      body {
+        background-color: hsl(260, 20%, 10%); /* Match your --background color */
+        color: hsl(0, 0%, 98%); /* Match your --foreground color */
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <!-- Load our main application first -->
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Non-critical external scripts loaded last with defer -->
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
   </body>
 </html>
