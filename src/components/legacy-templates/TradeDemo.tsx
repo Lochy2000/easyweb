@@ -42,7 +42,7 @@ const TradeDemo = () => {
         'Emergency electrical services',
         'Smart home wiring'
       ],
-      image: `${process.env.PUBLIC_URL}/assets/images/demo/trade/1.png`
+      image: `/assets/images/demo/trade/1.png`
     },
     {
       id: 'plumbing',
@@ -55,7 +55,7 @@ const TradeDemo = () => {
         'Drain cleaning',
         'Bathroom renovations'
       ],
-      image: `${process.env.PUBLIC_URL}/assets/images/demo/trade/2.png`
+      image: `/assets/images/demo/trade/2.png`
     },
     {
       id: 'maintenance',
@@ -68,7 +68,7 @@ const TradeDemo = () => {
         'Safety upgrades',
         'Equipment installation'
       ],
-      image: `${process.env.PUBLIC_URL}/assets/images/demo/trade/3.png`
+      image: `/assets/images/demo/trade/3.png`
     }
   ];
 
@@ -152,7 +152,7 @@ const TradeDemo = () => {
       <section className="relative min-h-[80vh] flex items-center bg-gray-900">
         <div className="absolute inset-0">
           <img
-            src={`${process.env.PUBLIC_URL}/assets/images/demo/trade/hero.avif`}
+            src="/assets/images/demo/trade/hero.avif"
             alt="Professional tradesperson"
             className="w-full h-full object-cover opacity-40"
           />

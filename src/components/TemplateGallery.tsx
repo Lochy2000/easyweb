@@ -28,7 +28,7 @@ const templates = [
     id: 1,
     title: "Portfolio Pro",
     category: "portfolio",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    image: "https://plus.unsplash.com/premium_vector-1682307855136-994be304e0d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cG9ydGZvbGlvfGVufDB8fDB8fHww",
     description: "Perfect for creatives and professionals showcasing their work.",
     demoUrl: "/templates/portfolio-pro.html",
     type: "html"
@@ -46,7 +46,7 @@ const templates = [
     id: 3,
     title: "Shop Simple",
     category: "ecommerce",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+    image: "https://plus.unsplash.com/premium_photo-1743893928142-71734f005813?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2ltcGxlJTIwc2hvcHxlbnwwfHwwfHx8MA%3D%3D",
     description: "Clean e-commerce template with optimized product layouts.",
     demoUrl: "/templates/shop-simple.html",
     type: "html"
@@ -64,7 +64,7 @@ const templates = [
     id: 5,
     title: "Minimal Blog",
     category: "blog",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    image: "https://plus.unsplash.com/premium_vector-1725441325643-967e1f639948?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHlwZSUyMHdyaXRlcnxlbnwwfHwwfHx8MA%3D%3D",
     description: "Elegant and focused layout for bloggers and writers.",
     demoUrl: "/templates/minimal-blog.html",
     type: "html"
@@ -73,7 +73,7 @@ const templates = [
     id: 6,
     title: "Landing Launch",
     category: "landing",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    image: "https://plus.unsplash.com/premium_vector-1721841639925-763c14b08942?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGxhdW5jaCUyMHBhZ2V8ZW58MHx8MHx8fDA%3D",
     description: "High-conversion landing page template for products and services.",
     demoUrl: "/templates/landing-launch.html",
     type: "html"
@@ -82,7 +82,7 @@ const templates = [
     id: 7,
     title: "Modern Portfolio",
     category: "portfolio",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    image: "https://plus.unsplash.com/premium_vector-1730996526020-38f8b2c9e4e4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwcG9ydGZvbGlvfGVufDB8fDB8fHww",
     description: "A clean design focusing on simplicity and gettng to the point.",
     demoUrl: "/templates/modern-portfolio.html",
     type: "html"
@@ -91,7 +91,7 @@ const templates = [
     id: 8,
     title: "Agency Portfolio",
     category: "portfolio",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    image: "https://plus.unsplash.com/premium_vector-1732319936889-bd5807d52bab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWdlbmN5JTIwcG9ydGZvbGlvJTIwZGlnaXRhbGx5fGVufDB8fDB8fHww",
     description: "A clean design focusing on simplicity and gettng to the point.",
     demoUrl: "/templates/agency-website.html",
     type: "html"
@@ -100,7 +100,7 @@ const templates = [
     id: 9,
     title: "Product Showcase",
     category: "portfolio",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHByb2R1Y3R8ZW58MHx8MHx8fDA%3D",
     description: "A clean design focusing on simplicity and gettng to the point.",
     demoUrl: "/templates/product-showcase.html",
     type: "html"
@@ -111,7 +111,7 @@ const templates = [
     id: 10,
     title: "Fine Dining Restaurant",
     category: "restaurant",
-    image: "/assets/images/demo/democards/restaurant.avif",
+    image: "https://images.unsplash.com/photo-1676471932681-45fa972d848a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZpbmUlMjBkaW5uaW5nfGVufDB8fDB8fHww",
     description: "Elegant template for upscale restaurants and dining establishments.",
     component: RestaurantDemo,
     type: "react"
@@ -120,7 +120,7 @@ const templates = [
     id: 11,
     title: "Fitness & Wellness",
     category: "fitness",
-    image: "/assets/images/demo/democards/fitness.avif",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3ltfGVufDB8fDB8fHww",
     description: "Dynamic template for gyms, fitness centers, and wellness businesses.",
     component: FitnessDemo,
     type: "react"
@@ -129,7 +129,7 @@ const templates = [
     id: 12,
     title: "Real Estate",
     category: "real-estate",
-    image: "/assets/images/demo/democards/realestate.avif",
+    image: "https://images.unsplash.com/vector-1745659433101-28ad4f096114?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJlYWxlc3RhdGV8ZW58MHx8MHx8fDA%3D",
     description: "Professional template for real estate agencies and property listings.",
     component: RealEstateDemo,
     type: "react"
@@ -147,7 +147,7 @@ const templates = [
     id: 14,
     title: "E-Learning Platform",
     category: "education",
-    image: "/assets/images/demo/democards/e-learning.avif",
+    image: "https://images.unsplash.com/photo-1552581234-26160f608093?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGUlMjBsZWFybmluZ3xlbnwwfHwwfHx8MA%3D%3D",
     description: "Interactive template for educational websites and online courses.",
     component: ELearningDemo,
     type: "react"
@@ -156,16 +156,16 @@ const templates = [
     id: 15,
     title: "Personal Portfolio",
     category: "portfolio",
-    image: "/assets/images/demo/democards/landingpage.jpg",
+    image: "https://plus.unsplash.com/premium_vector-1682305378650-373ea23d6d85?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29uYWx8ZW58MHx8MHx8fDA%3D",
     description: "Showcase your work and skills with this elegant portfolio template.",
     component: PersonalPortfolioDemo,
     type: "react"
   },
   {
     id: 16,
-    title: "Trade & Construction",
+    title: "Maintenance & Trade",
     category: "business",
-    image: "/assets/images/demo/democards/plumber.png",
+    image: "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFuZHklMjBtYW58ZW58MHx8MHx8fDA%3D",
     description: "Robust template for construction, trades, and home service businesses.",
     component: TradeDemo,
     type: "react"
@@ -174,7 +174,7 @@ const templates = [
     id: 17,
     title: "Photography Portfolio",
     category: "portfolio",
-    image: "/assets/images/demo/democards/photographer.png",
+    image: "https://plus.unsplash.com/premium_vector-1726129197123-1ca17b767e26?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG9ncmFwaGVyfGVufDB8fDB8fHww",
     description: "Visual-focused template for photographers and visual artists.",
     component: PhotographyDemo,
     type: "react"
@@ -187,7 +187,7 @@ const templates = [
     description: "Trendy template for fashion brands and clothing stores.",
     component: StreetWearDemo,
     type: "react"
-  }
+  },
 ];
 
 // Filter categories

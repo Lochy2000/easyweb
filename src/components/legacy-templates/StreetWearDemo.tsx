@@ -38,8 +38,8 @@ const StreetWearDemo = () => {
       price: 129.99,
       category: "hoodies",
       images: [
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/1.png`,
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streetfashion2/1.png`
+        `/assets/images/demo/streetwear/1.png`,
+        `/assets/images/demo/streetwear/streetfashion2/1.png`
       ],
       isNew: true,
       tags: ['Bestseller', 'New Drop'],
@@ -51,8 +51,8 @@ const StreetWearDemo = () => {
       price: 149.99,
       category: "pants",
       images: [
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/2.png`,
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streetfashion2/2.png`
+        `/assets/images/demo/streetwear/2.png`,
+        `/assets/images/demo/streetwear/streetfashion2/2.png`
       ],
       isNew: true,
       tags: ['Limited Edition'],
@@ -64,8 +64,8 @@ const StreetWearDemo = () => {
       price: 49.99,
       category: "tees",
       images: [
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/3.png`,
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streetfashion2/3.png`
+        `/assets/images/demo/streetwear/3.png`,
+        `/assets/images/demo/streetwear/streetfashion2/3.png`
       ],
       isNew: false,
       tags: ['Bestseller'],
@@ -77,8 +77,8 @@ const StreetWearDemo = () => {
       price: 199.99,
       category: "jackets",
       images: [
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/4.png`,
-        `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streetfashion2/4.png`
+        `/assets/images/demo/streetwear/4.png`,
+        `/assets/images/demo/streetwear/streetfashion2/4.png`
       ],
       isNew: true,
       tags: ['New Collection'],
@@ -93,7 +93,7 @@ const StreetWearDemo = () => {
       price: 129.99,
       size: "L",
       quantity: 1,
-      image: `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streettech/1.png`
+      image: `/assets/images/demo/streetwear/streettech/1.png`
     },
     {
       id: 2,
@@ -101,7 +101,7 @@ const StreetWearDemo = () => {
       price: 149.99,
       size: "32",
       quantity: 1,
-      image: `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streettech/2.png`
+      image: `/assets/images/demo/streetwear/streettech/2.png`
     }
   ];
 
@@ -196,7 +196,7 @@ const StreetWearDemo = () => {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10" />
           <img
-            src={`${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streetwear.gif`}
+            src='/assets/images/demo/streetwear/streetwear.gif'
             alt="Luxury home"
             className="w-full h-full object-cover opacity-90"
           />
@@ -321,13 +321,13 @@ const StreetWearDemo = () => {
               {
                 title: "STREET TECH",
                 description: "Future-ready urban essentials",
-                image: `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streettech/1.png`,
+                image: '/assets/images/demo/streetwear/streetfashion2/streettech/2.png',
                 color: "from-red-600"
               },
               {
                 title: "URBAN UTILITY",
                 description: "Function meets street style",
-                image: `${process.env.PUBLIC_URL}/assets/images/demo/streetwear/streettech/2.png`,
+                image: '/assets/images/demo/streetwear/streetfashion2/streettech/1.png',
                 color: "from-blue-600"
               }
             ].map((collection, index) => (
@@ -506,7 +506,7 @@ const StreetWearDemo = () => {
               </p>
               <div className="flex items-center gap-4">
                 <img
-                  src={`${process.env.PUBLIC_URL}/assets/images/demo/payment-methods.png`}
+                  src='/assets/images/demo/payment-methods.png'
                   alt="Payment methods"
                   className="h-8"
                 />
