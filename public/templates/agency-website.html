@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Agency - Modern Web Solutions</title>
+  <style>
+    /* Import lightweight system font stack */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    /* Modern, clean CSS with minimal variables */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #6366f1;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --text: #1e293b;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    body {
+      color: var(--text);
+      background-color: var(--light);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    
+    .logo span {
+      color: var(--primary);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    section {
+      padding: 5rem 0;
+    }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom right, #e0f2fe, #f0f9ff);
+      padding-top: 80px;
+    }
+    
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .hero-text {
+      flex: 1;
+    }
+    
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+    
+    .hero-title span {
+      color: var(--primary);
+    }
+    
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      max-width: 540px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--gray);
+      max-width: 800px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+    
+    .services {
+      background-color: white;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: #dbeafe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    
+    .service-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .work {
+      background-color: #f1f5f9;
+    }
+    
+    .work-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1rem;
+    }
+    
+    .work-tab {
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .work-tab.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .work-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+    }
+    
+    .work-img {
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .work-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .work-card:hover .work-img img {
+      transform: scale(1.05);
+    }
+    
+    .work-content {
+      padding: 1.5rem;
+    }
+    
+    .work-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .work-category {
+      font-size: 0.875rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .testimonials {
+      background-color: white;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .testimonial-card {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .testimonial-content {
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .author-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .author-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .author-info p {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+    
+    .contact {
+      background: linear-gradient(to bottom right, #1e3a8a, #2563eb);
+      color: white;
+    }
+    
+    .contact .section-title,
+    .contact .section-subtitle {
+      color: white;
+    }
+    
+    .contact .section-description {
+      color: #e0f2fe;
+    }
+    
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .footer-social a {
+      color: white;
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+    
+    .footer-social a:hover {
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid #334155;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.875rem;
+    }
+    
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+    }
+    
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--text);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      .hero-image {
+        margin-top: 2rem;
+      }
+      
+      .work-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: white;
+        height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      nav.active {
+        height: auto;
+        padding: 1.5rem 0;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .work-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <a href="#" class="logo">Digit<span>ally</span></a>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Our Work</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Transform Your <span>Digital Presence</span> With Us</h1>
+          <p class="hero-description">We help businesses grow by creating stunning websites, effective marketing strategies, and memorable brand experiences.</p>
+          <div class="hero-buttons">
+            <a href="#services" class="btn">Our Services</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d" alt="Digital Agency Team">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="services" class="services">
+    <div class="container">
+      <p class="section-subtitle">What We Do</p>
+      <h2 class="section-title">Services We Offer</h2>
+      <p class="section-description">We provide comprehensive digital solutions to help your business thrive in the online world. Our expert team combines creativity with technical expertise to deliver results.</p>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3 class="service-title">Web Development</h3>
+          <p>We build responsive, user-friendly websites that look great on any device and help you achieve your business goals.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3 class="service-title">UI/UX Design</h3>
+          <p>Our design team creates beautiful, intuitive interfaces that enhance user experience and drive engagement.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+          </div>
+          <h3 class="service-title">Branding</h3>
+          <p>We help you establish a strong, consistent brand identity that resonates with your target audience and sets you apart.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <h3 class="service-title">Digital Marketing</h3>
+          <p>Our data-driven marketing strategies help you reach your audience, increase traffic, and convert visitors into customers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="work" class="work">
+    <div class="container">
+      <p class="section-subtitle">Our Portfolio</p>
+      <h2 class="section-title">Recent Projects</h2>
+      <p class="section-description">Take a look at some of our recent work. We've had the pleasure of working with a diverse range of clients across various industries.</p>
+      
+      <div class="work-tabs">
+        <div class="work-tab active">All</div>
+        <div class="work-tab">Web Design</div>
+        <div class="work-tab">Branding</div>
+        <div class="work-tab">Marketing</div>
+      </div>
+      
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-img">
+            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="Project 1">
+          </div>
+          <div class="work-content">
+            <span class="work-category">Web Design</span>
+            <h3 class="work-title">Eco-Friendly E-commerce</h3>
+            <p>A sustainable product online store with a clean, minimal design that emphasizes product photography.</p>
+          </div>
+        </div>
+        
+        <div class="work-card">
+          <div class="work-img">
+            <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2" alt="Project 2">
+          </div>
+          <div class="work-content">
+            <span class="work-category">Branding</span>
+            <h3 class="work-title">Modern Café Identity</h3>
+            <p>Complete brand identity for an urban café, including logo, packaging, and digital assets.</p>
+          </div>
+        </div>
+        
+        <div class="work-card">
+          <div class="work-img">
+            <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740" alt="Project 3">
+          </div>
+          <div class="work-content">
+            <span class="work-category">Marketing</span>
+            <h3 class="work-title">Fitness App Campaign</h3>
+            <p>Digital marketing campaign that increased app downloads by 200% in three months.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <p class="section-subtitle">What Clients Say</p>
+      <h2 class="section-title">Testimonials</h2>
+      <p class="section-description">Don't just take our word for it. Here's what our clients have to say about working with us.</p>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-content">"Working with Digitally transformed our online presence. Their team understood our vision perfectly and delivered a website that exceeded our expectations."</p>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimonial Author">
+            </div>
+            <div class="author-info">
+              <h4>Sarah Johnson</h4>
+              <p>CEO, GreenTech Solutions</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-content">"The branding work they did for our startup helped us establish credibility right from the beginning. Professional, creative, and highly recommended!"</p>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Testimonial Author">
+            </div>
+            <div class="author-info">
+              <h4>Michael Roberts</h4>
+              <p>Founder, Innovate Labs</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-content">"Their marketing strategy completely revitalized our business. We've seen a 150% increase in leads since implementing their recommendations."</p>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Testimonial Author">
+            </div>
+            <div class="author-info">
+              <h4>Lisa Chen</h4>
+              <p>Marketing Director, Fusion Fitness</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact" class="contact">
+    <div class="container">
+      <p class="section-subtitle">Get In Touch</p>
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-description">Ready to start your project? Contact us today for a free consultation. We'd love to hear about your goals and how we can help you achieve them.</p>
+      
+      <div class="contact-form">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Digitally</h3>
+          <p>We help businesses transform their digital presence with expert web development, design, and marketing services.</p>
+          <div class="footer-social">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">UI/UX Design</a></li>
+            <li><a href="#">Branding</a></li>
+            <li><a href="#">Digital Marketing</a></li>
+            <li><a href="#">Content Creation</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Work</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-links">
+            <li>123 Digital Street</li>
+            <li>New York, NY 10001</li>
+            <li>hello@digitally.com</li>
+            <li>+1 (555) 123-4567</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Digitally. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Simple mobile menu toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('nav');
+      
+      menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking on a nav link
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+        });
+      });
+      
+      // Tab functionality for work section
+      const workTabs = document.querySelectorAll('.work-tab');
+      workTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          workTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

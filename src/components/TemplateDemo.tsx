@@ -16,7 +16,9 @@ export type Template = {
   category: string;
   image: string;
   description: string;
-  demoUrl?: string; // URL to the actual demo
+  demoUrl?: string; // URL to the actual demo for HTML templates
+  component?: React.ComponentType; // React component for TSX templates
+  type: 'html' | 'react'; // Template type
 };
 
 interface TemplateDemoProps {
@@ -56,8 +58,13 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   // If no template is provided, don't render anything
   if (!template) return null;
 
+  // For React components, we won't need loading state
+  const isReactTemplate = template.type === 'react';
+
   // Use the template's demoUrl if available, or fall back to demo-template.html
-  const demoUrl = template.demoUrl || `/templates/demo-template.html?template=${encodeURIComponent(template.title)}`;
+  const demoUrl = !isReactTemplate && template.demoUrl ? 
+    template.demoUrl : 
+    `/templates/demo-template.html?template=${encodeURIComponent(template.title)}`;
 
   const handleIframeLoad = () => {
     setIsLoading(false);
@@ -67,6 +74,9 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
+
+  // Render the React component if this is a React template
+  const ReactTemplateComponent = isReactTemplate && template.component ? template.component : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={() => onClose()}>
@@ -104,8 +114,8 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
           </div>
         </div>
 
-        {/* Loading overlay */}
-        {isLoading && (
+        {/* Loading overlay - only show for HTML templates */}
+        {!isReactTemplate && isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/90 z-10">
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
@@ -114,24 +124,30 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
           </div>
         )}
 
-        {/* Demo iframe */}
+        {/* Demo content */}
         <div className="relative w-full overflow-hidden bg-white" style={{ height: "calc(90vh - 130px)" }}>
-          <iframe
-            src={demoUrl}
-            className="w-full h-full border-0"
-            onLoad={handleIframeLoad}
-            title={`${template.title} demo`}
-            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-            referrerPolicy="no-referrer"
-            loading="eager"
-            style={{ 
-              backgroundColor: 'white', 
-              display: 'block',
-              width: '100%', 
-              height: '100%',
-              border: 'none'
-            }}
-          />
+          {isReactTemplate && ReactTemplateComponent ? (
+            <div className="w-full h-full overflow-auto">
+              <ReactTemplateComponent />
+            </div>
+          ) : (
+            <iframe
+              src={demoUrl}
+              className="w-full h-full border-0"
+              onLoad={handleIframeLoad}
+              title={`${template.title} demo`}
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+              referrerPolicy="no-referrer"
+              loading="eager"
+              style={{ 
+                backgroundColor: 'white', 
+                display: 'block',
+                width: '100%', 
+                height: '100%',
+                border: 'none'
+              }}
+            />
+          )}
         </div>
 
         {/* Footer */}
@@ -148,19 +164,33 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
           </div>
           
           <div className="flex gap-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="gap-1"
-              onClick={() => window.open(demoUrl, '_blank')}
-            >
-              Open in New Tab
-              <ExternalLink className="h-4 w-4" />
-            </Button>
+            {isReactTemplate ? (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1"
+                onClick={() => window.open(`/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+              >
+                Open in New Tab
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1"
+                onClick={() => window.open(demoUrl, '_blank')}
+              >
+                Open in New Tab
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            )}
             <Button 
               size="sm" 
               className="bg-primary hover:bg-primary/90"
-              onClick={() => window.open(demoUrl, '_blank')}
+              onClick={() => window.open(isReactTemplate ? 
+                `/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}` : 
+                demoUrl, '_blank')}
             >
               Use This Template
             </Button>

@@ -5,18 +5,33 @@ import { useNavigate } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import TemplateDemo, { Template } from './TemplateDemo';
 
+// Import legacy template components
+import {
+  RestaurantDemo,
+  FitnessDemo,
+  RealEstateDemo,
+  CreativeAgencyDemo,
+  ELearningDemo,
+  PersonalPortfolioDemo,
+  TradeDemo,
+  PhotographyDemo,
+  StreetWearDemo
+} from './legacy-templates';
+
 // Template data
 // TODO: Replace placeholder Unsplash images with actual template preview images.
 //       Create optimized images (e.g., WebP) and place them in the public directory.
 //       Update the 'image' paths below accordingly.
 const templates = [
+  // Original HTML-based templates
   {
     id: 1,
     title: "Portfolio Pro",
     category: "portfolio",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     description: "Perfect for creatives and professionals showcasing their work.",
-    demoUrl: "/templates/portfolio-pro.html"
+    demoUrl: "/templates/portfolio-pro.html",
+    type: "html"
   },
   {
     id: 2,
@@ -24,7 +39,8 @@ const templates = [
     category: "business",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
     description: "Professional layout designed for small to medium businesses.",
-    demoUrl: "/templates/business-plus.html"
+    demoUrl: "/templates/business-plus.html",
+    type: "html"
   },
   {
     id: 3,
@@ -32,7 +48,8 @@ const templates = [
     category: "ecommerce",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     description: "Clean e-commerce template with optimized product layouts.",
-    demoUrl: "/templates/shop-simple.html"
+    demoUrl: "/templates/shop-simple.html",
+    type: "html"
   },
   {
     id: 4,
@@ -40,7 +57,8 @@ const templates = [
     category: "business",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
     description: "Modern and bold design for forward-thinking agencies.",
-    demoUrl: "/templates/agency-edge.html"
+    demoUrl: "/templates/agency-edge.html",
+    type: "html"
   },
   {
     id: 5,
@@ -48,7 +66,8 @@ const templates = [
     category: "blog",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
     description: "Elegant and focused layout for bloggers and writers.",
-    demoUrl: "/templates/minimal-blog.html"
+    demoUrl: "/templates/minimal-blog.html",
+    type: "html"
   },
   {
     id: 6,
@@ -56,7 +75,118 @@ const templates = [
     category: "landing",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     description: "High-conversion landing page template for products and services.",
-    demoUrl: "/templates/landing-launch.html"
+    demoUrl: "/templates/landing-launch.html",
+    type: "html"
+  },  
+  {
+    id: 7,
+    title: "Modern Portfolio",
+    category: "portfolio",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    description: "A clean design focusing on simplicity and gettng to the point.",
+    demoUrl: "/templates/modern-portfolio.html",
+    type: "html"
+  },
+  {
+    id: 8,
+    title: "Agency Portfolio",
+    category: "portfolio",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    description: "A clean design focusing on simplicity and gettng to the point.",
+    demoUrl: "/templates/agency-website.html",
+    type: "html"
+  },
+  {
+    id: 9,
+    title: "Product Showcase",
+    category: "portfolio",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    description: "A clean design focusing on simplicity and gettng to the point.",
+    demoUrl: "/templates/product-showcase.html",
+    type: "html"
+  },
+  
+  // Legacy React-based templates
+  {
+    id: 10,
+    title: "Fine Dining Restaurant",
+    category: "restaurant",
+    image: "/assets/images/demo/democards/restaurant.avif",
+    description: "Elegant template for upscale restaurants and dining establishments.",
+    component: RestaurantDemo,
+    type: "react"
+  },
+  {
+    id: 11,
+    title: "Fitness & Wellness",
+    category: "fitness",
+    image: "/assets/images/demo/democards/fitness.avif",
+    description: "Dynamic template for gyms, fitness centers, and wellness businesses.",
+    component: FitnessDemo,
+    type: "react"
+  },
+  {
+    id: 12,
+    title: "Real Estate",
+    category: "real-estate",
+    image: "/assets/images/demo/democards/realestate.avif",
+    description: "Professional template for real estate agencies and property listings.",
+    component: RealEstateDemo,
+    type: "react"
+  },
+  {
+    id: 13,
+    title: "Creative Agency",
+    category: "agency",
+    image: "/assets/images/demo/democards/creativeagency.avif",
+    description: "Bold template for creative agencies and digital studios.",
+    component: CreativeAgencyDemo,
+    type: "react"
+  },
+  {
+    id: 14,
+    title: "E-Learning Platform",
+    category: "education",
+    image: "/assets/images/demo/democards/e-learning.avif",
+    description: "Interactive template for educational websites and online courses.",
+    component: ELearningDemo,
+    type: "react"
+  },
+  {
+    id: 15,
+    title: "Personal Portfolio",
+    category: "portfolio",
+    image: "/assets/images/demo/democards/landingpage.jpg",
+    description: "Showcase your work and skills with this elegant portfolio template.",
+    component: PersonalPortfolioDemo,
+    type: "react"
+  },
+  {
+    id: 16,
+    title: "Trade & Construction",
+    category: "business",
+    image: "/assets/images/demo/democards/plumber.png",
+    description: "Robust template for construction, trades, and home service businesses.",
+    component: TradeDemo,
+    type: "react"
+  },
+  {
+    id: 17,
+    title: "Photography Portfolio",
+    category: "portfolio",
+    image: "/assets/images/demo/democards/photographer.png",
+    description: "Visual-focused template for photographers and visual artists.",
+    component: PhotographyDemo,
+    type: "react"
+  },
+  {
+    id: 18,
+    title: "Streetwear Fashion",
+    category: "ecommerce",
+    image: "/assets/images/demo/democards/fashion.png",
+    description: "Trendy template for fashion brands and clothing stores.",
+    component: StreetWearDemo,
+    type: "react"
   }
 ];
 
@@ -67,7 +197,12 @@ const categories = [
   { id: "business", label: "Business" },
   { id: "ecommerce", label: "E-commerce" },
   { id: "blog", label: "Blog" },
-  { id: "landing", label: "Landing Page" }
+  { id: "landing", label: "Landing Page" },
+  { id: "restaurant", label: "Restaurant" },
+  { id: "fitness", label: "Fitness" },
+  { id: "real-estate", label: "Real Estate" },
+  { id: "agency", label: "Agency" },
+  { id: "education", label: "Education" }
 ];
 
 const TemplateGallery = () => {
@@ -84,7 +219,10 @@ const TemplateGallery = () => {
 
   const handleViewDemo = (template: Template) => {
     setSelectedTemplate(template);
-    setDemoLoading(true);
+    // Only set loading for HTML templates, not React templates
+    if (template.type === 'html') {
+      setDemoLoading(true);
+    }
     setDemoOpen(true);
   };
 
