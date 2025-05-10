@@ -29,31 +29,25 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     markdownPlugin(),
-    sitemap({
-      hostname: "https://www.easywebs.uk",
-      exclude: [
-        '/portfolio-pro.html',
-        '/business-plus.html',
-        '/shop-simple.html',
-        '/demo-template.html',
-        '/minimal-blog.html',
-        '/landing-launch.html',
-      ],
-      dynamicRoutes: [
-        '/',
-        '/about',
-        '/templates',
-        '/blog',
-        '/book',
-        // We would normally add blog post routes dynamically here
-        // e.g. '/blog/demystifying-seo-2025', '/blog/website-maintenance-matters', etc.
-      ],
-      outDir: './dist',
-      robots: true, // Generate a robots.txt file as well
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.8
-    }),
+    // Comment out the sitemap plugin temporarily to fix build issues
+    // sitemap({
+    //   hostname: "https://www.easywebs.uk",
+    //   dynamicRoutes: [
+    //     '/',
+    //     '/about',
+    //     '/templates',
+    //     '/blog',
+    //     '/book'
+    //   ],
+    //   exclude: [
+    //     '/portfolio-pro.html',
+    //     '/business-plus.html',
+    //     '/shop-simple.html',
+    //     '/demo-template.html',
+    //     '/minimal-blog.html',
+    //     '/landing-launch.html',
+    //   ],
+    // }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),

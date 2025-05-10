@@ -2,11 +2,11 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://www.easywebs.uk/sitemap.xml
-
-# Blog posts
+# Allow all paths
 Allow: /blog/
+Allow: /about/
+Allow: /templates/
+Allow: /book/
 
 # Prevent crawling of any potential admin areas
 Disallow: /admin/
