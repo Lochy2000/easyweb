@@ -17,6 +17,12 @@ export const generateCloudinaryUrl = (
   // Base Cloudinary URL with correct cloud name
   const baseUrl = 'https://res.cloudinary.com/dpw2txejq/image/upload';
   
+  // If publicId is 'default_image' or any of the not-found images, use a fallback
+  if (publicId === 'default_image' || publicId === 'seo_2025_image') {
+    // Use a placeholder image that's known to exist
+    publicId = 'hosting_iipawi';
+  }
+  
   // Build transformation string
   const transformations = [
     width !== 'auto' ? `w_${width}` : '',

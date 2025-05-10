@@ -75,13 +75,14 @@ const Header = () => {
           <NavLink to="/templates">Templates</NavLink>
           <NavLink to="/blog">Resources</NavLink>
           <NavLink to="/about">About</NavLink>
-          <Button 
-            variant="3d"
-            className="mr-0 lg:mr-1"
-            onClick={() => window.open('https://calendly.com/lochlann_oht/discussion', '_blank')}
-          >
-            Book Consultation
-          </Button>
+          <Link to="/book">
+            <Button 
+              variant="3d"
+              className="mr-0 lg:mr-1"
+            >
+              Book Consultation
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button with Text Label */}
@@ -131,16 +132,17 @@ const Header = () => {
           <MobileNavLink to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Resources</MobileNavLink>
           <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
           <div className="py-4 px-2">
-            <Button 
-              className="w-full"
-              variant="3d"
-              onClick={() => {
-                window.open('https://calendly.com/lochlann_oht/discussion', '_blank');
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              Book Consultation
-            </Button>
+            <Link to="/book">
+              <Button 
+                className="w-full"
+                variant="3d"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                Book Consultation
+              </Button>
+            </Link>
           </div>
         </nav>
       </div>

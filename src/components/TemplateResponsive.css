@@ -1,0 +1,26 @@
+/* Template Demo Responsive Styles */
+.template-iframe-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.template-iframe {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  border: none;
+}
+
+/* Ensures dialog content is properly responsive */
+.responsive-dialog {
+  width: 100%;
+  max-width: 90vw;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .template-iframe {
+    transform: scale(0.9);
+  }
+}

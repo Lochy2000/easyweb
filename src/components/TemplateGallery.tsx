@@ -291,11 +291,14 @@ const TemplateGallery = () => {
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <img 
                     src={template.image} 
-                    alt={template.title} 
+                    alt={`${template.title} - ${template.description} template preview`} 
                     className={cn(
                       "w-full h-full object-cover transition-transform duration-700",
                       hoveredTemplate === template.id ? "scale-105" : "scale-100"
                     )}
+                    width={600}
+                    height={450}
+                    loading="lazy"
                   />
                   <div className={cn(
                     "absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent flex items-center justify-center opacity-0 transition-opacity duration-300",

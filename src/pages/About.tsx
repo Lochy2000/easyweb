@@ -1,10 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BackgroundEffects } from '@/components/BackgroundEffects';
 import { Linkedin } from 'lucide-react'; // Import Linkedin icon
 import { OptimizedImage } from '@/components/OptimizedImage';
+import { getOrganizationSchema } from '@/lib/schema';
 // import Marquee from "react-fast-marquee"; // Placeholder for client marquee
 
 // Actual team data
@@ -90,6 +92,30 @@ const ClientLogo = ({ client, isDuplicate = false }: { client: typeof clients[0]
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-background/50 relative isolate font-inter">
+      <Helmet>
+        <title>About EasyWeb | Modern Web Design and Development Studio</title>
+        <meta name="description" content="EasyWeb is a web design studio that began as a university start-up, winning the Santander Universities Enterprise Competition. Learn about our team and mission." />
+        <link rel="canonical" href="https://www.easywebs.uk/about" />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:title" content="About EasyWeb | Modern Web Design and Development Studio" />
+        <meta property="og:description" content="EasyWeb is a web design studio that began as a university start-up, winning the Santander Universities Enterprise Competition. Learn about our team and mission." />
+        <meta property="og:url" content="https://www.easywebs.uk/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.easywebs.uk/og-image.jpg" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About EasyWeb | Modern Web Design and Development Studio" />
+        <meta name="twitter:description" content="EasyWeb is a web design studio that began as a university start-up, winning the Santander Universities Enterprise Competition. Learn about our team and mission." />
+        <meta name="twitter:image" content="https://www.easywebs.uk/og-image.jpg" />
+        
+        {/* Schema.org structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify(getOrganizationSchema())}
+        </script>
+      </Helmet>
+      
       <BackgroundEffects />
       <Header />
       <main className="relative pt-24 pb-16">

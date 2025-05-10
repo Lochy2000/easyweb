@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Star } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { Helmet } from 'react-helmet';
 
 interface TestimonialProps {
   name: string;
@@ -24,8 +25,8 @@ const TestimonialCard = ({ name, role, company, url, image, content, delay = 0 }
   >
     <div className="flex items-center gap-4 mb-6">
       <Avatar className="w-12 h-12">
-        <AvatarImage src={image} alt={name} />
-        <AvatarFallback>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+        <AvatarImage src={image} alt={`${name} from ${company} - client testimonial`} width={48} height={48} loading="lazy" />
+        <AvatarFallback aria-label={`${name}'s initials`}>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
       </Avatar>
       <div>
         <h4 className="font-semibold">{name}</h4>
@@ -97,6 +98,38 @@ export const Testimonials = () => {
 
   return (
     <section className="py-24 relative">
+      {/* Add structured data for testimonials */}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": allTestimonials.map((testimonial, index) => ({
+              "@type": "Review",
+              "position": index + 1,
+              "itemReviewed": {
+                "@type": "WebDesignService",
+                "name": "Easywebs Web Design Services"
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "author": {
+                "@type": "Person",
+                "name": testimonial.name
+              },
+              "reviewBody": testimonial.content,
+              "publisher": {
+                "@type": "Organization",
+                "name": testimonial.company
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
+      
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { 
+  CustomDialog,
+  CustomDialogContent 
+} from "@/components/ui/custom-dialog";
 import { X, ExternalLink, Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import './TemplateResponsive.css';
 
 export type Template = {
   id: number;
@@ -79,10 +81,10 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   const ReactTemplateComponent = isReactTemplate && template.component ? template.component : null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={() => onClose()}>
-      <DialogContent
+    <CustomDialog open={isOpen} onOpenChange={() => onClose()}>
+      <CustomDialogContent
         className={cn(
-          "sm:max-w-[90vw] max-h-[90vh] p-0 gap-0 bg-background/95 backdrop-blur-xl border-white/10",
+          "responsive-dialog sm:max-w-[90vw] max-h-[90vh] p-0 gap-0 bg-background/95 backdrop-blur-xl border-white/10",
           isFullscreen ? "w-screen h-screen max-w-none max-h-none !rounded-none" : ""
         )}
       >
@@ -95,6 +97,27 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
             </DialogDescription>
           </div>
           <div className="flex items-center gap-2">
+            {isReactTemplate ? (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1"
+                onClick={() => window.open(`/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+              >
+                Open in New Tab
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1"
+                onClick={() => window.open(demoUrl, '_blank')}
+              >
+                Open in New Tab
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            )}
             <Button 
               variant="ghost" 
               size="icon" 
@@ -131,22 +154,17 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
               <ReactTemplateComponent />
             </div>
           ) : (
-            <iframe
-              src={demoUrl}
-              className="w-full h-full border-0"
-              onLoad={handleIframeLoad}
-              title={`${template.title} demo`}
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-              referrerPolicy="no-referrer"
-              loading="eager"
-              style={{ 
-                backgroundColor: 'white', 
-                display: 'block',
-                width: '100%', 
-                height: '100%',
-                border: 'none'
-              }}
-            />
+            <div className="template-iframe-container" style={{ overflowX: "hidden" }}>
+              <iframe
+                src={demoUrl}
+                className="template-iframe"
+                onLoad={handleIframeLoad}
+                title={`${template.title} demo`}
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                referrerPolicy="no-referrer"
+                loading="eager"
+              />
+            </div>
           )}
         </div>
 
@@ -162,42 +180,9 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-          
-          <div className="flex gap-2">
-            {isReactTemplate ? (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-1"
-                onClick={() => window.open(`/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
-              >
-                Open in New Tab
-                <ExternalLink className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-1"
-                onClick={() => window.open(demoUrl, '_blank')}
-              >
-                Open in New Tab
-                <ExternalLink className="h-4 w-4" />
-              </Button>
-            )}
-            <Button 
-              size="sm" 
-              className="bg-primary hover:bg-primary/90"
-              onClick={() => window.open(isReactTemplate ? 
-                `/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}` : 
-                demoUrl, '_blank')}
-            >
-              Use This Template
-            </Button>
-          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </CustomDialogContent>
+    </CustomDialog>
   );
 };
 
