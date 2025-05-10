@@ -96,7 +96,7 @@ export const getServiceSchema = (service: {
     description: service.description,
     provider: getOrganizationSchema(),
     url: service.url,
-    image: service.image || 'https://www.easywebs.uk/images/services-default.jpg'
+    image: service.image || 'https://res.cloudinary.com/dpw2txejq/image/upload/v1746899868/easybanner2_m2kduh.png'
   };
 };
 

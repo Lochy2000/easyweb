@@ -68,7 +68,7 @@ export async function getAllBlogPosts(): Promise<BlogFrontMatter[]> {
       title: "Demystifying SEO in 2025",
       description: "Is SEO still worth it in 2025? Here's what's changed, who should care, and how to build websites that perform in a world of AI search.",
       category: "SEO",
-      imageUrl: generateCloudinaryUrl("seo_2025_image", IMAGE_SIZES.blogHero),
+      imageUrl: generateCloudinaryUrl("seo_wks2pf", IMAGE_SIZES.blogHero),
       date: "2025-05-09"
     }
   ];
@@ -94,7 +94,7 @@ export async function getBlogPostById(id: string): Promise<BlogPost | null> {
         title: "Demystifying SEO in 2025",
         description: "Is SEO still worth it in 2025? Here's what's changed, who should care, and how to build websites that perform in a world of AI search.",
         category: "SEO",
-        imageUrl: generateCloudinaryUrl("seo_2025_image", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("seo_wks2pf", IMAGE_SIZES.blogHero),
         date: "2025-05-09",
         author: "EasyWeb Team",
         tags: ["SEO", "Web Development", "AI"],
@@ -457,7 +457,7 @@ A mobile-responsive site is no longer a technical upgrade — it's the baseline 
         title: "SEO for Portfolio Websites: What Actually Matters in 2025",
         description: "Learn how to make your portfolio site discoverable in search engines without bloating it with gimmicks. Clear advice for creatives, developers, and freelancers in 2025.",
         category: "SEO",
-        imageUrl: generateCloudinaryUrl("seo_su09ig", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("seo-whatactuallymatters_tvua10", IMAGE_SIZES.blogHero),
         date: "2025-05-10",
         author: "EasyWeb Team",
         tags: ["SEO", "Portfolio Websites", "Web Design", "Freelancers"],
