@@ -7,33 +7,46 @@
 
 @layer base {
   :root {
-    --background: 260 20% 10%;
-    --foreground: hsl(0 0% 98%);
+    /* Enhanced Digital Cosmos Color Palette */
+    --background: 260 20% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 260 20% 12%;
-    --card-foreground: hsl(0 0% 98%);
+    --card: 260 18% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 260 20% 10%;
-    --popover-foreground: hsl(0 0% 98%);
+    --popover: 260 20% 8%;
+    --popover-foreground: 0 0% 98%;
 
     --primary: 267 100% 67%;
-    --primary-foreground: hsl(0 0% 100%);
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 260 15% 20%;
-    --secondary-foreground: hsl(0 0% 98%);
+    --secondary: 260 15% 18%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 260 15% 20%;
-    --muted-foreground: 215 20% 75%;
+    --muted: 260 15% 18%;
+    --muted-foreground: 215 20% 78%;
 
     --accent: 267 80% 65%;
-    --accent-foreground: hsl(0 0% 98%);
+    --accent-foreground: 0 0% 98%;
+
+    /* New Digital Cosmos Accents */
+    --accent-cyan: 180 100% 50%;
+    --accent-cyan-foreground: 260 20% 8%;
+    
+    --accent-pink: 330 100% 70%;
+    --accent-pink-foreground: 260 20% 8%;
 
     --destructive: 0 62% 30%;
-    --destructive-foreground: hsl(0 0% 98%);
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 260 15% 20%;
-    --input: 260 15% 20%;
+    --border: 260 15% 18%;
+    --input: 260 15% 18%;
     --ring: 267 80% 70%;
+
+    /* Glass morphism variables */
+    --glass-bg: 255 255 255 / 0.1;
+    --glass-border: 255 255 255 / 0.2;
+    --glass-shadow: 0 0 0 / 0.3;
 
     --radius: 0.5rem;
   }
@@ -54,22 +67,48 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold tracking-tight;
-    color: inherit;
+    @apply font-display font-bold tracking-tight text-foreground;
   }
 }
 
 @layer components {
+  /* Enhanced Glass Card with new variables */
   .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
+    background: rgba(var(--glass-bg));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--glass-border));
+    box-shadow: 0 8px 32px rgba(var(--glass-shadow));
   }
   
   .text-balance {
     text-wrap: balance;
   }
   
+  /* Enhanced gradients with new color palette */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+    background-size: 200% auto;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--accent-cyan)) 50%, 
+      hsl(var(--primary)) 100%);
+    background-size: 200% auto;
+    animation: gradient-shift 6s ease-in-out infinite;
+  }
+
+  .text-gradient-pink {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, 
+      hsl(var(--accent-pink)) 0%, 
+      hsl(var(--primary)) 50%, 
+      hsl(var(--accent-pink)) 100%);
+    background-size: 200% auto;
+    animation: gradient-shift 5s ease-in-out infinite;
   }
   
   .btn-shine {
@@ -100,7 +139,7 @@
     @apply bg-gradient-to-r from-primary via-primary to-accent;
   }
   
-  /* Grid Pattern with Animation */
+  /* Enhanced Grid Pattern with new color variables */
   .bg-grid-pattern {
     position: relative;
     background-size: 40px 40px;
@@ -116,8 +155,8 @@
     inset: 0;
     background-size: 40px 40px;
     background-image: 
-      linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--primary) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.06) 1px, transparent 1px);
     animation: grid-pulse 6s ease-in-out infinite;
     z-index: 1;
   }
@@ -128,9 +167,9 @@
     inset: 0;
     background-size: 40px 40px;
     background-image: 
-      linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
-    animation: grid-shift 8s linear infinite;
+      linear-gradient(to right, hsl(var(--accent-cyan) / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--accent-cyan) / 0.03) 1px, transparent 1px);
+    animation: grid-shift 12s linear infinite;
     z-index: 2;
   }
   
@@ -176,6 +215,15 @@
   }
   to {
     background-position: -200% center;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
 
@@ -638,4 +686,10 @@ html, body, #root {
 .from-background {
   --tw-gradient-from: hsl(var(--background));
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 0 0 / 0));
+}
+
+@media (max-width: 640px) {
+  html, body, #root, .min-h-screen {
+    min-height: 100dvh !important;
+  }
 }

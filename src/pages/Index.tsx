@@ -7,7 +7,7 @@ import { Services } from '@/components/Services';
 import { ProcessSteps } from '@/components/ProcessSteps';
 import { Testimonials } from '@/components/Testimonials';
 import { BackgroundEffects } from '@/components/BackgroundEffects';
-import { MarqueeText } from '@/components/MarqueeText';
+
 import { getOrganizationSchema, getWebsiteSchema } from '@/lib/schema';
 import '@/styles/animations.css';
 
@@ -51,10 +51,12 @@ const Index = () => {
       <Header />
       <main className="relative">
         <Hero />
-        <MarqueeText />
+        
         <Services />
+        
         <ProcessSteps />
         <Testimonials />
+        
       </main>
       <Footer />
     </div>

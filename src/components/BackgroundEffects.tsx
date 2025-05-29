@@ -10,52 +10,25 @@ export const BackgroundEffects = () => {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 -z-[1] overflow-hidden pointer-events-none bg-[#0d0b1a]">
-      {/* Horizontal Grid Lines */}
-      <div className="absolute inset-0">
-        {[...Array(25)].map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute w-full h-[1px] bg-white/20"
-            style={{
-              top: `${(i + 1) * 4}%`,
-              animation: `pulseOpacity ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+    <div className="fixed inset-0 -z-[1] overflow-hidden pointer-events-none bg-background">
+      {/* Enhanced Grid Pattern using new system */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60" />
 
-      {/* Vertical Grid Lines */}
-      <div className="absolute inset-0">
-        {[...Array(25)].map((_, i) => (
-          <div
-            key={`v-${i}`}
-            className="absolute h-full w-[1px] bg-white/20"
-            style={{
-              left: `${(i + 1) * 4}%`,
-              animation: `pulseOpacity ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Dynamic Color Overlays with Animation */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-accent-cyan/3 animate-pulse-slow" />
+      
+      <div className="absolute inset-0 bg-gradient-to-tr from-accent-pink/2 via-transparent to-primary/3" />
 
       {/* Subtle Vignette Effect */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.7) 100%)'
+          background: 'radial-gradient(circle at 50% 50%, transparent 0%, hsl(var(--background) / 0.8) 100%)'
         }}
       />
 
-      {/* Add the animation keyframes via style tag */}
-      <style>
-        {`
-          @keyframes pulseOpacity {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.3; }
-          }
-        `}
-      </style>
+      {/* Additional atmospheric layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" />
     </div>
   );
 }; 

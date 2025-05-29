@@ -47,7 +47,7 @@ const steps = [
 
 const ProcessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-[800px] bg-[#0f0f12] border border-white/10">
+    <DialogContent className="sm:max-w-[800px] bg-card border border-border text-foreground">
       <DialogHeader>
         <DialogTitle className="text-2xl font-bold">Our Road to Your Success</DialogTitle>
       </DialogHeader>
@@ -90,16 +90,15 @@ const ApproachCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="relative"
+    className="relative group"
   >
-    <div className="relative p-[1px] rounded-2xl overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-blue-500/20 to-primary/20 opacity-0 group-hover:opacity-100 rounded-2xl"></div>
-      <div className="absolute inset-[1px] bg-black rounded-xl"></div>
-      <div className="relative z-10 p-6 bg-[#0f0f12] rounded-xl">
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+    <div className="glass-card p-6 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+      <div className="relative z-10">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent-cyan/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
           {icon}
         </div>
-        <h3 className="text-xl font-semibold mb-3">{title}</h3>
+        <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
         <p className="text-foreground/70">{description}</p>
       </div>
     </div>
@@ -118,7 +117,7 @@ export const ProcessSteps = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm">
+          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full glass-card text-accent-cyan font-medium text-sm">
             Our Process
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

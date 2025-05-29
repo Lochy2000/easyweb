@@ -3,7 +3,7 @@ id: demystifying-seo-2025
 title: Demystifying SEO in 2025
 description: Is SEO still worth it in 2025? Here's what's changed, who should care, and how to build websites that perform in a world of AI search and evolving user behavior.
 category: SEO
-imageUrl: seo_wks2pf
+imageUrl: 20250529_1306_Lo-Fi_SEO_Animation_remix_01jwdyyes6e6y884wh18jrbave_fwmta7
 date: 2025-05-09
 author: EasyWeb Team
 tags: ["SEO", "Web Development", "AI"]

@@ -3,7 +3,7 @@ id: website-maintenance-matters
 title: Why Website Maintenance Matters in 2025
 description: Your website isn't a one-and-done project. Learn why regular website maintenance is essential for security, speed, and keeping your content fresh in 2025.
 category: Website Maintenance
-imageUrl: webmaintenance_aas7k1
+imageUrl: 20250529_1308_Lofi_Web_Maintenance_remix_01jwdz1zkce6y9ry4apdvbr7gb_nuwjcy
 date: 2025-05-10
 author: EasyWeb Team
 tags: ["Website Maintenance", "Web Security", "Performance", "SEO"]

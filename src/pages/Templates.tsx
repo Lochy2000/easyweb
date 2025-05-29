@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import TemplateGallery from '@/components/TemplateGallery';
 import Footer from '@/components/Footer';
+import { MarqueeText } from '@/components/MarqueeText';
 
 const Templates = () => {
   // Add scroll reveal effect
@@ -97,6 +98,7 @@ const Templates = () => {
           </div>
         </section>
         
+        <MarqueeText />
         <TemplateGallery />
       </main>
       <Footer />

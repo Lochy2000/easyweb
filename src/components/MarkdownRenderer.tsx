@@ -20,9 +20,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
           h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold mb-4 text-primary mt-8" {...props} />,
           h3: ({ node, ...props }) => <h3 className="text-xl font-semibold mb-3 mt-6" {...props} />,
           p: ({ node, ...props }) => <p className="mb-4 text-foreground/80 leading-relaxed" {...props} />,
-          ul: ({ node, ...props }) => <ul className="mb-4 list-disc list-inside pl-4" {...props} />,
-          ol: ({ node, ...props }) => <ol className="mb-4 list-decimal list-inside pl-4" {...props} />,
-          li: ({ node, ...props }) => <li className="mb-2" {...props} />,
+          ul: ({ node, ...props }) => <ul className="mb-4 list-disc list-inside pl-4 text-foreground/80" {...props} />,
+          ol: ({ node, ...props }) => <ol className="mb-4 list-decimal list-inside pl-4 text-foreground/80" {...props} />,
+          li: ({ node, ...props }) => <li className="mb-2 text-foreground/80" {...props} />,
           a: ({ node, ...props }) => (
             <a 
               className="text-primary hover:underline" 

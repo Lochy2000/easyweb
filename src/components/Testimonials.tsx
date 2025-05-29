@@ -21,30 +21,33 @@ const TestimonialCard = ({ name, role, company, url, image, content, delay = 0 }
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex flex-col h-full"
+    className="glass-card p-6 rounded-2xl flex flex-col h-full group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300"
   >
-    <div className="flex items-center gap-4 mb-6">
-      <Avatar className="w-12 h-12">
-        <AvatarImage src={image} alt={`${name} from ${company} - client testimonial`} width={48} height={48} loading="lazy" />
-        <AvatarFallback aria-label={`${name}'s initials`}>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-      </Avatar>
-      <div>
-        <h4 className="font-semibold">{name}</h4>
-        {url ? (
-          <a href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/70 hover:text-primary transition-colors">
-            {company} {role && `(${role})`}
-          </a>
-        ) : (
-          <p className="text-sm text-foreground/70">{company}{role && `, ${role}`}</p>
-        )}
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+    <div className="relative z-10 flex flex-col h-full">
+      <div className="flex items-center gap-4 mb-6">
+        <Avatar className="w-12 h-12">
+          <AvatarImage src={image} alt={`${name} from ${company} - client testimonial`} width={48} height={48} loading="lazy" />
+          <AvatarFallback aria-label={`${name}'s initials`} className="bg-primary/10 text-primary">{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+        </Avatar>
+        <div>
+          <h4 className="font-semibold text-foreground">{name}</h4>
+          {url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/70 hover:text-accent-cyan transition-colors">
+              {company} {role && `(${role})`}
+            </a>
+          ) : (
+            <p className="text-sm text-foreground/70">{company}{role && `, ${role}`}</p>
+          )}
+        </div>
       </div>
+      <div className="flex gap-1 mb-4">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-accent-cyan text-accent-cyan" />
+        ))}
+      </div>
+      <p className="text-foreground/80 leading-relaxed flex-grow">{content}</p>
     </div>
-    <div className="flex gap-1 mb-4">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-      ))}
-    </div>
-    <p className="text-foreground/80 leading-relaxed flex-grow">{content}</p>
   </motion.div>
 );
 
@@ -137,7 +140,7 @@ export const Testimonials = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm">
+          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full glass-card text-accent-cyan font-medium text-sm">
             Testimonials
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

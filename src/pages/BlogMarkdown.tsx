@@ -23,8 +23,6 @@ import { cn } from "@/lib/utils";
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import '@/components/TemplateResponsive.css';
 import { 
-  getAllBlogPosts, 
-  getBlogPostById, 
   formatBlogDate, 
   calculateReadingTime,
   type BlogFrontMatter,
@@ -79,7 +77,8 @@ const Sidebar = ({
     )}>
       <button
         onClick={onClose}
-        className="absolute top-28 -left-12 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0"
+        className="absolute top-28 -left-12 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 hover:bg-white/5 transition-colors"
+        aria-label="Close search"
       >
         <X className="w-5 h-5 text-foreground/70" />
       </button>
@@ -294,7 +293,7 @@ const BlogCard = ({ post, onClick }: { post: BlogFrontMatter; onClick: () => voi
   const navigate = useNavigate();
   
   const handlePreviewClick = async () => {
-    const fullPost = await getBlogPostById(post.id);
+    const fullPost = await loadMarkdownBlogPost(post.id);
     setPreviewPost(fullPost);
     setIsPreviewOpen(true);
   };
@@ -368,7 +367,16 @@ const BlogCard = ({ post, onClick }: { post: BlogFrontMatter; onClick: () => voi
                   content={previewPost.content.split('\n\n').slice(0, 3).join('\n\n')} 
                 />
                 <div className="text-center mt-6 pb-4">
-                  <p className="text-foreground/60">Continue reading to learn more...</p>
+                  <button
+                    onClick={() => {
+                      setIsPreviewOpen(false);
+                      navigate(`/blog/${previewPost.id}`);
+                    }}
+                    className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
+                  >
+                    Continue Reading
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -450,13 +458,13 @@ const BlogMarkdown = () => {
   const [posts, setPosts] = useState<BlogFrontMatter[]>([]);
   const [loading, setLoading] = useState(true);
   
-  // Initialize sidebar state from localStorage, default to true if viewing an article
+  // Initialize sidebar state from localStorage, default to false
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     const savedState = localStorage.getItem(SIDEBAR_STATE_KEY);
     if (savedState !== null) {
       return savedState === 'true';
     }
-    return !!postId; // Open by default if viewing an article
+    return false; // Always start closed by default
   });
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -473,74 +481,27 @@ const BlogMarkdown = () => {
     const loadData = async () => {
       setLoading(true);
       console.log('BlogMarkdown: Loading data...');
-      
       try {
-        // Primary approach: Load directly from markdown files
+        // Only use markdown files for blog posts
         console.log('BlogMarkdown: Loading from markdown files...');
         const markdownPosts = await loadMarkdownBlogPosts();
         console.log('BlogMarkdown: Loaded posts:', markdownPosts.map(p => p.id));
-        
-        if (markdownPosts.length > 0) {
-          console.log(`BlogMarkdown: Successfully loaded ${markdownPosts.length} posts from markdown`);
-          setPosts(markdownPosts);
-          
-          // If viewing a specific post
-          if (postId) {
-            console.log(`BlogMarkdown: Attempting to load post ${postId} from markdown`);
-            const markdownPost = await loadMarkdownBlogPost(postId);
-            console.log(`BlogMarkdown: Post load result:`, markdownPost ? "Success" : "Not found", postId);
-            
-            if (markdownPost) {
-              console.log(`BlogMarkdown: Successfully loaded post ${postId} from markdown`);
-              setPost(markdownPost);
-            } else {
-              console.log(`BlogMarkdown: Post ${postId} not found in markdown, falling back`);
-              // Fall back to original method for this specific post
-              const fallbackPost = await getBlogPostById(postId);
-              setPost(fallbackPost);
-            }
-          }
-        } else {
-          console.log('BlogMarkdown: No markdown posts found, falling back to original data');
-          // Fall back to original method
-          const allPosts = await getAllBlogPosts();
-          setPosts(allPosts);
-          
-          if (postId) {
-            const singlePost = await getBlogPostById(postId);
-            setPost(singlePost);
-          }
+        setPosts(markdownPosts);
+        if (postId) {
+          console.log(`BlogMarkdown: Attempting to load post ${postId} from markdown`);
+          const markdownPost = await loadMarkdownBlogPost(postId);
+          console.log(`BlogMarkdown: Post load result:`, markdownPost ? "Success" : "Not found", postId);
+          setPost(markdownPost || null);
         }
       } catch (error) {
         console.error('BlogMarkdown: Error loading blog data:', error);
-        // Final fallback - use original method
-        try {
-          console.log('BlogMarkdown: Using original blog data as fallback');
-          const allPosts = await getAllBlogPosts();
-          setPosts(allPosts);
-          
-          if (postId) {
-            const singlePost = await getBlogPostById(postId);
-            setPost(singlePost);
-          }
-        } catch (fallbackError) {
-          console.error('BlogMarkdown: Even fallback loading failed:', fallbackError);
-        }
       } finally {
         setLoading(false);
         console.log('BlogMarkdown: Loading complete');
       }
     };
-    
     loadData();
   }, [postId]);
-
-  // Open sidebar when navigating to an article
-  useEffect(() => {
-    if (postId && !isSidebarOpen) {
-      handleSidebarToggle(true);
-    }
-  }, [postId, isSidebarOpen]);
 
   if (loading) {
     return (
@@ -613,11 +574,12 @@ const BlogMarkdown = () => {
       <button
         onClick={() => handleSidebarToggle(true)}
         className={cn(
-          "fixed top-1/2 -translate-y-1/2 right-0 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 transition-opacity duration-300",
-          isSidebarOpen ? "opacity-0" : "opacity-100"
+          "fixed top-1/2 -translate-y-1/2 right-0 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/5",
+          isSidebarOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         )}
       >
-        <ChevronRight className="w-5 h-5 text-foreground/70" />
+        <Search className="w-4 h-4 text-foreground/70" />
+        <span className="text-sm text-foreground/70">Search</span>
       </button>
 
       <Sidebar

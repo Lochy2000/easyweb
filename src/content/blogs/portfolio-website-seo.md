@@ -3,7 +3,7 @@ id: portfolio-website-seo
 title: SEO for Portfolio Websites: What Actually Matters in 2025
 description: Learn how to make your portfolio site discoverable in search engines without bloating it with gimmicks. Clear advice for creatives, developers, and freelancers in 2025.
 category: SEO
-imageUrl: seo-whatactuallymatters_tvua10
+imageUrl: 69c52b67-76e0-4890-a60b-68c7bdaa6cf5
 date: 2025-05-10
 author: EasyWeb Team
 tags: ["SEO", "Portfolio Websites", "Web Design", "Freelancers"]

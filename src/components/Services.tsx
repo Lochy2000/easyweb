@@ -123,16 +123,15 @@ const ServiceCard = ({ service, delay = 0, onOpenModal }: ServiceCardProps) => (
     className="group flex relative h-full cursor-pointer"
     onClick={() => onOpenModal(service)}
   >
-    <div className="relative w-full p-[1px] rounded-2xl overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary opacity-0 sm:group-hover:opacity-100 group-hover:animate-rotation rounded-2xl sm:opacity-0 active:opacity-100"></div>
-      <div className="absolute inset-[1px] bg-black rounded-xl"></div>
-      <div className="relative z-10 h-full p-4 sm:p-6 bg-[#0f0f12] rounded-xl">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6 text-primary group-hover:scale-110 transition-transform">
+    <div className="glass-card relative w-full p-6 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="relative z-10 h-full">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent-cyan/20 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
           {service.icon}
         </div>
-        <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{service.title}</h3>
-        <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-3 sm:mb-4">{service.quickView}</p>
-        <div className="flex items-center text-primary sm:opacity-0 sm:group-hover:opacity-100 transition-opacity opacity-70">
+        <h3 className="text-xl font-semibold mb-3 text-gradient group-hover:text-gradient-cyan transition-all duration-300">{service.title}</h3>
+        <p className="text-base text-foreground/70 leading-relaxed mb-4">{service.quickView}</p>
+        <div className="flex items-center text-accent-cyan opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
           <span className="text-sm font-medium">Learn more</span>
           <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
         </div>
@@ -153,7 +152,7 @@ export const Services = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm">
+          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full glass-card text-accent-cyan font-medium text-sm">
             Our Services
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

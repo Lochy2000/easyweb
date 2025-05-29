@@ -10,6 +10,7 @@ import { PreloadAssets } from './components/PreloadAssets';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import CalendlyWidget from './components/CalendlyWidget';
+import MiniLoader from './components/MiniLoader';
 
 // Lazy load main pages
 const Index = React.lazy(() => import("./pages/Index"));
@@ -30,73 +31,66 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
+  const [showContent, setShowContent] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
-  // Handle route changes
   useEffect(() => {
-    if (!initialLoad) {
-      setIsLoading(true);
-    }
-  }, [location.pathname, initialLoad]);
-
-  const handleLoaded = () => {
-    setIsLoading(false);
-    setInitialLoad(false);
-  };
-
-  // Force loading screen to close after 4 seconds
-  useEffect(() => {
-    if (isLoading) {
-      const forceLoadTimeoutId = setTimeout(() => {
-        setIsLoading(false);
-        setInitialLoad(false);
-        console.log('Force-closing loading screen');
-        
-        // Clear force refresh flag on successful load
-        if (sessionStorage.getItem('refreshed')) {
-          // Wait a moment to ensure everything is visible
-          setTimeout(() => {
-            sessionStorage.removeItem('refreshed');
-          }, 1000);
-        }
-      }, 4000); // 4 seconds max to match LoadingScreen
-      
-      return () => clearTimeout(forceLoadTimeoutId);
-    }
-  }, [isLoading]);
+    setShowLoader(true);
+    setShowContent(false);
+    const loaderDuration = isHome ? 4500 : 1500;
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+      setShowContent(true); // Show content immediately as loader starts fading out
+    }, loaderDuration);
+    return () => clearTimeout(timer);
+  }, [location.pathname, isHome]);
 
   return (
     <>
       <PreloadAssets />
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen key={location.pathname} onLoaded={handleLoaded} />}
+        {showLoader && (
+          isHome ? (
+            <LoadingScreen key="home-loader" show={showLoader} />
+          ) : (
+            <motion.div
+              key="mini-loader"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <MiniLoader />
+            </motion.div>
+          )
+        )}
       </AnimatePresence>
-      <Suspense fallback={
-        <motion.div 
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <div className="cssloader">
-            <div className="triangle1"></div>
-            <div className="triangle2"></div>
-            <p className="loading-text">Loading...</p>
-          </div>
-        </motion.div>
-      }>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/templates" element={<Templates />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:postId" element={<Blog />} />
-          <Route path="/book" element={<BookNow />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      <AnimatePresence mode="wait">
+        {showContent && (
+          <motion.div
+            key="main-content"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+          >
+            <Suspense fallback={null}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/templates" element={<Templates />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:postId" element={<Blog />} />
+                <Route path="/book" element={<BookNow />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

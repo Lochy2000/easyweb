@@ -42,7 +42,15 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					cyan: {
+						DEFAULT: 'hsl(var(--accent-cyan))',
+						foreground: 'hsl(var(--accent-cyan-foreground))'
+					},
+					pink: {
+						DEFAULT: 'hsl(var(--accent-pink))',
+						foreground: 'hsl(var(--accent-pink-foreground))'
+					}
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -67,6 +75,10 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			backgroundImage: {
+				'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 			keyframes: {
 			'accordion-down': {

@@ -1,91 +1,147 @@
-import { motion } from "framer-motion";
-import { Button } from "./ui/button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { TextReveal } from "./TextReveal";
 import { Link } from "react-router-dom";
-
+import { LampContainer } from "./ui/lamp";
+import { GooeyText } from "./ui/gooey-text-morphing";
+import { SplashCursor } from "./ui/splash-cursor";
 
 const Hero = () => {
+  const [showSplash, setShowSplash] = useState(true);
+  const heroRef = useRef(null);
+  const { scrollY } = useScroll();
+  
+  // Parallax transforms
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  useEffect(() => {
+    // Handle splash cursor visibility
+    const handleScroll = () => {
+      const heroSection = heroRef.current;
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        setShowSplash(rect.bottom > 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <section className="relative pt-16 sm:pt-20 md:pt-24 min-h-[65vh] sm:min-h-[70vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 -z-10">
+    <section 
+      ref={heroRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Splash Cursor - only in hero section */}
+      {showSplash && <SplashCursor />}
+
+      {/* Digital Innovation Partners Badge - Above everything */}
+      <div className="absolute top-24 left-0 right-0 flex justify-center z-50">
         <motion.div
-          animate={{
-            rotate: 360,
-          }}
-          transition={{
-            duration: 50,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -top-[25%] -left-[25%] w-[150%] h-[150%] opacity-30"
-          style={{
-            background: "radial-gradient(circle at center, transparent 0%, transparent 20%, var(--primary) 21%, transparent 22%, transparent)",
-            backgroundSize: "5% 5%",
-          }}
-        />
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full glass-card">
+            <Sparkles className="w-4 h-4 text-accent-cyan" />
+            <span className="text-accent-cyan text-sm font-medium">Digital Innovation Partners</span>
+          </div>
+        </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
+      {/* Main Content with Lamp Effect */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        <LampContainer className="bg-transparent">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 mb-4 sm:mb-6 py-1.5 sm:py-2 px-3 sm:px-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
+            transition={{
+              delay: 0.8,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center"
+            style={{ opacity }}
           >
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-            <span className="text-primary text-sm sm:text-base font-medium">Web Development Solutions</span>
-          </motion.div>
+            {/* Main Heading with Gooey Text - Perfectly centered under lamp */}
+            <div className="mb-12 flex items-center justify-center">
+              <GooeyText
+                texts={["Innovate.", "Create.", "Build.", "Elevate."]}
+                morphTime={2}
+                cooldownTime={1.5}
+                className="text-center"
+                textClassName="text-gradient-pink"
+              />
+            </div>
 
-          {/* Main heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-4 sm:mb-6 animate-float"
-          >
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-tight tracking-tight">
-              <TextReveal text="we develop" delay={0.4} className="text-white" />
-              <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 animate-gradient" style={{ backgroundSize: "200% auto" }}>
-                <TextReveal text="your ideas" delay={0.6} />
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed"
-          >
-            Transform your vision into reality with our expert web development services.
-            We build beautiful, functional websites that help your business grow.
-          </motion.p>
-
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-            className="flex justify-center items-center mb-6 sm:mb-8"
-          >
-            <Link
-              to="/templates"
-              className="relative group px-6 py-3 min-w-[200px] rounded-[10px] font-medium text-white overflow-hidden text-center"
+            {/* Subtitle - Centered with proper spacing */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="text-lg md:text-xl lg:text-2xl text-foreground/90 mb-12 leading-relaxed max-w-4xl mx-auto text-center"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0ce39a] via-[#69007f] to-[#fc0987] transition-all duration-500 group-hover:blur-[15px] group-hover:opacity-80 opacity-0"></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0ce39a] via-[#69007f] to-[#fc0987]"></span>
-              <span className="absolute inset-[1px] rounded-[9px] bg-[#272727] transition-opacity duration-500 group-hover:opacity-70"></span>
-              <span className="relative z-10">View Templates</span>
-            </Link>
+              We craft bespoke digital experiences that drive growth and define the future of your brand.
+            </motion.p>
+
+            {/* CTA Buttons - Centered with proper spacing */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            >
+              <Link
+                to="/templates"
+                className="group relative px-8 py-4 min-w-[200px] rounded-xl font-semibold text-white overflow-hidden text-center transition-all duration-300 hover:scale-105"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
+                <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Explore Our Work
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+
+              <Link
+                to="/book"
+                className="px-8 py-4 rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105"
+              >
+                Start Your Project
+              </Link>
+            </motion.div>
           </motion.div>
-        </div>
-        
+        </LampContainer>
+      </div>
+
+      {/* Scroll Indicator - Bottom center, perfect positioning */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 2 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 border-2 border-accent-cyan/40 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1 h-3 bg-accent-cyan/60 rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent-cyan/5" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-accent-pink/5 via-transparent to-primary/5" />
       </div>
     </section>
   );

@@ -28,7 +28,7 @@ export async function getAllBlogPosts(): Promise<BlogFrontMatter[]> {
       title: "Understanding Website Hosting",
       description: "Learn the basics of web hosting and why it's crucial for your online presence.",
       category: "Getting Started",
-      imageUrl: generateCloudinaryUrl("hosting_iipawi", IMAGE_SIZES.blogHero),
+      imageUrl: generateCloudinaryUrl("20250529_1327_Vibrant_Web_Hosting_Illustration_remix_01jwe03z93fe2bpf701jcjbqck_ue32lo", IMAGE_SIZES.blogHero),
       date: "2025-01-15"
     },
     {
@@ -52,7 +52,7 @@ export async function getAllBlogPosts(): Promise<BlogFrontMatter[]> {
       title: "Custom vs. Template Websites",
       description: "Compare the benefits of custom-built websites with template-based solutions.",
       category: "Getting Started",
-      imageUrl: generateCloudinaryUrl("custom_vs_templates_omxx2a", IMAGE_SIZES.blogHero),
+      imageUrl: generateCloudinaryUrl("20250529_1326_Enhanced_Colors_Showcase_remix_01jwe02xnaf0xtzzgw3wq95s11_q79o2y", IMAGE_SIZES.blogHero),
       date: "2025-03-22"
     },
     {
@@ -60,15 +60,25 @@ export async function getAllBlogPosts(): Promise<BlogFrontMatter[]> {
       title: "Maintaining Your Website Post-Launch",
       description: "Essential tips for keeping your website secure, updated, and performing well.",
       category: "Best Practices",
-      imageUrl: generateCloudinaryUrl("webmaintenance_aas7k1", IMAGE_SIZES.blogHero),
+      imageUrl: generateCloudinaryUrl("20250529_1308_Lofi_Web_Maintenance_remix_01jwdz1zkce6y9ry4apdvbr7gb_nuwjcy", IMAGE_SIZES.blogHero),
       date: "2025-04-18"
+    },
+    {
+      id: "adding-a-bot-to-your-workflow",
+      title: "Adding a Bot to Your Workflow: A Smart Step or Shiny Distraction?",
+      description: "Discover how adding AI bots to your workflow can improve productivity and support—and when they might just get in the way.",
+      category: 'ai',
+      imageUrl: generateCloudinaryUrl("bb0e56ba-8363-47c3-b60b-4b2d9bb57488", IMAGE_SIZES.blogHero),
+      date: '2025-05-29',
+      author: "",
+      tags: []
     },
     {
       id: "demystifying-seo-2025",
       title: "Demystifying SEO in 2025",
       description: "Is SEO still worth it in 2025? Here's what's changed, who should care, and how to build websites that perform in a world of AI search.",
       category: "SEO",
-      imageUrl: generateCloudinaryUrl("seo_wks2pf", IMAGE_SIZES.blogHero),
+      imageUrl: generateCloudinaryUrl("20250529_1306_Lo-Fi_SEO_Animation_remix_01jwdyyes6e6y884wh18jrbave_fwmta7", IMAGE_SIZES.blogHero),
       date: "2025-05-09"
     }
   ];
@@ -94,7 +104,7 @@ export async function getBlogPostById(id: string): Promise<BlogPost | null> {
         title: "Demystifying SEO in 2025",
         description: "Is SEO still worth it in 2025? Here's what's changed, who should care, and how to build websites that perform in a world of AI search.",
         category: "SEO",
-        imageUrl: generateCloudinaryUrl("seo_wks2pf", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("20250529_1306_Lo-Fi_SEO_Animation_remix_01jwdyyes6e6y884wh18jrbave_fwmta7", IMAGE_SIZES.blogHero),
         date: "2025-05-09",
         author: "EasyWeb Team",
         tags: ["SEO", "Web Development", "AI"],
@@ -193,7 +203,7 @@ If you're building a site and want help with performance, structure, or visibili
         title: "Understanding Website Hosting",
         description: "Learn the basics of web hosting and why it's crucial for your online presence.",
         category: "Getting Started",
-        imageUrl: generateCloudinaryUrl("hosting_iipawi", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("20250529_1327_Vibrant_Web_Hosting_Illustration_remix_01jwe03z93fe2bpf701jcjbqck_ue32lo", IMAGE_SIZES.blogHero),
         date: "2025-01-15",
         content: `# Introduction
 
@@ -222,7 +232,7 @@ Choosing the right hosting solution is crucial for your website's success. We he
         title: "Why Website Maintenance Matters in 2025",
         description: "Your website isn't a one-and-done project. Learn why regular website maintenance is essential for security, speed, and keeping your content fresh in 2025.",
         category: "Website Maintenance",
-        imageUrl: generateCloudinaryUrl("webmaintenance_aas7k1", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("20250529_1308_Lofi_Web_Maintenance_remix_01jwdz1zkce6y9ry4apdvbr7gb_nuwjcy", IMAGE_SIZES.blogHero),
         date: "2025-05-10",
         author: "EasyWeb Team",
         tags: ["Website Maintenance", "Web Security", "Performance", "SEO"],
@@ -349,7 +359,7 @@ Our Richmond-based team specializes in comprehensive website care plans tailored
         title: "Why Mobile Responsiveness Still Defines Good Web Design in 2025",
         description: "Over 60% of web traffic now comes from mobile. This guide explains why mobile responsiveness is critical, how to design for it, and how to test your site the right way.",
         category: "Web Design",
-        imageUrl: generateCloudinaryUrl("mobile_friendly_zihxvu", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("20250529_1309_Animated_Lofi_Blog_Design_remix_01jwdz38tzfzbabnfbcbnaac82_r4jx8r", IMAGE_SIZES.blogHero),
         date: "2025-05-10",
         author: "EasyWeb Team",
         tags: ["Mobile Design", "Responsive Design", "Web Development", "UX"],
@@ -457,7 +467,7 @@ A mobile-responsive site is no longer a technical upgrade — it's the baseline 
         title: "SEO for Portfolio Websites: What Actually Matters in 2025",
         description: "Learn how to make your portfolio site discoverable in search engines without bloating it with gimmicks. Clear advice for creatives, developers, and freelancers in 2025.",
         category: "SEO",
-        imageUrl: generateCloudinaryUrl("seo-whatactuallymatters_tvua10", IMAGE_SIZES.blogHero),
+        imageUrl: generateCloudinaryUrl("69c52b67-76e0-4890-a60b-68c7bdaa6cf5", IMAGE_SIZES.blogHero),
         date: "2025-05-10",
         author: "EasyWeb Team",
         tags: ["SEO", "Portfolio Websites", "Web Design", "Freelancers"],
