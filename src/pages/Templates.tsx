@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -86,7 +85,7 @@ const Templates = () => {
       <Header />
       <main className="pt-32">
         {/* Hero Section for Templates */}
-        <section className="py-12 bg-gradient-to-br from-primary/20 to-secondary/20">
+        <section className="py-16 md:py-20 bg-gradient-to-br from-primary/20 to-secondary/20">
           <div className="container-custom text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               <span className="text-gradient">Browse Our Templates</span>

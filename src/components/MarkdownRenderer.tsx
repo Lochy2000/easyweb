@@ -43,7 +43,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
           ),
           img: ({ node, ...props }) => (
             <img 
-              className="rounded-lg mx-auto my-6" 
+              className={`blog-image rounded-lg mx-auto my-6 ${props.className || ''}`.trim()} 
               loading="lazy"
               {...props} 
               alt={props.alt || 'Blog image'} 

@@ -73,7 +73,8 @@ If you're not sure what your users really need, adding AI may just distract from
 | Scaling Product      | High         | 10+       | Go for It      |
 | Niche or Static Site | Low          | Varies    | Likely No Need |
 
-https://res.cloudinary.com/dpw2txejq/image/upload/v1748532998/87035e4e-c77b-414f-a011-53a4ab6e9bb2.png
+![AI Integration Decision Matrix](https://res.cloudinary.com/dpw2txejq/image/upload/v1748532998/87035e4e-c77b-414f-a011-53a4ab6e9bb2.png)
+
 ## Conclusion
 
 AI is a tool, not a magic fix. When used at the right time, it can dramatically enhance your website's value. But when added too early or without a clear goal, it becomes a drain on resources and focus. Think critically, test iteratively, and build with purpose.

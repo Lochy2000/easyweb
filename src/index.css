@@ -50,6 +50,39 @@
 
     --radius: 0.5rem;
   }
+
+  table {
+    @apply w-full border-collapse my-6 rounded-lg overflow-hidden bg-card text-card-foreground;
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+  }
+  th, td {
+    @apply px-4 py-2 border border-border;
+    border-color: hsl(var(--border));
+  }
+  th {
+    @apply bg-muted text-left font-semibold;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+  }
+  tr:nth-child(even) td {
+    @apply bg-muted/30;
+    background-color: hsl(var(--muted) / 0.3);
+  }
+
+  /* Blog image size constraint and right float */
+  img.blog-image {
+    max-width: 400px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    float: right;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  }
 }
 
 @layer base {

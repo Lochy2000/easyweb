@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useRef, useEffect, Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Toaster } from "@/components/ui/toaster";
@@ -31,45 +31,50 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
-  const [showLoader, setShowLoader] = useState(true);
-  const [showContent, setShowContent] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  // Track if cinematic loader has been shown (sessionStorage persists across reloads in the same tab)
+  const [hasSeenCinematic, setHasSeenCinematic] = useState(() => {
+    return sessionStorage.getItem('hasSeenCinematicLoader') === 'true';
+  });
+  const [showCinematic, setShowCinematic] = useState(isHome && !hasSeenCinematic);
 
   useEffect(() => {
-    setShowLoader(true);
-    setShowContent(false);
-    const loaderDuration = isHome ? 4500 : 1500;
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-      setShowContent(true); // Show content immediately as loader starts fading out
-    }, loaderDuration);
-    return () => clearTimeout(timer);
-  }, [location.pathname, isHome]);
+    if (isHome && !hasSeenCinematic) {
+      setShowCinematic(true);
+    } else {
+      setShowCinematic(false);
+    }
+  }, [isHome, hasSeenCinematic]);
+
+  // When the cinematic loader finishes, mark as seen
+  useEffect(() => {
+    if (showCinematic) {
+      // Cinematic loader duration (match your animation, e.g. 4500ms)
+      const timer = setTimeout(() => {
+        sessionStorage.setItem('hasSeenCinematicLoader', 'true');
+        setHasSeenCinematic(true);
+        setShowCinematic(false);
+      }, 4500);
+      return () => clearTimeout(timer);
+    }
+  }, [showCinematic]);
+
+  // Fallback loader logic
+  const suspenseFallback = isHome
+    ? (hasSeenCinematic ? <MiniLoader /> : <LoadingScreen show />)
+    : <MiniLoader />;
 
   return (
     <>
       <PreloadAssets />
       <AnimatePresence mode="wait">
-        {showLoader && (
-          isHome ? (
-            <LoadingScreen key="home-loader" show={showLoader} />
-          ) : (
-            <motion.div
-              key="mini-loader"
-              className="fixed inset-0 z-50 flex items-center justify-center bg-background"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <MiniLoader />
-            </motion.div>
-          )
+        {showCinematic && (
+          <LoadingScreen key="home-cinematic" show={true} />
         )}
       </AnimatePresence>
       <AnimatePresence mode="wait">
-        {showContent && (
+        {!showCinematic && (
           <motion.div
             key="main-content"
             initial={{ opacity: 0, y: 30 }}
@@ -77,7 +82,7 @@ function AppContent() {
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
-            <Suspense fallback={null}>
+            <Suspense fallback={suspenseFallback}>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/templates" element={<Templates />} />

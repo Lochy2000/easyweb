@@ -67,16 +67,15 @@ const Hero = () => {
             style={{ opacity }}
           >
             {/* Main Heading with Gooey Text - Perfectly centered under lamp */}
-            <div className="mb-12 flex items-center justify-center">
+            <div className="flex items-center justify-center mt-2 mb-24">
               <GooeyText
                 texts={["Innovate.", "Create.", "Build.", "Elevate."]}
                 morphTime={2}
                 cooldownTime={1.5}
                 className="text-center"
-                textClassName="text-gradient-pink"
+                textClassName="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gradient-pink"
               />
             </div>
-
             {/* Subtitle - Centered with proper spacing */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}

@@ -22,7 +22,7 @@ const getColor = (index: number) => {
 
 export const MarqueeText = () => {
   return (
-    <div className="relative -mt-16 sm:-mt-20 md:-mt-24 lg:-mt-28">
+    <div className="relative mt-0 sm:mt-2 md:mt-4 lg:mt-6">
       {/* First marquee - top (front) */}
       <div className="w-screen absolute left-[50%] right-[50%] -mx-[50vw] overflow-hidden h-[70px] sm:h-[85px] -rotate-[4deg] translate-y-0 opacity-95 z-20 backdrop-blur-sm bg-gradient-to-r from-black/40 via-black/30 to-black/40">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10"></div>

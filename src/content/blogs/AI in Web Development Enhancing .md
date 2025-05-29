@@ -75,7 +75,7 @@ Shopify merchants can activate AI modules to upsell or cross-sell based on user 
 
 ## Visual Aid: AI in Web Development Map
 
-https://res.cloudinary.com/dpw2txejq/image/upload/v1748533224/4f18e37a-bd8d-46c8-9c1a-580e698eaaf7.png
+![AI in Web Development Map](https://res.cloudinary.com/dpw2txejq/image/upload/v1748533224/4f18e37a-bd8d-46c8-9c1a-580e698eaaf7.png)
 
 1. **Personalization**
 
