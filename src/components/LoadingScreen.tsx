@@ -1,34 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GooeyText } from "./ui/gooey-text-morphing";
 import React from "react";
 
-const gradients = [
-  "from-primary to-accent-cyan",
-  "from-accent-cyan to-primary",
-  "from-primary/80 to-accent-cyan/80",
-  "from-accent-cyan/60 to-primary/60"
-];
+// Simple morphing text component
+const MorphingText = ({ 
+  texts, 
+  className = "",
+  duration = 800 
+}: { 
+  texts: string[]; 
+  className?: string;
+  duration?: number;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const circles = [
-  { size: 320, x: -120, y: -80, delay: 0 },
-  { size: 220, x: 180, y: -60, delay: 0.2 },
-  { size: 180, x: -60, y: 180, delay: 0.4 },
-  { size: 140, x: 120, y: 160, delay: 0.6 }
-];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % texts.length);
+    }, duration);
+    return () => clearInterval(timer);
+  }, [texts.length, duration]);
 
-const morphTime = 1.1;
-const cooldownTime = 0.7;
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          {texts[currentIndex]}
+        </motion.div>
+      </AnimatePresence>
+      {/* Invisible text for maintaining container size */}
+      <div className="invisible">
+        {texts.reduce((longest, current) => 
+          current.length > longest.length ? current : longest
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default function LoadingScreen({ show }: { show: boolean }) {
-  const [reveal, setReveal] = useState(false);
-  const [curtain, setCurtain] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
-  // Trigger curtain on exit
-  React.useEffect(() => {
+  useEffect(() => {
     if (!show) {
-      setCurtain(true);
-      setTimeout(() => setCurtain(false), 900); // slightly longer than exit
+      setIsExiting(true);
     }
   }, [show]);
 
@@ -37,94 +59,105 @@ export default function LoadingScreen({ show }: { show: boolean }) {
       {show && (
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center bg-background"
-          initial={{ opacity: 1, scale: 1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {/* Parallax Circles/Blobs with more movement and smooth exit */}
-          <AnimatePresence>
-            {show && (
-              <motion.div
-                className="absolute inset-0 overflow-hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
-              >
-                {circles.map((c, i) => (
-                  <motion.div
-                    key={i}
-                    className={`absolute rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} opacity-40 blur-2xl`}
-                    style={{ width: c.size, height: c.size, left: `calc(50% + ${c.x}px)`, top: `calc(50% + ${c.y}px)`, zIndex: 1 }}
-                    initial={{ scale: 0.7, opacity: 0.2, rotate: 0, filter: "blur(32px)" }}
-                    animate={{ 
-                      scale: [0.7, 1.1, 0.9, 1], 
-                      opacity: [0.2, 0.4, 0.3, 0.4],
-                      x: [0, 20 * (i % 2 === 0 ? 1 : -1), 0],
-                      y: [0, 20 * (i % 2 === 1 ? 1 : -1), 0],
-                      rotate: [0, 15, -10, 0],
-                      filter: ["blur(32px)", "blur(16px)", "blur(32px)"]
-                    }}
-                    exit={{ opacity: 0, scale: 1.2 }}
-                    transition={{ duration: 0.7, ease: "easeInOut", delay: 0.1 * i }}
-                  />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {/* Gooey Morphing Text - morphs through Welcome → to → easywebs, with smooth entrance/exit */}
-          <AnimatePresence>
-            {show && (
-              <motion.div
-                className="relative z-10 w-full flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.92, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.96, y: -20 }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
-              >
-                <GooeyText
-                  texts={["Welcome", "to", "easywebs"]}
-                  morphTime={morphTime}
-                  cooldownTime={cooldownTime}
-                  className="w-full flex items-center justify-center"
-                  textClassName="bg-gradient-to-r from-primary via-accent-cyan to-primary bg-clip-text text-transparent text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold px-4"
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {/* Curtain Reveal Animation on exit */}
-          <AnimatePresence>
-            {curtain && (
-              <>
+          {/* Background gradient orbs */}
+          <div className="absolute inset-0 overflow-hidden">
+            <motion.div
+              className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/30 to-accent-cyan/30 blur-3xl"
+              animate={{
+                x: [0, 50, 0],
+                y: [0, -30, 0],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-gradient-to-br from-accent-pink/20 to-primary/20 blur-3xl"
+              animate={{
+                x: [0, -40, 0],
+                y: [0, 20, 0],
+                scale: [1, 0.8, 1]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+          </div>
+
+          {/* Main content */}
+          <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+            {/* Logo and brand name */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-8 flex flex-col items-center gap-4"
+            >
+              <img 
+                src="/easyweb-logo.png" 
+                alt="Easywebs Logo" 
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+              />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-accent-cyan to-accent-pink bg-clip-text text-transparent">
+                easywebs
+              </h1>
+            </motion.div>
+
+            {/* Morphing text */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-12"
+            >
+              <MorphingText
+                texts={["Welcome", "to the future", "of web design"]}
+                className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground/80 h-12"
+                duration={1000}
+              />
+            </motion.div>
+
+            {/* Progress bar */}
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: "100%", opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="max-w-md mx-auto"
+            >
+              <div className="h-1 bg-muted rounded-full overflow-hidden">
                 <motion.div
-                  className="fixed top-0 left-0 h-full w-1/2 bg-background z-[100]"
-                  initial={{ scaleX: 1 }}
-                  animate={{ scaleX: 0 }}
-                  exit={{ scaleX: 0 }}
-                  style={{ originX: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className="h-full bg-gradient-to-r from-primary via-accent-cyan to-accent-pink rounded-full"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
                 />
-                <motion.div
-                  className="fixed top-0 right-0 h-full w-1/2 bg-background z-[100]"
-                  initial={{ scaleX: 1 }}
-                  animate={{ scaleX: 0 }}
-                  exit={{ scaleX: 0 }}
-                  style={{ originX: 0 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                />
-              </>
-            )}
-          </AnimatePresence>
-          {/* Wipe up reveal mask on exit (kept for fallback) */}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Exit animation overlay */}
           <AnimatePresence>
-            {!show && !curtain && (
+            {isExiting && (
               <motion.div
-                className="absolute inset-0 z-50 bg-background"
-                initial={{ scaleY: 0, opacity: 0 }}
-                animate={{ scaleY: 1, opacity: 1 }}
-                exit={{ scaleY: 1.2, opacity: 0 }}
-                style={{ originY: 1 }}
+                className="absolute inset-0 bg-background z-20"
+                initial={{ clipPath: "circle(0% at 50% 50%)" }}
+                animate={{ clipPath: "circle(150% at 50% 50%)" }}
+                exit={{ clipPath: "circle(150% at 50% 50%)" }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
               />
             )}

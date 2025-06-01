@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
-import { Globe, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
@@ -11,31 +11,30 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 20);
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Reset mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [location]);
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
+  const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <RouterNavLink
+      to={to}
+      className={({ isActive }) =>
+        cn(
+          "text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium relative py-2",
+          isActive && "text-foreground after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent-cyan after:rounded-full"
+        )
+      }
+    >
+      {children}
+    </RouterNavLink>
+  );
 
   return (
     <header 
@@ -45,31 +44,23 @@ const Header = () => {
       )}
     >
       <div className="container-custom flex items-center justify-between relative max-w-[1200px] px-4 sm:px-6 lg:px-8 mx-auto">
-        {/* Logo - Centered for balance */}
+        {/* Logo - Updated to use PNG logo */}
         <Link 
           to="/" 
-          className="text-2xl font-bold text-foreground flex items-center gap-2 group ml-0 lg:ml-1"
-          style={{ fontFamily: "'Exo 2', sans-serif" }}
+          className="flex items-center gap-2 group ml-0 lg:ml-1 hover:scale-105 transition-transform duration-300"
         >
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
-            <Globe className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
-          </div>
-          <div className="flex items-center">
-            <span 
-              className="text-[#8b5cf6] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#8b5cf6] group-hover:via-[#d946ef] group-hover:to-[#8b5cf6] group-hover:bg-[length:200%_auto] group-hover:animate-gradient-x" 
-              style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 800 }}
-            >
-              easy
-            </span>
-            <span 
-              className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#8b5cf6] group-hover:via-[#d946ef] group-hover:to-[#8b5cf6] group-hover:bg-[length:200%_auto] group-hover:animate-gradient-x" 
-              style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 800 }}
-            >
-              web
-            </span>
-          </div>
+          <img 
+            src="/easyweb-logo.png" 
+            alt="Easywebs Logo" 
+            className="h-8 sm:h-10 w-auto object-contain group-hover:brightness-110 transition-all duration-300"
+          />
+          <span 
+            className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-accent-cyan group-hover:to-primary group-hover:bg-[length:200%_auto] group-hover:animate-gradient-x" 
+            style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 800 }}
+          >
+            easywebs
+          </span>
         </Link>
-
         {/* Desktop Navigation */}
         <nav key={location.pathname} className="hidden md:flex items-center md:gap-6 lg:gap-8">
           <NavLink to="/templates">Templates</NavLink>
@@ -80,111 +71,67 @@ const Header = () => {
               variant="3d"
               className="mr-0 lg:mr-1"
             >
-              Book Consultation
+              <span className="text-sm font-semibold">BOOK CONSULTATION</span>
             </Button>
           </Link>
         </nav>
 
-        {/* Mobile Menu Button with Text Label */}
-        <div className="md:hidden flex items-center gap-2">
-          <span className="text-sm font-medium text-white">Menu</span>
-          <button 
-            className="flex flex-col justify-center items-center w-10 h-10 gap-1.5 p-2 z-50 relative bg-primary/20 hover:bg-primary/30 rounded-md border border-primary/30 transition-colors duration-200 mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {/* Icon fallback that shows if spans are invisible */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {isMobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
-            </div>
-            
-            {/* Original hamburger spans */}
-            <span className={cn(
-              "w-6 h-0.5 bg-white transition-all duration-300 absolute z-10 menu-bar", 
-              isMobileMenuOpen ? "transform rotate-45" : "transform translate-y-[-4px]"
-            )}></span>
-            <span className={cn(
-              "w-6 h-0.5 bg-white transition-all duration-300 z-10 menu-bar",
-              isMobileMenuOpen && "opacity-0 transform scale-0"
-            )}></span>
-            <span className={cn(
-              "w-6 h-0.5 bg-white transition-all duration-300 absolute z-10 menu-bar",
-              isMobileMenuOpen ? "transform -rotate-45" : "transform translate-y-[4px]"
-            )}></span>
-          </button>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg mobile-menu-button transition-colors duration-200 p-2"
+          aria-label="Toggle mobile menu"
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5 menu-bar" />
+          ) : (
+            <Menu className="w-5 h-5 menu-bar" />
+          )}
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      <div 
-        className={cn(
-          "md:hidden fixed inset-x-0 top-[72px] bottom-auto max-h-[calc(100vh-80px)] overflow-y-auto bg-background backdrop-blur-lg transform transition-all duration-300 ease-in-out z-40 border-t border-white/10 shadow-xl",
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible translate-y-[-10px]"
-        )}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setIsMobileMenuOpen(false);
-          }
-        }}
-      >
-        <nav className="flex flex-col divide-y divide-white/10">
-          <MobileNavLink to="/templates" onClick={() => setIsMobileMenuOpen(false)}>Templates</MobileNavLink>
-          <MobileNavLink to="/blog" onClick={() => setIsMobileMenuOpen(false)}>Resources</MobileNavLink>
-          <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</MobileNavLink>
-          <div className="py-4 px-2">
-            <Link to="/book">
-              <Button 
-                className="w-full"
-                variant="3d"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Book Consultation
-              </Button>
-            </Link>
-          </div>
+      <div className={cn(
+        "md:hidden transition-all duration-300 overflow-hidden bg-background/95 backdrop-blur-md border-b border-white/10",
+        isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+      )}>
+        <nav className="container-custom px-4 sm:px-6 lg:px-8 mx-auto py-4 space-y-4">
+          <Link 
+            to="/templates" 
+            className="block py-2 text-foreground/80 hover:text-foreground transition-colors font-medium"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Templates
+          </Link>
+          <Link 
+            to="/blog" 
+            className="block py-2 text-foreground/80 hover:text-foreground transition-colors font-medium"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Resources
+          </Link>
+          <Link 
+            to="/about" 
+            className="block py-2 text-foreground/80 hover:text-foreground transition-colors font-medium"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            About
+          </Link>
+          <Link 
+            to="/book" 
+            className="block py-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <Button 
+              variant="3d"
+              className="w-full justify-center"
+            >
+              <span className="text-sm font-semibold">BOOK CONSULTATION</span>
+            </Button>
+          </Link>
         </nav>
       </div>
     </header>
-  );
-};
-
-interface NavLinkProps {
-  href?: string;
-  to?: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-}
-
-const NavLink = ({ href, to, children, ...props }: NavLinkProps) => {
-  if (to) {
-    return <RouterNavLink to={to} className={({ isActive }: any) => cn("text-foreground/70 hover:text-foreground transition-colors font-medium", isActive && "text-primary")} {...props}>{children}</RouterNavLink>;
-  } 
-  return <a href={href} className="text-foreground/70 hover:text-foreground transition-colors font-medium" {...props}>{children}</a>;
-};
-
-const MobileNavLink = ({ href, to, children, onClick }: NavLinkProps) => {
-  if (to) {
-    return (
-      <Link 
-        to={to} 
-        className="text-white text-lg font-medium py-3 px-4 flex items-center hover:bg-white/5 transition-colors"
-        onClick={onClick}
-      >
-        {children}
-      </Link>
-    );
-  } 
-  
-  return (
-    <a 
-      href={href} 
-      className="text-white text-lg font-medium py-3 px-4 flex items-center hover:bg-white/5 transition-colors"
-      onClick={onClick}
-    >
-      {children}
-    </a>
   );
 };
 

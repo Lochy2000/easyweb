@@ -10,7 +10,7 @@ export const getOrganizationSchema = () => {
     '@type': 'WebDesignCompany',
     name: 'Easywebs',
     url: 'https://www.easywebs.uk',
-    logo: 'https://www.easywebs.uk/logo.png',
+    logo: 'https://www.easywebs.uk/easyweb-logo.png',
     description: 'A modern web design and development studio based in Richmond, UK, specializing in high-performance websites for creators, small businesses, and startups.',
     address: {
       '@type': 'PostalAddress',
@@ -71,7 +71,7 @@ export const getBlogPostSchema = (post: {
       name: 'Easywebs',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.easywebs.uk/logo.png'
+        url: 'https://www.easywebs.uk/easyweb-logo.png'
       }
     },
     mainEntityOfPage: {

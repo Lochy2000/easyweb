@@ -386,6 +386,75 @@
     backdrop-filter: blur(8px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
+  
+  /* Hero section mobile fixes */
+  .hero-mobile-fix {
+    min-height: 100dvh;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Responsive hero adjustments */
+@media (max-width: 768px) {
+  .hero-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .lamp-container-mobile {
+    scale: 0.8;
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 640px) {
+  html, body, #root, .min-h-screen {
+    min-height: 100dvh !important;
+  }
+  
+  .hero-mobile-spacing {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Responsive text scaling utilities */
+.text-responsive-sm {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.text-responsive-base {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1.125rem, 4vw, 1.5rem);
+}
+
+.text-responsive-xl {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.text-responsive-2xl {
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.text-responsive-3xl {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+
+/* Responsive spacing utilities */
+.spacing-responsive-sm {
+  margin: clamp(0.5rem, 2vw, 1rem);
+}
+
+.spacing-responsive-md {
+  margin: clamp(1rem, 3vw, 2rem);
+}
+
+.spacing-responsive-lg {
+  margin: clamp(2rem, 5vw, 4rem);
 }
 
 /* Typing animation for loading screen */
