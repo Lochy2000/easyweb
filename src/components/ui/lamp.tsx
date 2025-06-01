@@ -88,8 +88,8 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-32 sm:h-40 md:h-44 w-full -translate-y-[8rem] sm:-translate-y-[10rem] md:-translate-y-[12.5rem] bg-background"></div>
       </div>
 
-      {/* Content container - Even closer to lamp light */}
-      <div className="relative z-50 flex -translate-y-40 sm:-translate-y-48 md:-translate-y-52 lg:-translate-y-56 flex-col items-center px-4 sm:px-6 lg:px-5 w-full">
+      {/* Content container - Logo positioned very close to lamp */}
+      <div className="relative z-50 flex -translate-y-48 sm:-translate-y-56 md:-translate-y-60 lg:-translate-y-64 flex-col items-center px-4 sm:px-6 lg:px-5 w-full">
         {children}
       </div>
     </div>

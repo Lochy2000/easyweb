@@ -122,9 +122,9 @@ export default function LoadingScreen({ show }: { show: boolean }) {
               className="mb-12"
             >
               <MorphingText
-                texts={["Welcome", "to the future", "of web design"]}
+                texts={["Web Agency", "We Create", "Digital Solutions"]}
                 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground/80 h-12"
-                duration={1000}
+                duration={1500}
               />
             </motion.div>
 

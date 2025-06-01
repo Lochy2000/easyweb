@@ -51,6 +51,7 @@ const Hero = () => {
           </div>
         </motion.div>
       </div>
+
       {/* Main Content with Lamp Effect */}
       <div className="relative w-full h-full flex items-center justify-center">
         <LampContainer className="bg-transparent">
@@ -65,9 +66,35 @@ const Hero = () => {
             className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full"
             style={{ opacity }}
           >
+            {/* Logo emerging from lamp with subtle flicker */}
+            <motion.div
+              className="flex items-center justify-center mb-8 sm:mb-10 md:mb-12 lg:mb-16"
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                delay: 0.9,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+            >
+              <motion.img 
+                src="/easyweb-logo.png" 
+                alt="Easywebs Logo" 
+                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
+                animate={{ 
+                  opacity: [0.7, 1, 0.8, 1],
+                  scale: [0.98, 1, 0.99, 1]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
             {/* Main Heading with Gooey Text - With proper entrance animation */}
             <motion.div 
-              className="flex items-center justify-center mt-0 mb-6 sm:mb-8 md:mb-10 lg:mb-12 w-full"
+              className="flex items-center justify-center mt-0 mb-8 sm:mb-10 md:mb-12 lg:mb-16 w-full"
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
@@ -94,6 +121,7 @@ const Hero = () => {
             >
               We craft bespoke digital experiences that drive growth and define the future of your brand.
             </motion.p>
+
             {/* CTA Buttons - Responsive layout and sizing */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
