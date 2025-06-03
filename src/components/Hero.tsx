@@ -33,28 +33,39 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-0"
+      className="relative min-h-screen flex flex-col pt-16 sm:pt-20 hero-section"
     >
       {/* Splash Cursor - only in hero section */}
       {showSplash && <SplashCursor />}
 
-      {/* Digital Innovation Partners Badge - Responsive positioning */}
-      <div className="absolute top-20 sm:top-24 left-0 right-0 flex justify-center z-50 px-4">
+      {/* Digital Innovation Partners Badge - Positioned OUTSIDE lamp container */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: '80px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 1000,
+          width: 'fit-content'
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 py-2 px-3 sm:px-4 rounded-full glass-card">
+          <div className="inline-flex items-center gap-2 py-2 px-3 sm:px-4 rounded-full glass-card-enhanced">
             <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-accent-cyan" />
-            <span className="text-accent-cyan text-sm sm:text-base md:text-lg font-medium">Digital Innovation Partners</span>
+            <span className="text-accent-cyan text-sm sm:text-base font-medium">Digital Innovation Partners</span>
           </div>
         </motion.div>
       </div>
 
-      {/* Main Content with Lamp Effect */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      {/* Main Content Container with proper lamp integration */}
+      <div className="relative flex-1 flex flex-col">
         <LampContainer className="bg-transparent">
+
+          {/* Main content positioned properly under the lamp light */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,12 +74,12 @@ const Hero = () => {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full"
+            className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full hero-content-spacing"
             style={{ opacity }}
           >
             {/* Logo emerging from lamp with subtle flicker */}
             <motion.div
-              className="flex items-center justify-center mb-8 sm:mb-10 md:mb-12 lg:mb-16"
+              className="flex items-center justify-center mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-12"
               initial={{ opacity: 0, y: 20, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
@@ -80,7 +91,7 @@ const Hero = () => {
               <motion.img 
                 src="/easyweb-logo.png" 
                 alt="Easywebs Logo" 
-                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
+                className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
                 animate={{ 
                   opacity: [0.7, 1, 0.8, 1],
                   scale: [0.98, 1, 0.99, 1]
@@ -92,9 +103,10 @@ const Hero = () => {
                 }}
               />
             </motion.div>
-            {/* Main Heading with Gooey Text - With proper entrance animation */}
+
+            {/* Main Heading with Gooey Text - Fixed gradient color */}
             <motion.div 
-              className="flex items-center justify-center mt-0 mb-8 sm:mb-10 md:mb-12 lg:mb-16 w-full"
+              className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
@@ -108,26 +120,26 @@ const Hero = () => {
                 morphTime={2}
                 cooldownTime={1.5}
                 className="text-center w-full"
-                textClassName="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient-pink leading-tight"
+                textClassName="hero-title-responsive font-bold text-gradient-cyan-fixed leading-tight"
               />
             </motion.div>
             
-            {/* Subtitle - Reduced spacing for better flow */}
+            {/* Subtitle with proper color */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="text-base sm:text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-6 sm:mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto text-center px-2"
+              className="hero-subtitle-responsive text-foreground/90 leading-relaxed max-w-4xl mx-auto text-center px-2"
             >
               We craft bespoke digital experiences that drive growth and define the future of your brand.
             </motion.p>
 
-            {/* CTA Buttons - Responsive layout and sizing */}
+            {/* CTA Buttons with improved spacing */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none hero-buttons"
             >
               <Link
                 to="/templates"
@@ -136,7 +148,7 @@ const Hero = () => {
                 <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
                 <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
                 <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
-                <span className="relative z-10 flex items-center justify-center gap-2 text-base sm:text-lg md:text-xl">
+                <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
                   Explore Our Work
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -144,7 +156,7 @@ const Hero = () => {
 
               <Link
                 to="/book"
-                className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-base sm:text-lg md:text-xl"
+                className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-sm sm:text-base md:text-lg"
               >
                 Start Your Project
               </Link>
@@ -152,12 +164,13 @@ const Hero = () => {
           </motion.div>
         </LampContainer>
       </div>
-      {/* Scroll Indicator - Responsive positioning and sizing */}
+
+      {/* Scroll Indicator - Positioned at bottom */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 2 }}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-40"
+        className="scroll-indicator-fix"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -44,18 +44,13 @@ const Header = () => {
       )}
     >
       <div className="container-custom flex items-center justify-between relative max-w-[1200px] px-4 sm:px-6 lg:px-8 mx-auto">
-        {/* Logo - Updated to use PNG logo */}
+        {/* Text Logo - Subtle animated gradient */}
         <Link 
           to="/" 
-          className="flex items-center gap-2 group ml-0 lg:ml-1 hover:scale-105 transition-transform duration-300"
+          className="group ml-0 lg:ml-1 hover:scale-105 transition-transform duration-300"
         >
-          <img 
-            src="/easyweb-logo.png" 
-            alt="Easywebs Logo" 
-            className="h-8 sm:h-10 w-auto object-contain group-hover:brightness-110 transition-all duration-300"
-          />
           <span 
-            className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-accent-cyan group-hover:to-primary group-hover:bg-[length:200%_auto] group-hover:animate-gradient-x" 
+            className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground/90 via-accent-cyan/70 to-foreground/90 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]" 
             style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 800 }}
           >
             easywebs
