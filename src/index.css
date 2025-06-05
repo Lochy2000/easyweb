@@ -1081,19 +1081,33 @@ html, body, #root {
     min-height: 100vh !important;
   }
   
-  /* Fix the lamp positioning container - move it up */
+  /* CRITICAL: Fix the lamp positioning container - neutralize the problematic translate */
   .laptop-hero-fix .relative.flex.w-full.flex-1.scale-y-125.items-center.justify-center.isolate {
-    transform: scale(1) translateY(-2rem) !important;
+    transform: scale(1, 1.125) translateY(0rem) !important;
   }
   
   /* Adjust the badge positioning for laptops */
   .laptop-hero-fix .digital-badge-fixed {
-    top: 8rem !important;
+    top: 6rem !important;
     transform: translateX(-50%) !important;
   }
   
-  /* Fix the content positioning inside lamp */
+  /* Fix the content positioning inside lamp - bring it back to center */
   .laptop-hero-fix .relative.z-50.flex.lamp-container-content {
+    transform: translateY(0rem) !important;
+    margin-top: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+
+/* Fix for mobile screens - remove excessive transforms */
+@media (max-width: 768px) {
+  .hero-section .relative.flex.w-full.flex-1.scale-y-125.items-center.justify-center.isolate {
+    transform: scale(1, 1.125) translateY(2rem) !important;
+  }
+  
+  .hero-section .relative.z-50.flex.lamp-container-content {
     transform: translateY(-2rem) !important;
   }
 }
