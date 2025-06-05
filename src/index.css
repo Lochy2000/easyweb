@@ -1094,9 +1094,20 @@ html, body, #root {
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1280px) {
+/* LAPTOP SPECIFIC FIXES - Target common laptop resolutions */
+@media (min-width: 1025px) and (max-width: 1440px) {
   .digital-badge-responsive {
     top: 110px !important;
+  }
+  
+  /* Force lamp closer to content on laptops */
+  .lamp-container-content {
+    transform: translateY(-4rem) !important;
+  }
+  
+  /* Adjust lamp positioning for laptops */
+  .relative.flex.w-full.flex-1.scale-y-125.items-center.justify-center.isolate {
+    transform: scale(1, 1.125) translateY(8rem) !important;
   }
 }
 

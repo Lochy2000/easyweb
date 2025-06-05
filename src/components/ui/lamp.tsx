@@ -17,7 +17,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-8 sm:translate-y-12 md:translate-y-16 lg:translate-y-20 xl:translate-y-24">
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-8 sm:translate-y-12 md:translate-y-16 lg:translate-y-32 xl:translate-y-24">
         {/* Left Lamp Beam - Responsive */}
         <motion.div
           initial={{ opacity: 0.5, width: "8rem" }}
