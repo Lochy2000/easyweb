@@ -1062,3 +1062,38 @@ html, body, #root {
 .animate-gradient-x {
   animation: gradient-x 4s ease infinite;
 }
+
+/* ========================================
+   LAPTOP SCREEN POSITIONING FIXES ONLY
+   ======================================== */
+
+/* Target laptop screens specifically (1024px - 1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  
+  /* Fix the main hero section */
+  .laptop-hero-fix.hero-section {
+    min-height: 100vh !important;
+    padding-top: 0px !important;
+  }
+  
+  /* Fix the LampContainer min-height */
+  .laptop-hero-fix .relative.flex.min-h-screen.flex-col.items-center.justify-center {
+    min-height: 100vh !important;
+  }
+  
+  /* Fix the lamp positioning container - move it up */
+  .laptop-hero-fix .relative.flex.w-full.flex-1.scale-y-125.items-center.justify-center.isolate {
+    transform: scale(1) translateY(-2rem) !important;
+  }
+  
+  /* Adjust the badge positioning for laptops */
+  .laptop-hero-fix .digital-badge-fixed {
+    top: 8rem !important;
+    transform: translateX(-50%) !important;
+  }
+  
+  /* Fix the content positioning inside lamp */
+  .laptop-hero-fix .relative.z-50.flex.lamp-container-content {
+    transform: translateY(-2rem) !important;
+  }
+}

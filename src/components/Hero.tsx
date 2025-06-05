@@ -33,13 +33,14 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex flex-col pt-16 sm:pt-20 hero-section"
+      className="relative min-h-screen flex flex-col pt-16 sm:pt-20 hero-section laptop-hero-fix"
     >
       {/* Splash Cursor - only in hero section */}
       {showSplash && <SplashCursor />}
 
-      {/* Digital Innovation Partners Badge - Positioned OUTSIDE lamp container */}
+      {/* Digital Innovation Partners Badge - Fixed positioning for all screens */}
       <div 
+        className="digital-badge-fixed"
         style={{
           position: 'absolute',
           top: '80px',
