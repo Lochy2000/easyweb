@@ -17,7 +17,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-12 sm:translate-y-16 md:translate-y-20">
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 translate-y-8 sm:translate-y-12 md:translate-y-16 lg:translate-y-20 xl:translate-y-24">
         {/* Left Lamp Beam - Responsive */}
         <motion.div
           initial={{ opacity: 0.5, width: "8rem" }}
@@ -53,6 +53,7 @@ export const LampContainer = ({
           <div className="absolute w-20 sm:w-32 md:w-40 h-[100%] right-0 bg-background bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
           <div className="absolute w-[100%] right-0 bg-background h-20 sm:h-32 md:h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
         </motion.div>
+        
         {/* Background blur elements - Responsive */}
         <div className="absolute top-1/2 h-32 sm:h-40 md:h-48 w-full translate-y-6 sm:translate-y-8 md:translate-y-12 scale-x-150 bg-background blur-2xl"></div>
         <div className="absolute top-1/2 z-50 h-32 sm:h-40 md:h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
@@ -88,8 +89,35 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-32 sm:h-40 md:h-44 w-full -translate-y-[8rem] sm:-translate-y-[10rem] md:-translate-y-[12.5rem] bg-background"></div>
       </div>
 
-      {/* Content container - IMPROVED POSITIONING */}
-      <div className="relative z-50 flex lamp-container-content flex-col items-center px-4 sm:px-6 lg:px-5 w-full">
+      {/* Content container - RESPONSIVE POSITIONING */}
+      <div className="relative z-50 flex flex-col items-center px-4 sm:px-6 lg:px-5 w-full lamp-container-content" style={{ transform: 'translateY(-8rem)' }}>
+        <style jsx>{`
+          @media (max-width: 640px) {
+            .lamp-container-content {
+              transform: translateY(-6rem) !important;
+            }
+          }
+          @media (min-width: 641px) and (max-width: 768px) {
+            .lamp-container-content {
+              transform: translateY(-8rem) !important;
+            }
+          }
+          @media (min-width: 769px) and (max-width: 1024px) {
+            .lamp-container-content {
+              transform: translateY(-10rem) !important;
+            }
+          }
+          @media (min-width: 1025px) and (max-width: 1280px) {
+            .lamp-container-content {
+              transform: translateY(-12rem) !important;
+            }
+          }
+          @media (min-width: 1281px) {
+            .lamp-container-content {
+              transform: translateY(-14rem) !important;
+            }
+          }
+        `}</style>
         {children}
       </div>
     </div>

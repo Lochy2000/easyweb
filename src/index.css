@@ -1062,3 +1062,46 @@ html, body, #root {
 .animate-gradient-x {
   animation: gradient-x 4s ease infinite;
 }
+
+/* Responsive hero section fixes for all screen sizes */
+@media (max-width: 640px) {
+  .digital-badge-responsive {
+    top: 80px !important;
+  }
+  
+  .hero-section .text-4xl {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .hero-section .text-lg {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .digital-badge-responsive {
+    top: 90px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .digital-badge-responsive {
+    top: 100px !important;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .digital-badge-responsive {
+    top: 110px !important;
+  }
+}
+
+@media (min-width: 1281px) {
+  .digital-badge-responsive {
+    top: 120px !important;
+  }
+}

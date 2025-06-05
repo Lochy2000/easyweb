@@ -33,19 +33,20 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex flex-col hero-section"
+      className="relative min-h-screen flex flex-col pt-16 sm:pt-20 hero-section"
     >
       {/* Splash Cursor - only in hero section */}
       {showSplash && <SplashCursor />}
 
-      {/* Digital Innovation Partners Badge - Fixed positioning */}
+      {/* Digital Innovation Partners Badge - RESPONSIVE positioning behind the lamp */}
       <div 
+        className="digital-badge-responsive"
         style={{
           position: 'absolute',
-          top: '80px',
+          top: '100px', // Responsive via CSS
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 1000,
+          zIndex: 10,
           width: 'fit-content'
         }}
       >
@@ -61,33 +62,12 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* ALL CONTENT - Position exactly like the badge for consistent behavior */}
-      <div 
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 100,
-          width: '100%',
-          maxWidth: '1200px',
-          padding: '0 1rem'
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.8,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="text-center flex flex-col items-center justify-center w-full"
-          style={{ opacity }}
-        >
-          {/* Logo */}
+      {/* Main Content Container with lamp spotlight effect */}
+      <div className="relative flex-1 flex flex-col">
+        <LampContainer className="bg-transparent">
+          {/* Logo positioned in the bright spotlight area */}
           <motion.div
-            className="flex items-center justify-center mb-8 sm:mb-10 md:mb-12"
+            className="flex items-center justify-center mb-8 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -112,74 +92,80 @@ const Hero = () => {
             />
           </motion.div>
 
-          {/* Main Heading with Gooey Text */}
-          <motion.div 
-            className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+          {/* Content positioned below the spotlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: 1.0,
+              delay: 0.8,
               duration: 0.8,
               ease: "easeInOut",
             }}
+            className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full"
+            style={{ opacity }}
           >
-            <GooeyText
-              texts={["Innovate.", "Create.", "Build.", "Elevate."]}
-              morphTime={2}
-              cooldownTime={1.5}
-              className="text-center w-full"
-              textClassName="hero-title-responsive font-bold text-gradient-cyan-fixed leading-tight"
-            />
-          </motion.div>
-          
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="hero-subtitle-responsive text-foreground/90 leading-relaxed max-w-4xl mx-auto text-center px-2 mb-8 sm:mb-10 md:mb-12"
-          >
-            We craft bespoke digital experiences that drive growth and define the future of your brand.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none"
-          >
-            <Link
-              to="/templates"
-              className="group relative px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto sm:min-w-[200px] rounded-xl font-semibold text-white overflow-hidden text-center transition-all duration-300 hover:scale-105"
+            {/* Main Heading with Gooey Text */}
+            <motion.div 
+              className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                delay: 1.0,
+                duration: 0.8,
+                ease: "easeInOut",
+              }}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
-              <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
-              <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
-                Explore Our Work
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Link>
-
-            <Link
-              to="/book"
-              className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-sm sm:text-base md:text-lg"
+              <GooeyText
+                texts={["Innovate.", "Create.", "Build.", "Elevate."]}
+                morphTime={2}
+                cooldownTime={1.5}
+                className="text-center w-full"
+                textClassName="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient-cyan-fixed leading-tight"
+              />
+            </motion.div>
+            
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="text-lg sm:text-xl md:text-2xl text-foreground/90 leading-relaxed max-w-4xl mx-auto text-center px-2 mb-8 sm:mb-10 md:mb-12"
             >
-              Start Your Project
-            </Link>
-          </motion.div>
-        </motion.div>
-      </div>
+              We craft bespoke digital experiences that drive growth and define the future of your brand.
+            </motion.p>
 
-      {/* Lamp Container - BACKGROUND ONLY */}
-      <div className="relative flex-1 flex flex-col">
-        <LampContainer className="bg-transparent">
-          {/* Empty - lamp is now just background decoration */}
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none"
+            >
+              <Link
+                to="/templates"
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto sm:min-w-[200px] rounded-xl font-semibold text-white overflow-hidden text-center transition-all duration-300 hover:scale-105"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
+                <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
+                <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
+                  Explore Our Work
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+
+              <Link
+                to="/book"
+                className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-sm sm:text-base md:text-lg"
+              >
+                Start Your Project
+              </Link>
+            </motion.div>
+          </motion.div>
         </LampContainer>
       </div>
 
-      {/* Scroll Indicator - Fixed positioning like other elements */}
+      {/* Scroll Indicator - Positioned at bottom */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
