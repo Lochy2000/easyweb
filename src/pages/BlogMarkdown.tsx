@@ -72,12 +72,27 @@ const Sidebar = ({
 
   return (
     <div className={cn(
-      "fixed top-0 right-0 w-80 h-full bg-background/95 backdrop-blur-lg border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 pt-24",
+      "fixed top-0 right-0 h-full bg-background/95 backdrop-blur-lg border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 pt-24",
+      "w-80 sm:w-80 md:w-80 lg:w-80", // Consistent width on larger screens
+      "max-sm:w-full max-sm:left-0 max-sm:right-0", // Full width on mobile
       isOpen ? "translate-x-0" : "translate-x-full"
     )}>
       <button
         onClick={onClose}
-        className="absolute top-28 -left-12 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 hover:bg-white/5 transition-colors"
+        className={cn(
+          "absolute top-28 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 hover:bg-white/5 transition-colors",
+          "max-sm:hidden", // Hide on mobile (use X inside instead)
+          "-left-12"
+        )}
+        aria-label="Close search"
+      >
+        <X className="w-5 h-5 text-foreground/70" />
+      </button>
+      
+      {/* Mobile close button */}
+      <button
+        onClick={onClose}
+        className="sm:hidden absolute top-6 right-4 bg-background/95 backdrop-blur-lg p-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors z-50"
         aria-label="Close search"
       >
         <X className="w-5 h-5 text-foreground/70" />
@@ -574,12 +589,14 @@ const BlogMarkdown = () => {
       <button
         onClick={() => handleSidebarToggle(true)}
         className={cn(
-          "fixed top-1/2 -translate-y-1/2 right-0 bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/5",
+          "fixed bg-background/95 backdrop-blur-lg p-3 rounded-l-xl border border-white/10 border-r-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/5",
+          "top-1/2 -translate-y-1/2 right-0", // Desktop positioning
+          "max-sm:bottom-4 max-sm:right-4 max-sm:top-auto max-sm:translate-y-0 max-sm:rounded-full max-sm:border max-sm:shadow-lg", // Mobile positioning
           isSidebarOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         )}
       >
         <Search className="w-4 h-4 text-foreground/70" />
-        <span className="text-sm text-foreground/70">Search</span>
+        <span className="text-sm text-foreground/70 max-sm:hidden">Search</span>
       </button>
 
       <Sidebar

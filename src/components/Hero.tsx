@@ -65,34 +65,7 @@ const Hero = () => {
       {/* Main Content Container with lamp spotlight effect */}
       <div className="relative flex-1 flex flex-col">
         <LampContainer className="bg-transparent">
-          {/* Logo positioned in the bright spotlight area */}
-          <motion.div
-            className="flex items-center justify-center mb-8 sm:mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{
-              delay: 0.9,
-              duration: 0.6,
-              ease: "easeOut",
-            }}
-          >
-            <motion.img 
-              src="/easyweb-logo.png" 
-              alt="Easywebs Logo" 
-              className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
-              animate={{ 
-                opacity: [0.7, 1, 0.8, 1],
-                scale: [0.98, 1, 0.99, 1]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
-
-          {/* Content positioned below the spotlight */}
+          {/* Content positioned properly under the lamp light */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -104,6 +77,33 @@ const Hero = () => {
             className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full"
             style={{ opacity }}
           >
+            {/* Logo - Show on large screens only */}
+            <motion.div
+              className="hidden xl:flex items-center justify-center mb-8 sm:mb-12 md:mb-16 lg:mb-20"
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                delay: 0.9,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+            >
+              <motion.img 
+                src="/easyweb-logo.png" 
+                alt="Easywebs Logo" 
+                className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
+                animate={{ 
+                  opacity: [0.7, 1, 0.8, 1],
+                  scale: [0.98, 1, 0.99, 1]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
+
             {/* Main Heading with Gooey Text */}
             <motion.div 
               className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
@@ -139,7 +139,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none mb-8 sm:mb-10 md:mb-12"
             >
               <Link
                 to="/templates"
@@ -160,6 +160,33 @@ const Hero = () => {
               >
                 Start Your Project
               </Link>
+            </motion.div>
+
+            {/* Logo - Show on laptop and smaller screens only, positioned after buttons */}
+            <motion.div
+              className="flex xl:hidden items-center justify-center"
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                delay: 0.9,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+            >
+              <motion.img 
+                src="/easyweb-logo.png" 
+                alt="Easywebs Logo" 
+                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
+                animate={{ 
+                  opacity: [0.7, 1, 0.8, 1],
+                  scale: [0.98, 1, 0.99, 1]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </motion.div>
           </motion.div>
         </LampContainer>
