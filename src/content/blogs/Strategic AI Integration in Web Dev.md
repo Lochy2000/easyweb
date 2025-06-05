@@ -1,6 +1,6 @@
 ---
 id: strategic-ai-integration-in-web-dev
-title: AI Integration in Web Development 
+title: AI Integration - A Guide for Startups
 description: Learn how startups can effectively integrate AI into web development to enhance user experience, streamline operations, and drive growth. A Guide for Startups.
 category: ai
 imageUrl: 65283a5a-c693-406a-a4f7-c6beccbe8b45
@@ -63,9 +63,9 @@ AI should feel like a helpful assistant, not an obstacle. Great UX ensures:
 * Watch for failure points or user drop-offs.
 * Use feedback to tune prompts or add edge cases.
 
-## Visual Aid: AI Integration Flowchart
+##  AI Integration Flowchart
 
-\[Flowchart showing 4 steps: Define Use Case → Select Tool → Build & Integrate → Track & Improve. Each step has brief tips like "Don't automate the unknown" or "Explain AI actions to users".]
+![AI Integration Flowchart](https://res.cloudinary.com/dpw2txejq/image/upload/v1749060512/2964d802-243c-4e2a-8520-c952e85d0901.png)
 
 ## Conclusion
 
