@@ -33,14 +33,13 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex flex-col pt-16 sm:pt-20 hero-section laptop-hero-fix"
+      className="relative min-h-screen flex flex-col hero-section"
     >
       {/* Splash Cursor - only in hero section */}
       {showSplash && <SplashCursor />}
 
-      {/* Digital Innovation Partners Badge - Fixed positioning for all screens */}
+      {/* Digital Innovation Partners Badge - Fixed positioning */}
       <div 
-        className="digital-badge-fixed"
         style={{
           position: 'absolute',
           top: '80px',
@@ -62,116 +61,136 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Main Content Container with proper lamp integration */}
-      <div className="relative flex-1 flex flex-col">
-        <LampContainer className="bg-transparent">
-
-          {/* Main content positioned properly under the lamp light */}
+      {/* ALL CONTENT - Position exactly like the badge for consistent behavior */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 100,
+          width: '100%',
+          maxWidth: '1200px',
+          padding: '0 1rem'
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.8,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="text-center flex flex-col items-center justify-center w-full"
+          style={{ opacity }}
+        >
+          {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center mb-8 sm:mb-10 md:mb-12"
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
-              delay: 0.8,
+              delay: 0.9,
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+          >
+            <motion.img 
+              src="/easyweb-logo.png" 
+              alt="Easywebs Logo" 
+              className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
+              animate={{ 
+                opacity: [0.7, 1, 0.8, 1],
+                scale: [0.98, 1, 0.99, 1]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+
+          {/* Main Heading with Gooey Text */}
+          <motion.div 
+            className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              delay: 1.0,
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="text-center max-w-6xl mx-auto px-4 flex flex-col items-center justify-center w-full hero-content-spacing"
-            style={{ opacity }}
           >
-            {/* Logo emerging from lamp with subtle flicker */}
-            <motion.div
-              className="flex items-center justify-center mt-6 sm:mt-8 md:mt-10 mb-8 sm:mb-10 md:mb-12"
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                delay: 0.9,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-            >
-              <motion.img 
-                src="/easyweb-logo.png" 
-                alt="Easywebs Logo" 
-                className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
-                animate={{ 
-                  opacity: [0.7, 1, 0.8, 1],
-                  scale: [0.98, 1, 0.99, 1]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            </motion.div>
-
-            {/* Main Heading with Gooey Text - Fixed gradient color */}
-            <motion.div 
-              className="flex items-center justify-center w-full mb-8 sm:mb-10 md:mb-12"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                delay: 1.0,
-                duration: 0.8,
-                ease: "easeInOut",
-              }}
-            >
-              <GooeyText
-                texts={["Innovate.", "Create.", "Build.", "Elevate."]}
-                morphTime={2}
-                cooldownTime={1.5}
-                className="text-center w-full"
-                textClassName="hero-title-responsive font-bold text-gradient-cyan-fixed leading-tight"
-              />
-            </motion.div>
-            
-            {/* Subtitle with proper color */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="hero-subtitle-responsive text-foreground/90 leading-relaxed max-w-4xl mx-auto text-center px-2"
-            >
-              We craft bespoke digital experiences that drive growth and define the future of your brand.
-            </motion.p>
-
-            {/* CTA Buttons with improved spacing */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none hero-buttons"
-            >
-              <Link
-                to="/templates"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto sm:min-w-[200px] rounded-xl font-semibold text-white overflow-hidden text-center transition-all duration-300 hover:scale-105"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
-                <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
-                <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
-                <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
-                  Explore Our Work
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-
-              <Link
-                to="/book"
-                className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-sm sm:text-base md:text-lg"
-              >
-                Start Your Project
-              </Link>
-            </motion.div>
+            <GooeyText
+              texts={["Innovate.", "Create.", "Build.", "Elevate."]}
+              morphTime={2}
+              cooldownTime={1.5}
+              className="text-center w-full"
+              textClassName="hero-title-responsive font-bold text-gradient-cyan-fixed leading-tight"
+            />
           </motion.div>
+          
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="hero-subtitle-responsive text-foreground/90 leading-relaxed max-w-4xl mx-auto text-center px-2 mb-8 sm:mb-10 md:mb-12"
+          >
+            We craft bespoke digital experiences that drive growth and define the future of your brand.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full max-w-md sm:max-w-none"
+          >
+            <Link
+              to="/templates"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto sm:min-w-[200px] rounded-xl font-semibold text-white overflow-hidden text-center transition-all duration-300 hover:scale-105"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink transition-all duration-500 group-hover:blur-md group-hover:opacity-80"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary to-accent-pink"></span>
+              <span className="absolute inset-[1px] rounded-[11px] bg-card/90 transition-opacity duration-500 group-hover:opacity-70"></span>
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
+                Explore Our Work
+                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            <Link
+              to="/book"
+              className="px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto rounded-xl font-semibold text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-105 text-center text-sm sm:text-base md:text-lg"
+            >
+              Start Your Project
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Lamp Container - BACKGROUND ONLY */}
+      <div className="relative flex-1 flex flex-col">
+        <LampContainer className="bg-transparent">
+          {/* Empty - lamp is now just background decoration */}
         </LampContainer>
       </div>
 
-      {/* Scroll Indicator - Positioned at bottom */}
+      {/* Scroll Indicator - Fixed positioning like other elements */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 2 }}
-        className="scroll-indicator-fix"
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 50
+        }}
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
@@ -186,7 +205,7 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Enhanced Background Effects - Responsive gradients */}
+      {/* Enhanced Background Effects */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent-cyan/5" />
         <div className="absolute inset-0 bg-gradient-to-tl from-accent-pink/5 via-transparent to-primary/5" />
