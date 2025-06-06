@@ -60,7 +60,6 @@ export function GooeyText({
 
       setMorph(fraction);
     };
-
     function animate() {
       requestAnimationFrame(animate);
       const newTime = new Date();
@@ -115,7 +114,7 @@ export function GooeyText({
         <span
           ref={text1Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold",
+            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
             "text-foreground",
             textClassName
           )}
@@ -123,7 +122,7 @@ export function GooeyText({
         <span
           ref={text2Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold",
+            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
             "text-foreground",
             textClassName
           )}

@@ -1201,3 +1201,393 @@ html, body, #root {
     top: 120px !important;
   }
 }
+
+/* Hero Component Responsive Improvements */
+
+/* Remove all conflicting hero positioning */
+.hero-section {
+  /* Clean slate - no conflicting transforms or positioning */
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Enhanced glass card for better visibility */
+.glass-card-enhanced {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+.glass-card-enhanced:hover {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Improved gradient text with better animation */
+.text-gradient-cyan-fixed {
+  background: linear-gradient(
+    135deg, 
+    hsl(180, 100%, 50%) 0%,     /* accent-cyan */
+    hsl(267, 100%, 67%) 25%,    /* primary */
+    hsl(330, 100%, 70%) 50%,    /* accent-pink */
+    hsl(267, 100%, 67%) 75%,    /* primary */
+    hsl(180, 100%, 50%) 100%    /* accent-cyan */
+  );
+  background-size: 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 8s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 100% 50%;
+  }
+  66% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 100dvh !important;
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Ensure content doesn't get cut off on mobile */
+  .hero-content-mobile {
+    max-height: calc(100dvh - 8rem);
+    overflow: visible;
+    padding: 1rem;
+  }
+}
+
+/* Performance improvements */
+.hero-section * {
+  will-change: auto;
+}
+
+.hero-section .moving-element {
+  will-change: transform, opacity;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* Additional fixes for lamp visibility and spacing */
+
+/* Ensure lamp container is properly positioned */
+.hero-section .lamp-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+/* Ensure content is above lamp */
+.hero-section .hero-content {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Better responsive spacing using CSS custom properties */
+:root {
+  --hero-spacing-sm: 2rem;
+  --hero-spacing-md: 2.5rem;
+  --hero-spacing-lg: 3rem;
+  --hero-spacing-xl: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --hero-spacing-sm: 2.5rem;
+    --hero-spacing-md: 3rem;
+    --hero-spacing-lg: 3.5rem;
+    --hero-spacing-xl: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-spacing-sm: 3rem;
+    --hero-spacing-md: 3.5rem;
+    --hero-spacing-lg: 4rem;
+    --hero-spacing-xl: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --hero-spacing-sm: 3.5rem;
+    --hero-spacing-md: 4rem;
+    --hero-spacing-lg: 4.5rem;
+    --hero-spacing-xl: 5rem;
+  }
+}
+
+/* Make sure the lamp gradient is visible */
+.bg-gradient-conic {
+  background: conic-gradient(var(--conic-position), var(--tw-gradient-stops));
+}
+
+/* Ensure proper text rendering over lamp effect */
+.text-gradient-cyan-fixed {
+  position: relative;
+  z-index: 5;
+}
+/* Fixed layering for proper lamp positioning */
+
+/* Ensure proper z-index stacking */
+.hero-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge - highest layer */
+.hero-section .z-20 {
+  z-index: 20 !important;
+}
+
+/* Text and buttons - high layer */
+.hero-section .z-15 {
+  z-index: 15 !important;
+}
+
+/* Logo - medium layer (in lamp light) */
+.hero-section .z-10 {
+  z-index: 10 !important;
+}
+
+/* Lamp effect - low layer */
+.hero-section .z-5 {
+  z-index: 5 !important;
+}
+
+/* Ensure gooey text is always visible */
+.text-gradient-cyan-fixed {
+  position: relative !important;
+  z-index: 15 !important;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
+}
+
+/* Enhance text readability over lamp effect */
+.hero-section p,
+.hero-section .gooey-text {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+  position: relative !important;
+  z-index: 15 !important;
+}
+
+/* Ensure buttons are clickable and visible */
+.hero-section a,
+.hero-section button {
+  position: relative !important;
+  z-index: 15 !important;
+}
+
+/* Make lamp container non-interactive */
+.hero-section .lamp-container {
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+/* Fix gooey text jumping and positioning */
+.gooey-text-container {
+  position: relative !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 1.2em !important;
+}
+
+.gooey-text-container span {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+/* Ensure text doesn't shift */
+.text-gradient-cyan-fixed {
+  display: inline-block !important;
+  text-align: center !important;
+  width: auto !important;
+}
+
+/* Fix lamp positioning relative to content */
+.hero-section .lamp-positioned {
+  position: absolute !important;
+  top: 8rem !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+}
+
+@media (min-width: 640px) {
+  .hero-section .lamp-positioned {
+    top: 10rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-section .lamp-positioned {
+    top: 12rem !important;
+  }
+}
+/* SIMPLE HERO RESET - No complex positioning */
+
+.hero-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced glass card for badge */
+.glass-card-enhanced {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+.glass-card-enhanced:hover {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Simple gradient text */
+.text-gradient-cyan-fixed {
+  background: linear-gradient(
+    135deg, 
+    hsl(180, 100%, 50%) 0%,     /* accent-cyan */
+    hsl(267, 100%, 67%) 25%,    /* primary */
+    hsl(330, 100%, 70%) 50%,    /* accent-pink */
+    hsl(267, 100%, 67%) 75%,    /* primary */
+    hsl(180, 100%, 50%) 100%    /* accent-cyan */
+  );
+  background-size: 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 8s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 100% 50%;
+  }
+  66% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 100dvh !important;
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Remove all the problematic CSS classes */
+.lamp-positioned,
+.gooey-text-container,
+.hero-content-spacing,
+.lamp-container-content {
+  /* Reset everything */
+  all: unset;
+}
+
+/* CLEAN HERO ORGANIZATION */
+
+.hero-section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Clear information hierarchy */
+.hero-section > * {
+  position: relative;
+}
+
+/* Badge - top level */
+.hero-section .z-20 {
+  z-index: 20;
+}
+
+/* Content - mid level */
+.hero-section .z-10 {
+  z-index: 10;
+}
+
+/* Lamp - background level */
+.hero-section .z-5 {
+  z-index: 5;
+}
+
+/* Enhanced glass card */
+.glass-card-enhanced {
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Clean gradient text */
+.text-gradient-cyan-fixed {
+  background: linear-gradient(
+    135deg, 
+    hsl(180, 100%, 50%) 0%,
+    hsl(267, 100%, 67%) 30%, 
+    hsl(330, 100%, 70%) 60%,
+    hsl(180, 100%, 50%) 100%
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-slide 6s ease-in-out infinite;
+}
+
+@keyframes gradient-slide {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Responsive spacing */
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 100dvh;
+  }
+}
