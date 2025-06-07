@@ -1303,6 +1303,13 @@ html, body, #root {
   }
 }
 
+/* Large desktop improvements */
+@media (min-width: 1536px) {
+  .hero-section {
+    min-height: 110vh !important; /* Give more height on very large screens */
+  }
+}
+
 /* Enhanced glass card for badge */
 .glass-card-enhanced {
   background: rgba(0, 0, 0, 0.8) !important;
