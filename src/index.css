@@ -947,30 +947,6 @@ html, body, #root {
   gap: 1.5rem !important;
 }
 
-/* Lamp container specific fixes */
-.lamp-container-content {
-  /* Move content DOWN further - less negative value means further down */
-  transform: translateY(-8rem) !important;
-}
-
-@media (min-width: 640px) {
-  .lamp-container-content {
-    transform: translateY(-10rem) !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .lamp-container-content {
-    transform: translateY(-12rem) !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lamp-container-content {
-    transform: translateY(-14rem) !important;
-  }
-}
-
 /* Consistent text sizing */
 .hero-title-responsive {
   font-size: clamp(2rem, 8vw, 6rem) !important;
@@ -996,222 +972,7 @@ html, body, #root {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Badge positioning fix to ensure it's above the lamp */
-.digital-badge {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -10rem) !important;
-  z-index: 70 !important;
-}
-
-@media (min-width: 640px) {
-  .digital-badge {
-    transform: translate(-50%, -12rem) !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .digital-badge {
-    transform: translate(-50%, -15rem) !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .digital-badge {
-    transform: translate(-50%, -17rem) !important;
-  }
-}
-
-/* Badge positioned OUTSIDE lamp container - above everything */
-.digital-badge-hero {
-  position: absolute !important;
-  top: 6rem !important; /* Fixed position from top instead of percentage */
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 1000 !important; /* Higher than header's z-50 */
-}
-
-@media (min-width: 640px) {
-  .digital-badge-hero {
-    top: 7rem !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .digital-badge-hero {
-    top: 8rem !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .digital-badge-hero {
-    top: 9rem !important;
-  }
-}
-
-/* Badge positioning relative to lamp - responsive */
-.lamp-badge-positioning {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translateX(-50%) translateY(-8rem) !important;
-  z-index: 60 !important;
-}
-
-@media (min-width: 640px) {
-  .lamp-badge-positioning {
-    transform: translateX(-50%) translateY(-9rem) !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .lamp-badge-positioning {
-    transform: translateX(-50%) translateY(-10rem) !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lamp-badge-positioning {
-    transform: translateX(-50%) translateY(-11rem) !important;
-  }
-}
-
-@media (min-width: 1280px) {
-  .lamp-badge-positioning {
-    transform: translateX(-50%) translateY(-12rem) !important;
-  }
-}
-
-/* Ensure badge stays visible and responsive */
-.hero-badge-responsive {
-  position: absolute;
-  top: calc(50% - 8rem);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 60;
-  transition: all 0.3s ease;
-}
-
-@media (max-width: 640px) {
-  .hero-badge-responsive {
-    top: calc(50% - 6rem);
-  }
-}
-
-@media (min-width: 640px) {
-  .hero-badge-responsive {
-    top: calc(50% - 8rem);
-  }
-}
-
-@media (min-width: 768px) {
-  .hero-badge-responsive {
-    top: calc(50% - 9rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-badge-responsive {
-    top: calc(50% - 10rem);
-  }
-}
-
-@media (min-width: 1280px) {
-  .hero-badge-responsive {
-    top: calc(50% - 11rem);
-  }
-}
-
-/* Scroll indicator positioning fix */
-.scroll-indicator-fix {
-  position: absolute !important;
-  bottom: 2rem !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 50 !important;
-}
-
-/* Subtle gradient animation for header text */
-@keyframes gradient-x {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-x {
-  animation: gradient-x 4s ease infinite;
-}
-
-/* Responsive hero section fixes for all screen sizes */
-@media (max-width: 640px) {
-  .digital-badge-responsive {
-    top: 80px !important;
-  }
-  
-  .hero-section .text-4xl {
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  .hero-section .text-lg {
-    font-size: 1rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 1.5rem !important;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .digital-badge-responsive {
-    top: 90px !important;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .digital-badge-responsive {
-    top: 100px !important;
-  }
-}
-
-/* LAPTOP SPECIFIC FIXES - Target common laptop resolutions */
-@media (min-width: 1025px) and (max-width: 1440px) {
-  .digital-badge-responsive {
-    top: 220px !important; /* Position just above the lamp */
-  }
-  
-  /* Reduce content offset since logo is now at bottom */
-  .lamp-container-content {
-    transform: translateY(-1rem) !important;
-  }
-}
-
-/* Tablet and smaller - also reposition badge above lamp */
-@media (max-width: 1024px) {
-  .digital-badge-responsive {
-    top: 180px !important; /* Position just above the lamp */
-  }
-}
-
-@media (min-width: 1281px) {
-  .digital-badge-responsive {
-    top: 120px !important;
-  }
-}
-
-/* Hero Component Responsive Improvements */
-
-/* Remove all conflicting hero positioning */
-.hero-section {
-  /* Clean slate - no conflicting transforms or positioning */
-  padding: 0 !important;
-  margin: 0 !important;
-  position: relative;
-  isolation: isolate;
-}
+/* CLEAN HERO SECTION - Remove all conflicting styles */
 
 /* Enhanced glass card for better visibility */
 .glass-card-enhanced {
@@ -1518,43 +1279,31 @@ html, body, #root {
   }
 }
 
-/* Remove all the problematic CSS classes */
-.lamp-positioned,
-.gooey-text-container,
-.hero-content-spacing,
-.lamp-container-content {
-  /* Reset everything */
-  all: unset;
+
+
+/* CLEAN HERO SECTION - Remove all conflicting styles */
+.hero-section,
+.hero-section * {
+  /* Reset any problematic positioning */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
-/* CLEAN HERO ORGANIZATION */
-
-.hero-section {
-  position: relative;
-  isolation: isolate;
+/* Simple responsive spacing */
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 100dvh !important;
+    padding-top: 80px !important; /* Account for fixed header */
+  }
 }
 
-/* Clear information hierarchy */
-.hero-section > * {
-  position: relative;
+@media (min-width: 641px) {
+  .hero-section {
+    padding-top: 0 !important;
+  }
 }
 
-/* Badge - top level */
-.hero-section .z-20 {
-  z-index: 20;
-}
-
-/* Content - mid level */
-.hero-section .z-10 {
-  z-index: 10;
-}
-
-/* Lamp - background level */
-.hero-section .z-5 {
-  z-index: 5;
-}
-
-/* Enhanced glass card */
+/* Enhanced glass card for badge */
 .glass-card-enhanced {
   background: rgba(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(20px) saturate(180%) !important;
@@ -1562,32 +1311,4 @@ html, body, #root {
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-}
-
-/* Clean gradient text */
-.text-gradient-cyan-fixed {
-  background: linear-gradient(
-    135deg, 
-    hsl(180, 100%, 50%) 0%,
-    hsl(267, 100%, 67%) 30%, 
-    hsl(330, 100%, 70%) 60%,
-    hsl(180, 100%, 50%) 100%
-  );
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-slide 6s ease-in-out infinite;
-}
-
-@keyframes gradient-slide {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Responsive spacing */
-@media (max-width: 640px) {
-  .hero-section {
-    min-height: 100dvh;
-  }
 }
