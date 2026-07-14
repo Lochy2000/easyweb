@@ -110,9 +110,14 @@ const SelfAudit = () => {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: 'brightness(0.85) saturate(0.95)' }}
       />
+      {/* Long, soft taper (aurora-like) instead of a hard-edged fade — avoids a
+          visible seam where the hero's gradient sky meets this section's photo. */}
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg,#9d6fd8 0%,rgba(157,111,216,0.32) 8%,transparent 18%)' }}
+        style={{
+          background:
+            'linear-gradient(180deg,#9d6fd8 0%,rgba(157,111,216,0.88) 8%,rgba(157,111,216,0.6) 20%,rgba(157,111,216,0.32) 38%,rgba(157,111,216,0.14) 58%,rgba(157,111,216,0.04) 78%,transparent 92%)',
+        }}
       />
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {stars.map((star, i) => (
