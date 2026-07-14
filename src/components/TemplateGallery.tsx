@@ -236,25 +236,23 @@ const TemplateGallery = () => {
   };
 
   return (
-    <section id="templates" className="section relative overflow-hidden">
+    <section id="templates" className="section relative overflow-hidden bg-paper pt-40 md:pt-52">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px]"></div>
-        <div className="absolute bottom-40 -left-60 w-[300px] h-[300px] rounded-full bg-accent/10 blur-[80px]"></div>
-        {/* Grid overlay */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.1]"></div>
+        <div className="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-ew-accent/5 blur-[100px]"></div>
+        <div className="absolute bottom-40 -left-60 w-[300px] h-[300px] rounded-full bg-ew-accent/5 blur-[80px]"></div>
       </div>
-      
+
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm opacity-0 animate-fade-in">
+          <div className="inline-block mb-4 py-1 px-3 rounded-full bg-ew-accent-soft text-ew-accent font-medium text-sm opacity-0 animate-fade-in">
             Beautiful Templates
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 opacity-0 animate-fade-in animate-delay-1 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+          <h2 className="font-serif font-medium text-3xl md:text-4xl text-ink mb-6 opacity-0 animate-fade-in animate-delay-1 tracking-[-0.01em]">
             Find the Perfect Starting Point
           </h2>
-          <p className="text-lg text-foreground/80 opacity-0 animate-fade-in animate-delay-2">
+          <p className="text-lg text-ink-soft opacity-0 animate-fade-in animate-delay-2">
             Browse our hand-crafted templates designed for various needs. Each template is fully responsive and customizable to your brand.
           </p>
         </div>
@@ -267,8 +265,8 @@ const TemplateGallery = () => {
               className={cn(
                 "px-4 py-2 rounded-full text-sm font-medium transition-all",
                 activeCategory === category.id
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 text-foreground/70 hover:text-foreground"
+                  ? "bg-ew-accent text-white shadow-md"
+                  : "bg-paper-raised border border-line hover:border-ew-accent text-ink-soft hover:text-ink"
               )}
               onClick={() => setActiveCategory(category.id)}
             >
@@ -287,7 +285,7 @@ const TemplateGallery = () => {
               onMouseEnter={() => setHoveredTemplate(template.id)}
               onMouseLeave={() => setHoveredTemplate(null)}
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
+              <div className="bg-[#14121a] border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <img 
                     src={template.image} 
@@ -323,8 +321,8 @@ const TemplateGallery = () => {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{template.title}</h3>
-                  <p className="text-foreground/70 mb-4 flex-grow">{template.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-ew-accent transition-colors">{template.title}</h3>
+                  <p className="text-white/60 mb-4 flex-grow">{template.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
                       {categories.find(c => c.id === template.category)?.label}

@@ -55,20 +55,23 @@ export default {
 				// New "paper" theme tokens — additive, used by the redesigned
 				// homepage + shared Header/Footer. Existing tokens above are left
 				// untouched so other pages keep their current dark theme.
+				// Wrapped in rgb(var(--x) / <alpha-value>) — not just var(--x) —
+				// so opacity modifiers (bg-ew-accent/90 etc.) actually generate;
+				// Tailwind can only inject alpha into a recognized color function.
 				paper: {
-					DEFAULT: 'var(--paper)',
-					raised: 'var(--paper-raised)'
+					DEFAULT: 'rgb(var(--paper) / <alpha-value>)',
+					raised: 'rgb(var(--paper-raised) / <alpha-value>)'
 				},
 				ink: {
-					DEFAULT: 'var(--ink)',
-					soft: 'var(--ink-soft)',
-					faint: 'var(--ink-faint)'
+					DEFAULT: 'rgb(var(--ink) / <alpha-value>)',
+					soft: 'rgb(var(--ink-soft) / <alpha-value>)',
+					faint: 'rgb(var(--ink-faint) / <alpha-value>)'
 				},
-				line: 'var(--line)',
+				line: 'rgb(var(--line) / <alpha-value>)',
 				'ew-accent': {
-					DEFAULT: 'var(--ew-accent)',
-					soft: 'var(--ew-accent-soft)',
-					ink: 'var(--ew-accent-ink)'
+					DEFAULT: 'rgb(var(--ew-accent) / <alpha-value>)',
+					soft: 'rgb(var(--ew-accent-soft) / <alpha-value>)',
+					ink: 'rgb(var(--ew-accent-ink) / <alpha-value>)'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',

@@ -28,7 +28,7 @@ const Templates = () => {
   }, []);
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-paper">
       <Helmet>
         <title>Website Templates | Easywebs</title>
         <meta name="description" content="Explore our collection of hand-crafted website templates designed for various needs. Each template is fully responsive and customizable to your brand." />
@@ -85,12 +85,13 @@ const Templates = () => {
       <Header />
       <main className="pt-32">
         {/* Hero Section for Templates */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-primary/20 to-secondary/20">
+        <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-paper">
           <div className="container-custom text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-gradient">Browse Our Templates</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ew-accent">Templates</span>
+            <h1 className="font-serif font-medium text-4xl md:text-6xl text-ink mt-3 mb-6 leading-tight tracking-[-0.01em]">
+              Browse Our Templates
             </h1>
-            <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-ink-soft mb-8 max-w-2xl mx-auto">
               Explore our collection of hand-crafted templates designed for various needs.
               Each template is fully responsive and customizable to your brand.
             </p>

@@ -54,16 +54,19 @@
     /* "Paper" theme — additive, used only by the redesigned homepage and the
        shared Header/Footer. Everything above stays untouched so other pages
        keep their current dark theme until they get their own redesign pass.
-       Values match website-update/design-update.html's actual inline styles. */
-    --paper: #fbfaf7;
-    --paper-raised: #ffffff;
-    --ink: #211f1a;
-    --ink-soft: #463f33;
-    --ink-faint: #8b8477;
-    --line: #e7e2d8;
-    --ew-accent: #3c4cc4;
-    --ew-accent-soft: #eef0fb;
-    --ew-accent-ink: #2f3ba0;
+       Values match website-update/design-update.html's actual inline styles.
+       Stored as "R G B" channel triplets (not hex) so Tailwind can generate
+       opacity-modifier utilities (e.g. bg-ew-accent/90) via rgb(var(--x) / a) —
+       see the paper/ink/line/ew-accent entries in tailwind.config.ts. */
+    --paper: 251 250 247;
+    --paper-raised: 255 255 255;
+    --ink: 33 31 26;
+    --ink-soft: 70 63 51;
+    --ink-faint: 139 132 119;
+    --line: 231 226 216;
+    --ew-accent: 60 76 196;
+    --ew-accent-soft: 238 240 251;
+    --ew-accent-ink: 47 59 160;
   }
 
   /* Blog content styling improvements */
@@ -97,6 +100,43 @@
   .prose blockquote {
     color: hsl(var(--foreground) / 0.8) !important;
     border-left-color: hsl(var(--primary)) !important;
+  }
+
+  /* Paper-theme override for blog content — higher specificity (two classes)
+     than the dark .prose rules above, so it wins regardless of source order.
+     --ink etc. now hold "R G B" triplets (see the :root block above), so
+     every reference here must go through rgb(...). */
+  .prose.prose-paper {
+    color: rgb(var(--ink)) !important;
+  }
+
+  .prose.prose-paper h1, .prose.prose-paper h2, .prose.prose-paper h3,
+  .prose.prose-paper h4, .prose.prose-paper h5, .prose.prose-paper h6 {
+    color: rgb(var(--ink)) !important;
+  }
+
+  .prose.prose-paper p, .prose.prose-paper li, .prose.prose-paper td, .prose.prose-paper th {
+    color: rgb(var(--ink-soft)) !important;
+  }
+
+  .prose.prose-paper strong {
+    color: rgb(var(--ink)) !important;
+    font-weight: 600;
+  }
+
+  .prose.prose-paper code {
+    color: rgb(var(--ew-accent-ink)) !important;
+    background-color: rgb(var(--ew-accent-soft)) !important;
+  }
+
+  .prose.prose-paper pre {
+    background-color: rgb(var(--paper-raised)) !important;
+    border: 1px solid rgb(var(--line));
+  }
+
+  .prose.prose-paper blockquote {
+    color: rgb(var(--ink-soft)) !important;
+    border-left-color: rgb(var(--ew-accent)) !important;
   }
 
   table {

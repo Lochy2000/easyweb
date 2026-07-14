@@ -11,19 +11,11 @@ interface HeaderProps {
   transparentOnHero?: boolean;
 }
 
-const HOME_ANCHORS = [
-  { to: '#services', label: 'Services' },
-  { to: '#process', label: 'Process' },
-  { to: '#audit', label: 'Self-Audit' },
-  { to: '#faq', label: 'FAQ' },
-];
-
 const Header = ({ transparentOnHero = false }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { openBooking } = useBooking();
-  const isHome = location.pathname === '/';
 
   const isSolid = !transparentOnHero || isScrolled || isMobileMenuOpen;
 
@@ -37,8 +29,6 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
-
-  const anchorHref = (hash: string) => (isHome ? hash : `/${hash}`);
 
   const handleBookClick = () => {
     setIsMobileMenuOpen(false);
@@ -58,19 +48,6 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
     >
       {children}
     </RouterNavLink>
-  );
-
-  const AnchorLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-    <a
-      href={anchorHref(to)}
-      onClick={() => setIsMobileMenuOpen(false)}
-      className={cn(
-        'transition-colors duration-200 font-medium text-sm py-2',
-        isSolid ? 'text-ink-soft hover:text-ink' : 'text-white/85 hover:text-white'
-      )}
-    >
-      {children}
-    </a>
   );
 
   return (
@@ -96,9 +73,6 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
         </Link>
 
         <nav key={location.pathname} className="hidden md:flex items-center gap-7">
-          {isHome && HOME_ANCHORS.map((item) => (
-            <AnchorLink key={item.to} to={item.to}>{item.label}</AnchorLink>
-          ))}
           <NavLink to="/templates">Templates</NavLink>
           <NavLink to="/blog">Resources</NavLink>
           <NavLink to="/about">About</NavLink>
@@ -135,16 +109,6 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
         )}
       >
         <nav className="container-custom px-4 sm:px-6 lg:px-8 mx-auto py-4 flex flex-col gap-1">
-          {isHome && HOME_ANCHORS.map((item) => (
-            <a
-              key={item.to}
-              href={anchorHref(item.to)}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-ink-soft hover:text-ink transition-colors font-medium text-sm"
-            >
-              {item.label}
-            </a>
-          ))}
           <Link to="/templates" className="block py-2 text-ink-soft hover:text-ink transition-colors font-medium text-sm">Templates</Link>
           <Link to="/blog" className="block py-2 text-ink-soft hover:text-ink transition-colors font-medium text-sm">Resources</Link>
           <Link to="/about" className="block py-2 text-ink-soft hover:text-ink transition-colors font-medium text-sm">About</Link>
