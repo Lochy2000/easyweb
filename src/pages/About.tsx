@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { BackgroundEffects } from '@/components/BackgroundEffects';
 import { Linkedin } from 'lucide-react'; // Import Linkedin icon
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { getOrganizationSchema } from '@/lib/schema';
@@ -91,7 +90,7 @@ const ClientLogo = ({ client, isDuplicate = false }: { client: typeof clients[0]
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-background/50 relative isolate font-inter">
+    <div className="min-h-screen bg-paper relative isolate font-inter">
       <Helmet>
         <title>About EasyWeb | Modern Web Design and Development Studio</title>
         <meta name="description" content="EasyWeb is a web design studio that began as a university start-up, winning the Santander Universities Enterprise Competition. Learn about our team and mission." />
@@ -116,36 +115,35 @@ const AboutPage = () => {
         </script>
       </Helmet>
       
-      <BackgroundEffects />
       <Header />
       <main className="relative pt-24 pb-16">
         <div className="container mx-auto px-4">
-          
+
           {/* Page Header */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient font-features">About EasyWeb</h1>
-            <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ew-accent">Who we are</span>
+            <h1 className="font-serif font-medium text-4xl md:text-5xl text-ink mt-3 mb-4 tracking-[-0.01em]">About EasyWebs</h1>
+            <p className="text-lg md:text-xl text-ink-soft max-w-3xl mx-auto">
               Building digital experiences that empower businesses and connect communities.
             </p>
           </motion.div>
 
           {/* Our Story Section */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-20 bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl shadow-lg"
+            className="mb-20 bg-paper-raised border border-line p-8 rounded-2xl"
           >
-            <h2 className="text-3xl font-bold mb-6 text-center font-features">Our Journey</h2>
-            <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
-              EasyWeb began as a university start-up, born from a passion for making web technology accessible and effective. We gained early recognition by winning the Santander Universities Enterprise Competition, which fueled our mission to provide high-quality, easy-to-manage web solutions for businesses of all sizes. 
-              {/* Add more details here if desired */}
+            <h2 className="font-serif font-medium text-3xl text-ink mb-6 text-center">Our Journey</h2>
+            <p className="text-ink-soft leading-relaxed text-center max-w-2xl mx-auto">
+              EasyWebs began as a university start-up, born from a passion for making web technology accessible and effective. We gained early recognition by winning the Santander Universities Enterprise Competition, which fueled our mission to provide high-quality, easy-to-manage web solutions for businesses of all sizes.
             </p>
           </motion.section>
 
@@ -157,40 +155,38 @@ const AboutPage = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mb-20"
           >
-            <h2 className="text-3xl font-bold mb-12 text-center font-features">Meet the Team</h2>
+            <h2 className="font-serif font-medium text-3xl text-ink mb-12 text-center">Meet the Team</h2>
             {/* Use flex for centering and gap */}
-            <div className="flex flex-wrap justify-center gap-12 max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
               {teamMembers.map((member, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="card relative overflow-hidden"
+                  className="bg-paper-raised border border-line rounded-2xl p-8 w-[280px] flex flex-col items-center"
                 >
-                  <div className="relative z-10 flex flex-col items-center">
-                    <OptimizedImage 
-                      src={member.image} 
-                      alt={`${member.name}'s profile picture`} 
-                      className="card-image"
-                      width={member.width}
-                      height={member.height}
-                    />
-                    <div className="text-center mt-4">
-                      <p className="heading">{member.name}</p>
-                      <p className="text-sm text-foreground/70 mt-2">{member.role}</p>
-                    </div>
-                    <a 
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="linkedin-link mt-4"
-                    >
-                      <Linkedin size={16} />
-                      Connect on LinkedIn
-                    </a>
+                  <OptimizedImage
+                    src={member.image}
+                    alt={`${member.name}'s profile picture`}
+                    className="w-[140px] h-[140px] rounded-full object-cover border-2 border-line"
+                    width={member.width}
+                    height={member.height}
+                  />
+                  <div className="text-center mt-5">
+                    <p className="font-serif font-medium text-lg text-ink">{member.name}</p>
+                    <p className="text-sm text-ink-soft mt-2">{member.role}</p>
                   </div>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-ew-accent hover:text-ew-accent-ink transition-colors mt-4"
+                  >
+                    <Linkedin size={16} />
+                    Connect on LinkedIn
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -204,11 +200,11 @@ const AboutPage = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="py-12"
           >
-            <h2 className="text-2xl font-bold mb-8 text-center text-foreground/80 font-features">Trusted By</h2>
-            <div className="relative overflow-hidden bg-white/5 border-y border-white/10">
+            <h2 className="text-2xl font-serif font-medium mb-8 text-center text-ink-soft">Trusted By</h2>
+            <div className="relative overflow-hidden bg-paper-raised border-y border-line">
               {/* Gradient Overlays */}
-              <div className="absolute left-0 top-0 bottom-0 w-[200px] bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
-              <div className="absolute right-0 top-0 bottom-0 w-[200px] bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
+              <div className="absolute left-0 top-0 bottom-0 w-[200px] bg-gradient-to-r from-paper-raised via-paper-raised/80 to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-[200px] bg-gradient-to-l from-paper-raised via-paper-raised/80 to-transparent z-10" />
               
               {/* Scrolling Content */}
               <div className="flex whitespace-nowrap py-8">

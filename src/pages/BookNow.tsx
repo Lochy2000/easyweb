@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from "framer-motion";
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const BookNow = () => {
   useEffect(() => {
@@ -68,34 +69,37 @@ const BookNow = () => {
         </script>
       </Helmet>
       
-      <Header />
-      <section className="pt-32 pb-24 relative">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium text-sm">
-              Let's Talk
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Schedule a Consultation
-            </h2>
-            <p className="text-lg text-foreground/80">
-              Book a time with our team to discuss your website needs, get expert advice, or explore our services.
-            </p>
-          </motion.div>
+      <div className="min-h-screen bg-paper">
+        <Header />
+        <section className="pt-32 pb-24 relative">
+          <div className="container mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center max-w-3xl mx-auto mb-16"
+            >
+              <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full bg-ew-accent-soft text-ew-accent font-medium text-sm">
+                Let's Talk
+              </div>
+              <h2 className="font-serif font-medium text-3xl md:text-4xl text-ink mb-6">
+                Schedule a Consultation
+              </h2>
+              <p className="text-lg text-ink-soft">
+                Book a time with our team to discuss your website needs, get expert advice, or explore our services.
+              </p>
+            </motion.div>
 
-          <div className="max-w-4xl mx-auto bg-[#1C1C24] rounded-xl p-6 overflow-hidden shadow-lg border border-white/5">
-            <div 
-              className="calendly-inline-widget" 
-              data-url="https://calendly.com/lochlann_oht" 
-              style={{ minWidth: "320px", height: "700px" }}
-            ></div>
+            <div className="max-w-4xl mx-auto bg-paper-raised rounded-xl p-6 overflow-hidden border border-line">
+              <div
+                className="calendly-inline-widget"
+                data-url="https://calendly.com/lochlann_oht"
+                style={{ minWidth: "320px", height: "700px" }}
+              ></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        <Footer />
+      </div>
     </>
   );
 };

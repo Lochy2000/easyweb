@@ -790,61 +790,6 @@ html, body, #root {
 */
 /* --- END OF TEMPORARY COMMENT --- */
 
-/* New M2-style card design */
-.card {
-  @apply relative w-[300px] h-[400px] bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-lg rounded-xl p-6;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    600px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.06),
-    transparent 40%
-  );
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.card-image {
-  @apply w-[180px] h-[180px] rounded-full object-cover;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.card .heading {
-  font-size: 24px;
-  background-image: linear-gradient(to right, #626262, #fff);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  font-weight: bold;
-  margin: 10px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.card p:not(.heading) {
-  font-size: 14px;
-  color: #a0a0a0;
-  text-align: center;
-  margin: 5px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.linkedin-link {
-  @apply flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors duration-300;
-}
-
 .animate-scroll-x {
   animation: scroll-x 30s linear infinite;
 }

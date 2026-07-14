@@ -29,7 +29,7 @@ const BookingModal = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeBooking()}>
-      <DialogContent className="w-[95%] sm:max-w-[640px] bg-paper-raised border border-line p-0 overflow-hidden">
+      <DialogContent className="w-[95%] sm:max-w-[640px] bg-paper-raised border border-line p-0">
         <DialogHeader className="p-6 pb-0">
           <span className="text-[10.5px] font-bold uppercase tracking-[0.05em] text-ew-accent">EasyWebs</span>
           <DialogTitle className="font-serif text-xl text-ink">Book a discovery call</DialogTitle>
@@ -41,9 +41,9 @@ const BookingModal = () => {
         </DialogHeader>
         <div className="p-6 pt-4">
           <div
-            className="calendly-inline-widget"
+            className="calendly-inline-widget h-[500px] sm:h-[650px]"
             data-url={calendlyUrl}
-            style={{ minWidth: '320px', height: '650px' }}
+            style={{ minWidth: '320px' }}
           />
         </div>
       </DialogContent>

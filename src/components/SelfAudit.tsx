@@ -63,6 +63,7 @@ const AUDIT_RESULTS: Record<string, AuditResult> = {
 };
 
 const STEP_LABELS = ['1. Setup', '2. Desired fix', '3. Recommendation'];
+const STEP_NAMES = ['Setup', 'Desired fix', 'Recommendation'];
 const HERO_GIF = '/assets/images/hero-gif.gif';
 const STAR_COUNT = 45;
 
@@ -146,7 +147,8 @@ const SelfAudit = () => {
             transition={{ duration: 0.6 }}
             className="bg-paper-raised rounded-2xl p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
           >
-            <div className="flex justify-between border-b border-line pb-4 mb-5 text-[10.5px] font-semibold uppercase tracking-[0.03em]">
+            {/* Desktop/tablet: full 3-label row */}
+            <div className="hidden sm:flex justify-between border-b border-line pb-4 mb-5 text-[10.5px] font-semibold uppercase tracking-[0.03em]">
               {STEP_LABELS.map((label, i) => (
                 <span
                   key={label}
@@ -157,6 +159,21 @@ const SelfAudit = () => {
                   {label}
                 </span>
               ))}
+            </div>
+
+            {/* Mobile: current step only, plus a progress bar */}
+            <div className="sm:hidden border-b border-line pb-3 mb-5">
+              <p className="text-[10.5px] font-semibold uppercase tracking-[0.03em] text-ew-accent mb-2">
+                Step {step} of {STEP_NAMES.length} — {STEP_NAMES[step - 1]}
+              </p>
+              <div className="flex gap-1.5">
+                {STEP_NAMES.map((name, i) => (
+                  <span
+                    key={name}
+                    className={`h-1 flex-1 rounded-full ${i < step ? 'bg-ew-accent' : 'bg-line'}`}
+                  />
+                ))}
+              </div>
             </div>
 
             {step === 1 && (
@@ -215,13 +232,13 @@ const SelfAudit = () => {
                     </label>
                   ))}
                 </div>
-                <div className="flex justify-between mt-5">
+                <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-3 mt-5">
                   <button onClick={() => setStep(1)} className="text-ink-soft font-semibold text-[13px] hover:text-ink">
                     ← Back
                   </button>
                   <button
                     onClick={() => setStep(3)}
-                    className="rounded-full bg-ew-accent text-white text-[13px] font-semibold px-6 py-2.5 hover:bg-ew-accent-ink transition-colors"
+                    className="w-full sm:w-auto rounded-full bg-ew-accent text-white text-[13px] font-semibold px-6 py-2.5 hover:bg-ew-accent-ink transition-colors"
                   >
                     Get recommendation →
                   </button>
@@ -252,13 +269,13 @@ const SelfAudit = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap justify-between items-center gap-3">
+                <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-3">
                   <button onClick={() => setStep(2)} className="text-ink-soft font-semibold text-[13px] hover:text-ink">
                     ← Reset selection
                   </button>
                   <button
                     onClick={handleBook}
-                    className="rounded-full bg-ew-accent text-white text-[13px] font-semibold px-6 py-3 hover:bg-ew-accent-ink transition-colors"
+                    className="w-full sm:w-auto rounded-full bg-ew-accent text-white text-[13px] font-semibold px-6 py-3 hover:bg-ew-accent-ink transition-colors"
                   >
                     Book discovery call with these details
                   </button>

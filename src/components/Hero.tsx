@@ -59,13 +59,13 @@ const Hero = () => {
 
       <motion.div
         style={{ opacity }}
-        className="relative flex-1 flex flex-col items-center justify-center text-center px-6 pt-24"
+        className="relative flex-1 flex flex-col items-center justify-center text-center px-6 pt-20 sm:pt-24"
       >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-2 py-[7px] px-3.5 rounded-full bg-white/10 border border-white/25 text-[11px] font-semibold uppercase tracking-[0.04em] text-white mb-6"
+          className="inline-flex items-center gap-2 py-[7px] px-3.5 rounded-full bg-white/10 border border-white/25 text-[11px] font-semibold uppercase tracking-[0.04em] text-white mb-4 sm:mb-6"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-300" />
           Now booking discovery calls
@@ -75,10 +75,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          className="font-serif font-medium text-white max-w-3xl mx-auto mb-5 leading-[1.12] tracking-[-0.01em]"
-          style={{ fontSize: 'clamp(32px, 5vw, 58px)' }}
+          className="font-serif font-medium text-white max-w-3xl mx-auto mb-4 sm:mb-5 leading-[1.15] sm:leading-[1.12] tracking-[-0.01em]"
+          style={{ fontSize: 'clamp(26px, 7vw, 58px)' }}
         >
-          We fix messy digital setups —<br />
+          We fix messy digital setups —<br className="hidden sm:block" />{' '}
           <span className="italic">so your business runs on systems, not spreadsheets.</span>
         </motion.h1>
 
@@ -86,7 +86,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-[17px] leading-relaxed text-white/85 max-w-xl mx-auto mb-8"
+          className="text-[15px] sm:text-[17px] leading-relaxed text-white/85 max-w-xl mx-auto mb-6 sm:mb-8"
         >
           EasyWebs reviews your websites, databases, hosting and workflows — then designs and builds
           the fix. Consultancy plus implementation, from one technical partner.
@@ -96,18 +96,18 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.65 }}
-          className="flex flex-wrap gap-3.5 justify-center"
+          className="flex flex-wrap gap-3 sm:gap-3.5 justify-center"
         >
           <button
             onClick={() => openBooking()}
-            className="inline-flex items-center gap-2 rounded-full bg-white text-ew-accent font-semibold text-sm px-6 py-3.5 hover:bg-paper transition-colors"
+            className="inline-flex items-center gap-2 rounded-full bg-white text-ew-accent font-semibold text-sm px-5 py-3 sm:px-6 sm:py-3.5 hover:bg-paper transition-colors"
           >
             Book a discovery call
             <ArrowRight className="w-4 h-4" />
           </button>
           <a
             href="#services"
-            className="rounded-full border border-white/40 text-white font-semibold text-sm px-6 py-3.5 hover:bg-white/10 transition-colors"
+            className="rounded-full border border-white/40 text-white font-semibold text-sm px-5 py-3 sm:px-6 sm:py-3.5 hover:bg-white/10 transition-colors"
           >
             Explore our services
           </a>

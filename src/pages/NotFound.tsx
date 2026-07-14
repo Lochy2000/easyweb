@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-paper">
       <Helmet>
         <title>Page Not Found | Easywebs</title>
         <meta name="description" content="The page you are looking for does not exist. Return to the homepage to explore our web design services." />
@@ -29,30 +30,31 @@ const NotFound = () => {
       </Helmet>
       
       <Header />
-      
+
       <div className="container mx-auto pt-32 pb-24 flex items-center justify-center">
         <div className="text-center max-w-xl">
-          <div className="mb-6 text-9xl font-bold text-primary/30">404</div>
-          <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
-          <p className="text-xl text-foreground/70 mb-8">
+          <div className="mb-6 text-9xl font-serif font-medium text-ew-accent/25">404</div>
+          <h1 className="font-serif font-medium text-4xl text-ink mb-4">Page Not Found</h1>
+          <p className="text-xl text-ink-soft mb-8">
             The page you are looking for doesn't exist or has been moved.
           </p>
           <div className="flex gap-4 justify-center">
-            <a 
-              href="/" 
-              className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+            <a
+              href="/"
+              className="px-6 py-3 rounded-full bg-ew-accent text-white font-semibold hover:bg-ew-accent-ink transition-colors"
             >
               Return to Home
             </a>
-            <a 
-              href="/blog" 
-              className="px-6 py-3 bg-white/10 text-foreground rounded-lg hover:bg-white/20 transition-colors"
+            <a
+              href="/blog"
+              className="px-6 py-3 rounded-full border border-line text-ink font-semibold hover:border-ew-accent hover:text-ew-accent transition-colors"
             >
               Browse Our Blog
             </a>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
