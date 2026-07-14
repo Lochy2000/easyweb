@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { X } from "lucide-react";
 
 interface ServiceModalProps {
   isOpen: boolean;
@@ -22,19 +21,19 @@ export const ServiceModal: React.FC<ServiceModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95%] max-w-full sm:max-w-[500px] md:max-w-[600px] bg-[#0f0f12] border border-white/10 p-4 sm:p-6 overflow-y-auto max-h-[90vh]">
+      <DialogContent className="w-[95%] max-w-full sm:max-w-[560px] bg-paper-raised border border-line p-5 sm:p-7 overflow-y-auto max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle className="text-xl sm:text-2xl font-bold">{title}</DialogTitle>
+          <DialogTitle className="font-serif font-medium text-xl sm:text-2xl text-ink">{title}</DialogTitle>
         </DialogHeader>
         <div className="mt-3 sm:mt-4">
-          <p className="text-base sm:text-lg text-primary/90 mb-4 sm:mb-6">{quickView}</p>
+          <p className="text-base sm:text-lg text-ew-accent-ink mb-4 sm:mb-6">{quickView}</p>
           <div className="space-y-3 sm:space-y-4">
-            <p className="text-foreground/80">{details.description}</p>
+            <p className="text-ink-soft">{details.description}</p>
             <ul className="space-y-2">
               {details.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span className="text-foreground/70">{feature}</span>
+                  <span className="text-ew-accent">•</span>
+                  <span className="text-ink-soft">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -43,4 +42,4 @@ export const ServiceModal: React.FC<ServiceModalProps> = ({
       </DialogContent>
     </Dialog>
   );
-}; 
+};

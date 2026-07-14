@@ -52,6 +52,24 @@ export default {
 						foreground: 'hsl(var(--accent-pink-foreground))'
 					}
 				},
+				// New "paper" theme tokens — additive, used by the redesigned
+				// homepage + shared Header/Footer. Existing tokens above are left
+				// untouched so other pages keep their current dark theme.
+				paper: {
+					DEFAULT: 'var(--paper)',
+					raised: 'var(--paper-raised)'
+				},
+				ink: {
+					DEFAULT: 'var(--ink)',
+					soft: 'var(--ink-soft)',
+					faint: 'var(--ink-faint)'
+				},
+				line: 'var(--line)',
+				'ew-accent': {
+					DEFAULT: 'var(--ew-accent)',
+					soft: 'var(--ew-accent-soft)',
+					ink: 'var(--ew-accent-ink)'
+				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
@@ -163,7 +181,8 @@ export default {
 				},
 			fontFamily: {
 				sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
-				display: ['Inter var', 'Inter', 'system-ui', 'sans-serif']
+				display: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+				serif: ['Fraunces', 'Georgia', 'serif']
 			},
 			perspective: {
 				'30rem': '30rem',

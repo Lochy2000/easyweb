@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Star } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
 import { Helmet } from 'react-helmet';
 
 interface TestimonialProps {
@@ -21,33 +20,30 @@ const TestimonialCard = ({ name, role, company, url, image, content, delay = 0 }
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
-    className="glass-card p-6 rounded-2xl flex flex-col h-full group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300"
+    className="bg-paper-raised border border-line rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 hover:shadow-lg"
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-    <div className="relative z-10 flex flex-col h-full">
-      <div className="flex items-center gap-4 mb-6">
-        <Avatar className="w-12 h-12">
-          <AvatarImage src={image} alt={`${name} from ${company} - client testimonial`} width={48} height={48} loading="lazy" />
-          <AvatarFallback aria-label={`${name}'s initials`} className="bg-primary/10 text-primary">{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-        </Avatar>
-        <div>
-          <h4 className="font-semibold text-foreground">{name}</h4>
-          {url ? (
-            <a href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground/70 hover:text-accent-cyan transition-colors">
-              {company} {role && `(${role})`}
-            </a>
-          ) : (
-            <p className="text-sm text-foreground/70">{company}{role && `, ${role}`}</p>
-          )}
-        </div>
+    <div className="flex items-center gap-4 mb-5">
+      <Avatar className="w-12 h-12">
+        <AvatarImage src={image} alt={`${name} from ${company} - client testimonial`} width={48} height={48} loading="lazy" />
+        <AvatarFallback aria-label={`${name}'s initials`} className="bg-ew-accent-soft text-ew-accent">{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+      </Avatar>
+      <div>
+        <h4 className="font-semibold text-ink">{name}</h4>
+        {url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-ink-faint hover:text-ew-accent transition-colors">
+            {company} {role && `(${role})`}
+          </a>
+        ) : (
+          <p className="text-sm text-ink-faint">{company}{role && `, ${role}`}</p>
+        )}
       </div>
-      <div className="flex gap-1 mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-accent-cyan text-accent-cyan" />
-        ))}
-      </div>
-      <p className="text-foreground/80 leading-relaxed flex-grow">{content}</p>
     </div>
+    <div className="flex gap-1 mb-4">
+      {[...Array(5)].map((_, i) => (
+        <Star key={i} className="w-4 h-4 fill-ew-accent text-ew-accent" />
+      ))}
+    </div>
+    <p className="text-ink-soft leading-relaxed flex-grow">{content}</p>
   </motion.div>
 );
 
@@ -100,8 +96,14 @@ export const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 relative">
-      {/* Add structured data for testimonials */}
+    <section id="proof" className="relative py-20 md:py-28 px-5 md:px-10 bg-paper overflow-hidden">
+      {/* Subtle recolored floating accents — the one deliberate animated touch
+          back here, so the page doesn't go flat after the self-audit section. */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-10 left-[8%] w-64 h-64 rounded-full bg-ew-accent/5 blur-3xl animate-ew-glow-drift" />
+        <div className="absolute bottom-0 right-[10%] w-72 h-72 rounded-full bg-ew-accent/[0.04] blur-3xl animate-ew-glow-drift" style={{ animationDelay: '2s' }} />
+      </div>
+
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -132,26 +134,21 @@ export const Testimonials = () => {
           })}
         </script>
       </Helmet>
-      
-      <div className="container mx-auto px-4">
+
+      <div className="relative max-w-[1120px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-[560px] mb-14"
         >
-          <div className="inline-flex items-center gap-2 mb-4 py-1 px-3 rounded-full glass-card text-accent-cyan font-medium text-sm">
-            Testimonials
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            What Our Clients Say About Us
+          <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ew-accent">Recent work</span>
+          <h2 className="font-serif font-medium text-3xl text-ink mt-3 tracking-[-0.01em]">
+            What our clients say
           </h2>
-          <p className="text-lg text-foreground/80">
-            Don't just take our word for it - hear from some of our satisfied clients
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {visibleTestimonials.map((testimonial, index) => (
             <TestimonialCard
               key={startIndex + index}
@@ -167,14 +164,16 @@ export const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-center"
            >
-             <Button onClick={handleViewMore} variant="outline" size="lg">
-               {currentPage < totalPages - 1 ? "View More Testimonials" : "View Previous Testimonials"}
-             </Button>
+             <button
+               onClick={handleViewMore}
+               className="rounded-full border border-line text-ink font-semibold text-[13.5px] px-6 py-3 hover:border-ew-accent hover:text-ew-accent transition-colors"
+             >
+               {currentPage < totalPages - 1 ? "View more testimonials" : "View previous testimonials"}
+             </button>
            </motion.div>
         )}
       </div>
     </section>
   );
-}; 
+};
