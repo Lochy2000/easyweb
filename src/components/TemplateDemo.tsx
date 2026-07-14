@@ -28,6 +28,10 @@ interface TemplateDemoProps {
   onClose: () => void;
   template: Template | null;
   setLoading?: (loading: boolean) => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
 }
 
 const TemplateDemo: React.FC<TemplateDemoProps> = ({
@@ -35,6 +39,10 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   onClose,
   template,
   setLoading,
+  onPrevious,
+  onNext,
+  hasPrevious = false,
+  hasNext = false,
 }) => {
   const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -85,52 +93,49 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
       <CustomDialogContent
         className={cn(
           "responsive-dialog sm:max-w-[90vw] max-h-[90vh] p-0 gap-0 bg-background/95 backdrop-blur-xl border-white/10",
-          isFullscreen ? "w-screen h-screen max-w-none max-h-none !rounded-none" : ""
+          isFullscreen ? "w-screen h-screen sm:max-w-none sm:max-h-none max-w-none max-h-none !rounded-none" : ""
         )}
       >
         {/* Header */}
         <div className="p-4 border-b border-white/10 flex items-center justify-between">
           <div>
-            <DialogTitle className="text-xl font-bold">{template.title}</DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
+            <DialogTitle className="text-xl font-bold text-white">{template.title}</DialogTitle>
+            <DialogDescription className="text-sm text-white/60">
               Interactive demo - Explore this template
             </DialogDescription>
           </div>
           <div className="flex items-center gap-2">
-            {isReactTemplate ? (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-1"
-                onClick={() => window.open(`/legacy-templates/${template.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
-              >
-                Open in New Tab
-                <ExternalLink className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-1"
+            {/* React-component demos only exist inside this modal — there's no
+                standalone page for them, so no "open in new tab" link (that
+                used to point at a /legacy-templates/* route that never
+                existed, which is why it 404'd). HTML templates do have a real
+                demo page, so they keep the link. */}
+            {!isReactTemplate && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white"
                 onClick={() => window.open(demoUrl, '_blank')}
               >
                 Open in New Tab
                 <ExternalLink className="h-4 w-4" />
               </Button>
             )}
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleFullscreen} 
-              className="hover:bg-white/10"
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleFullscreen}
+              className="text-white/80 hover:bg-white/10 hover:text-white"
+              aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
             >
               <Maximize2 className="h-5 w-5" />
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={onClose} 
-              className="hover:bg-white/10"
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="text-white/80 hover:bg-white/10 hover:text-white"
+              aria-label="Close"
             >
               <X className="h-5 w-5" />
             </Button>
@@ -171,11 +176,23 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
         {/* Footer */}
         <div className="p-4 border-t border-white/10 flex items-center justify-between">
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white disabled:opacity-30"
+              onClick={onPrevious}
+              disabled={!hasPrevious}
+            >
               <ArrowLeft className="h-4 w-4" />
               Previous
             </Button>
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white disabled:opacity-30"
+              onClick={onNext}
+              disabled={!hasNext}
+            >
               Next
               <ArrowRight className="h-4 w-4" />
             </Button>

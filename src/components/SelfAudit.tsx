@@ -101,22 +101,28 @@ const SelfAudit = () => {
   return (
     <section
       id="audit"
-      className="relative w-full min-h-screen -mt-px overflow-hidden bg-[#0a0b28] flex items-center py-16 px-5 md:py-[110px] md:px-10"
+      className="relative w-full min-h-screen -mt-px overflow-hidden flex items-center py-16 px-5 md:py-[110px] md:px-10"
+      style={{
+        // Continues straight on from the hero's own gradient (same #9d6fd8
+        // end color) down into the section's dark navy base — a single pure
+        // gradient, no photo, right where the two sections meet. This is what
+        // actually removes the seam: there's nothing there to mismatch,
+        // regardless of viewport height/aspect ratio.
+        background:
+          'linear-gradient(180deg,#9d6fd8 0%,#8571c2 14%,#564f96 30%,#2b2c60 48%,#12122f 66%,#0a0b28 82%,#0a0b28 100%)',
+      }}
     >
-      {/* Bleed of the hero-gif behind the frame, dimmed slightly so it reads as one continuous scene with the hero above */}
+      {/* The photo only fades in well below the seam (via mask, not a color
+          overlay) — the top ~35% of the section is pure gradient, so there's
+          never a hard edge to reconcile between it and the hero above. */}
       <img
         src={HERO_GIF}
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'brightness(0.85) saturate(0.95)' }}
-      />
-      {/* Long, soft taper (aurora-like) instead of a hard-edged fade — avoids a
-          visible seam where the hero's gradient sky meets this section's photo. */}
-      <div
-        className="absolute inset-0"
         style={{
-          background:
-            'linear-gradient(180deg,#9d6fd8 0%,rgba(157,111,216,0.88) 8%,rgba(157,111,216,0.6) 20%,rgba(157,111,216,0.32) 38%,rgba(157,111,216,0.14) 58%,rgba(157,111,216,0.04) 78%,transparent 92%)',
+          filter: 'brightness(0.75) saturate(0.9)',
+          maskImage: 'linear-gradient(180deg,transparent 0%,transparent 32%,black 62%,black 100%)',
+          WebkitMaskImage: 'linear-gradient(180deg,transparent 0%,transparent 32%,black 62%,black 100%)',
         }}
       />
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">

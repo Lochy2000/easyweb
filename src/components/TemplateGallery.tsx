@@ -22,7 +22,7 @@ import {
 // TODO: Replace placeholder Unsplash images with actual template preview images.
 //       Create optimized images (e.g., WebP) and place them in the public directory.
 //       Update the 'image' paths below accordingly.
-const templates = [
+const templates: Template[] = [
   // Original HTML-based templates
   {
     id: 1,
@@ -213,9 +213,15 @@ const TemplateGallery = () => {
   const [demoLoading, setDemoLoading] = useState(false);
   const navigate = useNavigate();
 
-  const filteredTemplates = activeCategory === "all" 
-    ? templates 
+  const filteredTemplates = activeCategory === "all"
+    ? templates
     : templates.filter(template => template.category === activeCategory);
+
+  const selectedIndex = selectedTemplate
+    ? filteredTemplates.findIndex((t) => t.id === selectedTemplate.id)
+    : -1;
+  const hasPrevious = selectedIndex > 0;
+  const hasNext = selectedIndex !== -1 && selectedIndex < filteredTemplates.length - 1;
 
   const handleViewDemo = (template: Template) => {
     setSelectedTemplate(template);
@@ -224,6 +230,14 @@ const TemplateGallery = () => {
       setDemoLoading(true);
     }
     setDemoOpen(true);
+  };
+
+  const handlePreviousDemo = () => {
+    if (hasPrevious) handleViewDemo(filteredTemplates[selectedIndex - 1]);
+  };
+
+  const handleNextDemo = () => {
+    if (hasNext) handleViewDemo(filteredTemplates[selectedIndex + 1]);
   };
 
   const handleCloseDemoModal = () => {
@@ -354,6 +368,10 @@ const TemplateGallery = () => {
         onClose={handleCloseDemoModal}
         template={selectedTemplate}
         setLoading={setDemoLoading}
+        onPrevious={handlePreviousDemo}
+        onNext={handleNextDemo}
+        hasPrevious={hasPrevious}
+        hasNext={hasNext}
       />
 
       {/* Background blur overlay when demo is open */}
