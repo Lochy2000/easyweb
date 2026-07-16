@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sql } from './_lib/db';
+import { sql } from './_lib/db.js';
 
 const ALLOWED_EVENT_TYPES = ['pageview', 'booking_open', 'booking_complete', 'audit_complete'] as const;
 type EventType = (typeof ALLOWED_EVENT_TYPES)[number];

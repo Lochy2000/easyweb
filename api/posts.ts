@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isAuthenticated, requireAdmin } from './_lib/auth';
-import { listPosts, createPost } from './_lib/posts';
+import { isAuthenticated, requireAdmin } from './_lib/auth.js';
+import { listPosts, createPost } from './_lib/posts.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {

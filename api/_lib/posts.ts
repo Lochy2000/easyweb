@@ -1,4 +1,4 @@
-import { sql } from './db';
+import { sql } from './db.js';
 
 interface PostRow {
   id: number;
