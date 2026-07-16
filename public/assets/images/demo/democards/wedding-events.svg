@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="we-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdf6f3"/>
+      <stop offset="100%" stop-color="#fbe9e5"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#we-bg)"/>
+
+  <g opacity="0.35" fill="none" stroke="#9f1239" stroke-width="2">
+    <circle cx="90" cy="90" r="26"/>
+    <circle cx="120" cy="70" r="16"/>
+    <circle cx="60" cy="70" r="16"/>
+  </g>
+  <g opacity="0.25" fill="none" stroke="#047857" stroke-width="2">
+    <circle cx="520" cy="360" r="30"/>
+    <circle cx="490" cy="340" r="18"/>
+  </g>
+
+  <text x="300" y="215" font-family="Georgia, serif" font-style="italic" font-size="40" fill="#7f1d1d" text-anchor="middle" opacity="0.85">Willow &amp; Vine</text>
+  <line x1="230" y1="240" x2="370" y2="240" stroke="#9f1239" stroke-width="1.5" opacity="0.5"/>
+  <text x="300" y="268" font-family="Georgia, serif" font-size="16" fill="#78350f" text-anchor="middle" opacity="0.7">Weddings &amp; Celebrations</text>
+
+  <g transform="translate(150,300)">
+    <rect width="80" height="60" rx="10" fill="#fecdd3" opacity="0.8"/>
+    <rect x="90" width="80" height="60" rx="10" fill="#bbf7d0" opacity="0.8"/>
+    <rect x="180" width="80" height="60" rx="10" fill="#fef3c7" opacity="0.8"/>
+    <rect x="270" width="80" height="60" rx="10" fill="#bae6fd" opacity="0.6"/>
+  </g>
+</svg>

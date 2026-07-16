@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useBooking } from '@/lib/booking-context';
+import { trackEvent } from '@/lib/analytics';
 
 const CALENDLY_URL = 'https://calendly.com/lochlann_oht';
 
@@ -20,6 +21,21 @@ const BookingModal = () => {
         document.body.removeChild(script);
       }
     };
+  }, [isOpen]);
+
+  // Calendly's embed posts this message when a visitor actually completes a
+  // booking (not just opens the widget) — that's the real conversion signal.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.event === 'calendly.event_scheduled') {
+        trackEvent('booking_complete');
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, [isOpen]);
 
   const params = new URLSearchParams();

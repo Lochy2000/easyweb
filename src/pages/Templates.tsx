@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import TemplateGallery from '@/components/TemplateGallery';
@@ -6,27 +5,6 @@ import Footer from '@/components/Footer';
 import { MarqueeText } from '@/components/MarqueeText';
 
 const Templates = () => {
-  // Add scroll reveal effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const revealElements = document.querySelectorAll('.animate-on-scroll');
-      
-      revealElements.forEach((element) => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('opacity-100');
-        }
-      });
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on initial load
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
   return (
     <div className="min-h-screen bg-paper">
       <Helmet>

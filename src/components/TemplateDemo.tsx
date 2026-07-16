@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { 
+import {
   CustomDialog,
-  CustomDialogContent 
+  CustomDialogContent
 } from "@/components/ui/custom-dialog";
-import { X, ExternalLink, Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
+import { X, ExternalLink, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import './TemplateResponsive.css';
 
 export type Template = {
   id: number;
@@ -44,7 +42,6 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
   hasPrevious = false,
   hasNext = false,
 }) => {
-  const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
@@ -81,30 +78,45 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
     if (setLoading) setLoading(false);
   };
 
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
   // Render the React component if this is a React template
   const ReactTemplateComponent = isReactTemplate && template.component ? template.component : null;
 
   return (
     <CustomDialog open={isOpen} onOpenChange={() => onClose()}>
       <CustomDialogContent
-        className={cn(
-          "responsive-dialog sm:max-w-[90vw] max-h-[90vh] p-0 gap-0 bg-background/95 backdrop-blur-xl border-white/10",
-          isFullscreen ? "w-screen h-screen sm:max-w-none sm:max-h-none max-w-none max-h-none !rounded-none" : ""
-        )}
+        className="left-0 top-0 translate-x-0 translate-y-0 w-screen h-[100dvh] max-w-none max-h-none rounded-none border-0 p-0 gap-0 flex flex-col overflow-hidden overflow-y-hidden bg-background"
       >
-        {/* Header */}
-        <div className="p-4 border-b border-white/10 flex items-center justify-between">
-          <div>
-            <DialogTitle className="text-xl font-bold text-white">{template.title}</DialogTitle>
-            <DialogDescription className="text-sm text-white/60">
+        {/* Slim navbar */}
+        <div className="flex items-center justify-between gap-2 px-3 sm:px-4 h-12 sm:h-14 flex-shrink-0 border-b border-white/10">
+          <div className="min-w-0">
+            <DialogTitle className="text-sm sm:text-base font-semibold text-white truncate">
+              {template.title}
+            </DialogTitle>
+            <DialogDescription className="sr-only">
               Interactive demo - Explore this template
             </DialogDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onPrevious}
+              disabled={!hasPrevious}
+              className="text-white/80 hover:bg-white/10 hover:text-white disabled:opacity-30 h-8 w-8 sm:h-9 sm:w-9"
+              aria-label="Previous template"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onNext}
+              disabled={!hasNext}
+              className="text-white/80 hover:bg-white/10 hover:text-white disabled:opacity-30 h-8 w-8 sm:h-9 sm:w-9"
+              aria-label="Next template"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </Button>
             {/* React-component demos only exist inside this modal — there's no
                 standalone page for them, so no "open in new tab" link (that
                 used to point at a /legacy-templates/* route that never
@@ -112,29 +124,20 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
                 demo page, so they keep the link. */}
             {!isReactTemplate && (
               <Button
-                variant="outline"
-                size="sm"
-                className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white"
+                variant="ghost"
+                size="icon"
+                className="text-white/80 hover:bg-white/10 hover:text-white h-8 w-8 sm:h-9 sm:w-9"
                 onClick={() => window.open(demoUrl, '_blank')}
+                aria-label="Open in new tab"
               >
-                Open in New Tab
                 <ExternalLink className="h-4 w-4" />
               </Button>
             )}
             <Button
               variant="ghost"
               size="icon"
-              onClick={toggleFullscreen}
-              className="text-white/80 hover:bg-white/10 hover:text-white"
-              aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-            >
-              <Maximize2 className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
               onClick={onClose}
-              className="text-white/80 hover:bg-white/10 hover:text-white"
+              className="text-white/80 hover:bg-white/10 hover:text-white h-8 w-8 sm:h-9 sm:w-9"
               aria-label="Close"
             >
               <X className="h-5 w-5" />
@@ -152,51 +155,31 @@ const TemplateDemo: React.FC<TemplateDemoProps> = ({
           </div>
         )}
 
-        {/* Demo content */}
-        <div className="relative w-full overflow-hidden bg-white" style={{ height: "calc(90vh - 130px)" }}>
+        {/* Demo content fills all remaining space */}
+        <div className="relative flex-1 min-h-0 w-full overflow-hidden bg-white">
           {isReactTemplate && ReactTemplateComponent ? (
             <div className="w-full h-full overflow-auto">
-              <ReactTemplateComponent />
+              <Suspense
+                fallback={
+                  <div className="flex items-center justify-center h-full">
+                    <div className="w-12 h-12 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+                  </div>
+                }
+              >
+                <ReactTemplateComponent />
+              </Suspense>
             </div>
           ) : (
-            <div className="template-iframe-container" style={{ overflowX: "hidden" }}>
-              <iframe
-                src={demoUrl}
-                className="template-iframe"
-                onLoad={handleIframeLoad}
-                title={`${template.title} demo`}
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                referrerPolicy="no-referrer"
-                loading="eager"
-              />
-            </div>
+            <iframe
+              src={demoUrl}
+              className="w-full h-full border-0 block"
+              onLoad={handleIframeLoad}
+              title={`${template.title} demo`}
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+              referrerPolicy="no-referrer"
+              loading="eager"
+            />
           )}
-        </div>
-
-        {/* Footer */}
-        <div className="p-4 border-t border-white/10 flex items-center justify-between">
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white disabled:opacity-30"
-              onClick={onPrevious}
-              disabled={!hasPrevious}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1 border-white/20 bg-white/5 text-white hover:bg-white/15 hover:text-white disabled:opacity-30"
-              onClick={onNext}
-              disabled={!hasNext}
-            >
-              Next
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
         </div>
       </CustomDialogContent>
     </CustomDialog>

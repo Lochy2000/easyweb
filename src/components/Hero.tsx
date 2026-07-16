@@ -27,7 +27,11 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen overflow-hidden flex flex-col"
       style={{
-        background: 'linear-gradient(180deg, #2c3ed6 0%, #4a56e4 38%, #7660e2 68%, #9d6fd8 100%)',
+        // Stays blue-violet rather than drifting into lavender/pink — the hero
+        // gif's own top colors are blue, so ending here (not at a more
+        // saturated purple) is what lets the next section's photo pick up
+        // the same hue instead of jumping back to blue after a purple detour.
+        background: 'linear-gradient(180deg, #2b4bce 0%, #4658d9 55%, #6c63d4 100%)',
       }}
     >
       {/* Starfield — subtle, pauses under prefers-reduced-motion */}
@@ -48,9 +52,13 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Single soft ambient glow behind the headline — lamp-inspired, recolored */}
+      {/* Single soft ambient glow behind the headline — lamp-inspired, recolored.
+          Anchored high and sized so its blurred halo (~radius + blur reach)
+          stays clear of the section's bottom edge; sitting too low/large lets
+          overflow-hidden hard-clip the soft fade into a visible line at the
+          seam with the next section. */}
       <motion.div
-        className="absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] rounded-full bg-white/20 blur-[110px] animate-ew-glow-drift pointer-events-none"
+        className="absolute left-1/2 top-[18%] -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] rounded-full bg-white/20 blur-[110px] animate-ew-glow-drift pointer-events-none"
         aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

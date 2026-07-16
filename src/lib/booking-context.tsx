@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { trackEvent } from './analytics';
 
 interface BookingPrefill {
   name?: string;
@@ -22,6 +23,7 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
   const openBooking = useCallback((next?: BookingPrefill) => {
     setPrefill(next ?? {});
     setIsOpen(true);
+    trackEvent('booking_open');
   }, []);
 
   const closeBooking = useCallback(() => setIsOpen(false), []);

@@ -1,6 +1,6 @@
 ---
 id: ai-in-web-development-enhancing
-title: AI in Web Development: Enhancing User Experience and Design
+title: "AI in Web Development: Enhancing User Experience and Design"
 description: Discover how AI transforms web development by personalizing user experiences, automating design workflows, and enabling smarter, more accessible websites.
 category: ai
 imageUrl: 6b0cbbcf-e60d-4c37-b9f8-a821f4a2cac1

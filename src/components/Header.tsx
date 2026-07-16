@@ -22,7 +22,7 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -53,7 +53,7 @@ const Header = ({ transparentOnHero = false }: HeaderProps) => {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 transform-gpu',
         isSolid
           ? 'bg-white/10 backdrop-blur-sm'
           : 'bg-transparent'

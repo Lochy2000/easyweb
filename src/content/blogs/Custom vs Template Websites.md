@@ -1,6 +1,6 @@
 ---
 id: custom-vs-template-websites
-title: Custom vs Template Websites: Which Is Right for Your Business?
+title: "Custom vs Template Websites: Which Is Right for Your Business?"
 description: Explore the pros and cons of custom and template websites to determine the best fit for your business's online presence and goals.
 category: Web Design
 imageUrl: 20250529_1326_Enhanced_Colors_Showcase_remix_01jwe02xnaf0xtzzgw3wq95s11_q79o2y

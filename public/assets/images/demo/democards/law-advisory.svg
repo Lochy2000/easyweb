@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <rect width="600" height="450" fill="#faf8f4"/>
+  <g opacity="0.06" stroke="#1c1917" stroke-width="6" fill="none">
+    <path d="M300 60 v300 M180 120 h240 M200 120 l-40 90 h80 z M400 120 l-40 90 h80 z" stroke-linejoin="round" stroke-linecap="round"/>
+    <line x1="220" y1="360" x2="380" y2="360"/>
+  </g>
+
+  <text x="150" y="180" font-family="Georgia, serif" font-size="34" fill="#1c1917" text-anchor="middle" opacity="0.85">Ashcroft</text>
+  <text x="150" y="216" font-family="Georgia, serif" font-size="20" fill="#a16207" text-anchor="middle" opacity="0.9">&amp; Rowe</text>
+
+  <line x1="60" y1="250" x2="240" y2="250" stroke="#a16207" stroke-width="2" opacity="0.5"/>
+
+  <g transform="translate(320,150)" opacity="0.9">
+    <rect width="220" height="150" fill="#1c1917"/>
+    <rect x="20" y="24" width="90" height="8" rx="4" fill="#a16207"/>
+    <rect x="20" y="44" width="150" height="6" rx="3" fill="#ffffff" opacity="0.3"/>
+    <rect x="20" y="58" width="120" height="6" rx="3" fill="#ffffff" opacity="0.3"/>
+    <rect x="20" y="100" width="60" height="6" rx="3" fill="#a16207" opacity="0.8"/>
+    <rect x="20" y="114" width="90" height="6" rx="3" fill="#ffffff" opacity="0.25"/>
+  </g>
+</svg>

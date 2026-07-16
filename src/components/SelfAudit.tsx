@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useBooking } from '@/lib/booking-context';
+import { trackEvent } from '@/lib/analytics';
 
 interface Pain {
   value: string;
@@ -65,7 +66,6 @@ const AUDIT_RESULTS: Record<string, AuditResult> = {
 const STEP_LABELS = ['1. Setup', '2. Desired fix', '3. Recommendation'];
 const STEP_NAMES = ['Setup', 'Desired fix', 'Recommendation'];
 const HERO_GIF = '/assets/images/hero-gif.gif';
-const STAR_COUNT = 45;
 
 const SelfAudit = () => {
   const [step, setStep] = useState(1);
@@ -73,21 +73,14 @@ const SelfAudit = () => {
   const [target, setTarget] = useState('portal');
   const { openBooking } = useBooking();
 
-  const stars = useMemo(
-    () =>
-      Array.from({ length: STAR_COUNT }).map((_, i) => ({
-        left: `${(i * 37) % 100}%`,
-        top: `${(i * 53) % 70}%`,
-        size: 1 + ((i * 7) % 3),
-        opacity: 0.3 + ((i * 13) % 60) / 100,
-        delay: `${i % 5}s`,
-      })),
-    []
-  );
-
   const togglePain = (value: string) => {
     setPains((prev) => (prev.includes(value) ? prev.filter((p) => p !== value) : [...prev, value]));
   };
+
+  useEffect(() => {
+    if (step === 3) trackEvent('audit_complete', { auditTarget: target });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
 
   const result = AUDIT_RESULTS[target];
 
@@ -103,40 +96,48 @@ const SelfAudit = () => {
       id="audit"
       className="relative w-full min-h-screen -mt-px overflow-hidden flex items-center py-16 px-5 md:py-[110px] md:px-10"
       style={{
-        // Continues straight on from the hero's own gradient (same #9d6fd8
-        // end color) down into the section's dark navy base — a single pure
-        // gradient, no photo, right where the two sections meet. This is what
-        // actually removes the seam: there's nothing there to mismatch,
-        // regardless of viewport height/aspect ratio.
+        // Starts on the hero's exact end color, then follows the gif's own
+        // blue -> blue-violet -> pink-violet color path (sampled from the
+        // image) before dipping to navy, so the fade-in below matches
+        // whatever hue the photo actually is at that point instead of
+        // colliding with it.
         background:
-          'linear-gradient(180deg,#9d6fd8 0%,#8571c2 14%,#564f96 30%,#2b2c60 48%,#12122f 66%,#0a0b28 82%,#0a0b28 100%)',
+          'linear-gradient(180deg,#6c63d4 0%,#8a68c6 25%,#8f5f8e 45%,#4a3a55 65%,#171730 85%,#0a0b28 100%)',
       }}
     >
-      {/* The photo only fades in well below the seam (via mask, not a color
-          overlay) — the top ~35% of the section is pure gradient, so there's
-          never a hard edge to reconcile between it and the hero above. */}
+      {/* The photo fades in via mask (not a color overlay), anchored to the
+          top of its own frame (object-top) so the sky-blue band it starts
+          with lands near the top of the section on every aspect ratio —
+          that's what keeps the gradient above and the photo in sync
+          regardless of viewport size. */}
       <img
         src={HERO_GIF}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-top"
         style={{
-          filter: 'brightness(0.75) saturate(0.9)',
-          maskImage: 'linear-gradient(180deg,transparent 0%,transparent 32%,black 62%,black 100%)',
-          WebkitMaskImage: 'linear-gradient(180deg,transparent 0%,transparent 32%,black 62%,black 100%)',
+          filter: 'brightness(0.85) saturate(1)',
+          maskImage: 'linear-gradient(180deg,transparent 0%,transparent 18%,black 68%,black 100%)',
+          WebkitMaskImage: 'linear-gradient(180deg,transparent 0%,transparent 18%,black 68%,black 100%)',
         }}
       />
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {stars.map((star, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white animate-ew-star-pulse"
-            style={{ left: star.left, top: star.top, width: star.size, height: star.size, opacity: star.opacity, animationDelay: star.delay }}
-          />
-        ))}
-      </div>
+
+      {/* Bottom fade: blends the gif into the paper background below. Placed
+          here (above the gif, below the device frame in DOM order) so it
+          sits under the audit box instead of washing over it. Uses several
+          gradual stops rather than one steep ramp — a single sharp alpha
+          kink (e.g. 0 -> 0.75 in one stretch, then 0.75 -> 1 in a much
+          shorter one) reads as a visible line once blended over the gif's
+          darker foliage, even though each stop is individually smooth. */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(180deg,transparent 60%,rgba(251,250,247,0.1) 72%,rgba(251,250,247,0.3) 80%,rgba(251,250,247,0.55) 87%,rgba(251,250,247,0.8) 93%,#fbfaf7 100%)',
+        }}
+      />
 
       {/* Device frame: a white-bordered window onto a crisp copy of the same gif */}
-      <div className="relative w-full max-w-[1080px] mx-auto min-h-[480px] rounded-[28px] border-[10px] border-white shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col items-center justify-center p-6 md:p-10">
+      <div className="relative w-full max-w-[1080px] mx-auto min-h-[480px] rounded-[28px] border-[10px] border-white shadow-[0_16px_50px_rgba(0,0,0,0.22)] overflow-hidden flex flex-col items-center justify-center p-6 md:p-10">
         <img src={HERO_GIF} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[rgba(10,11,40,0.08)]" />
 
@@ -296,12 +297,6 @@ const SelfAudit = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Bottom fade: blends this section's dark bleed image into the paper background below */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'linear-gradient(180deg,transparent 72%,rgba(251,250,247,0.75) 90%,#fbfaf7 100%)' }}
-      />
     </section>
   );
 };

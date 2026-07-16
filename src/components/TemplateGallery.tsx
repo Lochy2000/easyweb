@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React, { lazy, useState } from 'react';
 import Button from './Button';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import TemplateDemo, { Template } from './TemplateDemo';
 
-// Import legacy template components
-import {
-  RestaurantDemo,
-  FitnessDemo,
-  RealEstateDemo,
-  CreativeAgencyDemo,
-  ELearningDemo,
-  PersonalPortfolioDemo,
-  TradeDemo,
-  PhotographyDemo,
-  StreetWearDemo
-} from './legacy-templates';
+// Legacy template demo components are lazy-loaded so their code only
+// downloads when a demo is actually opened, not on every Templates page
+// visit — keeps the page fast as more templates get added.
+const RestaurantDemo = lazy(() => import('./legacy-templates/RestaurantDemo'));
+const FitnessDemo = lazy(() => import('./legacy-templates/FitnessDemo'));
+const RealEstateDemo = lazy(() => import('./legacy-templates/RealEstateDemo'));
+const CreativeAgencyDemo = lazy(() => import('./legacy-templates/CreativeAgencyDemo'));
+const ELearningDemo = lazy(() => import('./legacy-templates/ELearningDemo'));
+const PersonalPortfolioDemo = lazy(() => import('./legacy-templates/PersonalPortfolioDemo'));
+const TradeDemo = lazy(() => import('./legacy-templates/TradeDemo'));
+const PhotographyDemo = lazy(() => import('./legacy-templates/PhotographyDemo'));
+const StreetWearDemo = lazy(() => import('./legacy-templates/StreetWearDemo'));
+
+// New templates live in ./templates/ (not legacy-templates/), same lazy pattern.
+const SaaSLaunchpadDemo = lazy(() => import('./templates/SaaSLaunchpadDemo'));
+const NonprofitImpactDemo = lazy(() => import('./templates/NonprofitImpactDemo'));
+const ClinicWellnessDemo = lazy(() => import('./templates/ClinicWellnessDemo'));
+const LawAdvisoryDemo = lazy(() => import('./templates/LawAdvisoryDemo'));
+const WeddingEventsDemo = lazy(() => import('./templates/WeddingEventsDemo'));
+const PodcastMediaDemo = lazy(() => import('./templates/PodcastMediaDemo'));
+const HomeInteriorDemo = lazy(() => import('./templates/HomeInteriorDemo'));
+const CoachConsultantDemo = lazy(() => import('./templates/CoachConsultantDemo'));
 
 // Template data
 // TODO: Replace placeholder Unsplash images with actual template preview images.
@@ -188,6 +198,80 @@ const templates: Template[] = [
     component: StreetWearDemo,
     type: "react"
   },
+
+  // New templates (src/components/templates/)
+  {
+    id: 19,
+    title: "SaaS Launchpad",
+    category: "saas",
+    image: "/assets/images/demo/democards/saas-launchpad.svg",
+    description: "Product-led landing page for SaaS tools, with interactive feature tabs and pricing.",
+    component: SaaSLaunchpadDemo,
+    type: "react"
+  },
+  {
+    id: 20,
+    title: "Nonprofit & Impact",
+    category: "nonprofit",
+    image: "/assets/images/demo/democards/nonprofit-impact.svg",
+    description: "Cause-driven site with animated impact counters and a live campaign progress bar.",
+    component: NonprofitImpactDemo,
+    type: "react"
+  },
+  {
+    id: 21,
+    title: "Clinic & Wellness",
+    category: "healthcare",
+    image: "/assets/images/demo/democards/clinic-wellness.svg",
+    description: "Medical practice site with a working multi-step appointment booking flow and FAQ.",
+    component: ClinicWellnessDemo,
+    type: "react"
+  },
+  {
+    id: 22,
+    title: "Law & Advisory",
+    category: "legal",
+    image: "/assets/images/demo/democards/law-advisory.svg",
+    description: "Typography-led law firm site with hover-reveal attorney bios and case results.",
+    component: LawAdvisoryDemo,
+    type: "react"
+  },
+  {
+    id: 23,
+    title: "Wedding & Events",
+    category: "events",
+    image: "/assets/images/demo/democards/wedding-events.svg",
+    description: "Elegant event planner site with an expandable day-of timeline and testimonial slider.",
+    component: WeddingEventsDemo,
+    type: "react"
+  },
+  {
+    id: 24,
+    title: "Podcast & Media",
+    category: "media",
+    image: "/assets/images/demo/democards/podcast-media.svg",
+    description: "Podcast brand site with a working play/pause audio player and animated waveform.",
+    component: PodcastMediaDemo,
+    type: "react"
+  },
+  {
+    id: 25,
+    title: "Home & Interior Design",
+    category: "home",
+    image: "/assets/images/demo/democards/home-interior.svg",
+    description: "Interior design studio site with a draggable before/after slider and project lightbox.",
+    component: HomeInteriorDemo,
+    type: "react"
+  },
+  {
+    id: 26,
+    title: "Coach & Consultant",
+    category: "business",
+    image: "/assets/images/demo/democards/coach-consultant.svg",
+    description: "Personal-brand coaching site with a testimonial quote wall and a working booking calendar.",
+    component: CoachConsultantDemo,
+    type: "react"
+  },
 ];
 
 // Filter categories
@@ -202,7 +286,14 @@ const categories = [
   { id: "fitness", label: "Fitness" },
   { id: "real-estate", label: "Real Estate" },
   { id: "agency", label: "Agency" },
-  { id: "education", label: "Education" }
+  { id: "education", label: "Education" },
+  { id: "saas", label: "SaaS" },
+  { id: "nonprofit", label: "Nonprofit" },
+  { id: "healthcare", label: "Healthcare" },
+  { id: "legal", label: "Legal" },
+  { id: "events", label: "Events" },
+  { id: "media", label: "Media" },
+  { id: "home", label: "Home & Interior" }
 ];
 
 const TemplateGallery = () => {
@@ -299,7 +390,7 @@ const TemplateGallery = () => {
               onMouseEnter={() => setHoveredTemplate(template.id)}
               onMouseLeave={() => setHoveredTemplate(null)}
             >
-              <div className="bg-[#14121a] border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
+              <div className="bg-paper-raised border border-line rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <img 
                     src={template.image} 
@@ -335,10 +426,10 @@ const TemplateGallery = () => {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-ew-accent transition-colors">{template.title}</h3>
-                  <p className="text-white/60 mb-4 flex-grow">{template.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-ink group-hover:text-ew-accent-ink transition-colors">{template.title}</h3>
+                  <p className="text-ink-soft mb-4 flex-grow">{template.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
+                    <span className="text-sm font-medium bg-ew-accent-soft text-ew-accent-ink px-3 py-1 rounded-full">
                       {categories.find(c => c.id === template.category)?.label}
                     </span>
                   </div>
@@ -373,14 +464,6 @@ const TemplateGallery = () => {
         hasPrevious={hasPrevious}
         hasNext={hasNext}
       />
-
-      {/* Background blur overlay when demo is open */}
-      {demoOpen && (
-        <div 
-          className="fixed inset-0 bg-background/50 backdrop-blur-sm z-40"
-          onClick={handleCloseDemoModal}
-        />
-      )}
     </section>
   );
 };

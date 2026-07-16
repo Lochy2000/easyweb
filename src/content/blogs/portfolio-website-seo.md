@@ -1,6 +1,6 @@
 ---
 id: portfolio-website-seo
-title: SEO for Portfolio Websites: What Actually Matters in 2025
+title: "SEO for Portfolio Websites: What Actually Matters in 2025"
 description: Learn how to make your portfolio site discoverable in search engines without bloating it with gimmicks. Clear advice for creatives, developers, and freelancers in 2025.
 category: SEO
 imageUrl: 69c52b67-76e0-4890-a60b-68c7bdaa6cf5

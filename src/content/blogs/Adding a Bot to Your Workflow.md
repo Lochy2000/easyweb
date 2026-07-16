@@ -1,6 +1,6 @@
 ---
 id: adding-a-bot-to-your-workflow
-title: Adding a Bot to Your Workflow: A Smart Step or Shiny Distraction?
+title: "Adding a Bot to Your Workflow: A Smart Step or Shiny Distraction?"
 description: Discover how adding AI bots to your workflow can improve productivity and support—and when they might just get in the way.
 category: ai
 imageUrl: bb0e56ba-8363-47c3-b60b-4b2d9bb57488

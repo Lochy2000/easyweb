@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="np-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbf7ef"/>
+      <stop offset="100%" stop-color="#f3ecdd"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="url(#np-bg)"/>
+
+  <g opacity="0.9">
+    <circle cx="230" cy="150" r="70" fill="#047857" opacity="0.9"/>
+    <circle cx="330" cy="120" r="52" fill="#d97706" opacity="0.9"/>
+    <circle cx="370" cy="220" r="60" fill="#fb7185" opacity="0.85"/>
+    <circle cx="200" cy="250" r="42" fill="#0ea5e9" opacity="0.85"/>
+  </g>
+
+  <g fill="#ffffff">
+    <path d="M230 130 a20 20 0 1 1 0 40 a20 20 0 1 1 0 -40 M215 178 h30 v14 h-30 z" opacity="0.95"/>
+  </g>
+
+  <g transform="translate(150,330)" opacity="0.6">
+    <rect width="300" height="8" rx="4" fill="#1c1917" opacity="0.08"/>
+    <rect width="204" height="8" rx="4" fill="#047857"/>
+  </g>
+
+  <text x="150" y="310" font-family="Georgia, serif" font-size="26" fill="#1c1917" opacity="0.85">Rootline</text>
+</svg>

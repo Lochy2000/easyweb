@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Toaster } from "@/components/ui/toaster";
@@ -12,6 +12,7 @@ import CalendlyWidget from './components/CalendlyWidget';
 import MiniLoader from './components/MiniLoader';
 import BookingModal from './components/BookingModal';
 import { BookingProvider } from './lib/booking-context';
+import { trackPageview } from './lib/analytics';
 
 // Lazy load main pages
 const Index = React.lazy(() => import("./pages/Index"));
@@ -19,6 +20,7 @@ const Templates = React.lazy(() => import("./pages/Templates"));
 const AboutPage = React.lazy(() => import("./pages/About"));
 const Blog = React.lazy(() => import("./pages/BlogMarkdown")); // Use markdown-based blog
 const BookNow = React.lazy(() => import("./pages/BookNow")); // New BookNow page
+const Admin = React.lazy(() => import("./pages/Admin"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient({
@@ -33,6 +35,10 @@ const queryClient = new QueryClient({
 
 function AppContent() {
   const location = useLocation();
+
+  useEffect(() => {
+    trackPageview(location.pathname);
+  }, [location.pathname]);
 
   return (
     <>
@@ -53,6 +59,7 @@ function AppContent() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:postId" element={<Blog />} />
               <Route path="/book" element={<BookNow />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
